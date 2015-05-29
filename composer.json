@@ -1,0 +1,26 @@
+{
+  "name": "arjan96s/htmlmin",
+  "description": "Minify html for Laravel 5",
+  "keywords": ["laravel", "html minifier", "html", "HTMLMin", "Laravel HTMLMin"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Arjan Schouten",
+      "email": "arjan-schouten@live.nl"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/contracts": "5.0.*|5.1.*",
+    "illuminate/filesystem": "5.0.*|5.1.*",
+    "illuminate/support": "5.0.*|5.1.*",
+    "illuminate/view": "5.0.*|5.1.*",
+    "mrclay/minify": "~2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Arjan96s\\HTMLMin\\": "src/"
+    }
+  },
+  "prefer-stable": true
+}

@@ -3,7 +3,7 @@ namespace ArjanSchouten\HTMLMin\Placeholders;
 
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
-class Comment implements PlaceholderInterface
+class CommentPlaceholder implements PlaceholderInterface
 {
 
     /**
@@ -14,16 +14,16 @@ class Comment implements PlaceholderInterface
      *
      * @return string
      */
-    public function setPlaceholders($contents, PlaceholderContainer $placeholderContainer)
+    public function process($context)
     {
-        $contents = $this->setCDataPlaceholder($contents, $placeholderContainer);
+        $context->setContents($this->setCDataPlaceholder($context->getContents(), $context->getPlaceholderContainer()));
 
-        return $this->setConditionalCommentsPlaceholder($contents, $placeholderContainer);
+        return $context->setContents($this->setConditionalCommentsPlaceholder($context->getContents(), $context->getPlaceholderContainer()));
     }
 
     protected function setCDataPlaceholder($contents, PlaceholderContainer $placeholderContainer)
     {
-        return preg_replace_callback('/<!\[CDATA\[((?!\]\]).)*\]\]/s', function ($match) use ($placeholderContainer) {
+        return preg_replace_callback('/<!\[CDATA\[((?!\]\]>).)*\]\]>/s', function ($match) use ($placeholderContainer) {
             return $placeholderContainer->addPlaceholder($match[0]);
         }, $contents);
     }
@@ -38,14 +38,15 @@ class Comment implements PlaceholderInterface
      */
     protected function setConditionalCommentsPlaceholder($contents, PlaceholderContainer $placeholderContainer)
     {
-        $contents = preg_replace_callback('/<!--[\s]*\[([\s\S]*?)\][\s]*>/i',
+        $contents = preg_replace_callback('/<!\[((?!\]>).)*\]>((?!<!\[endif\]>).)*<!\[endif\]>/is',
             function ($match) use ($placeholderContainer) {
                 return $placeholderContainer->addPlaceholder($match[0]);
             }, $contents);
 
-        return preg_replace_callback('/<![\s]*\[([\s\S]*)\]-->/i', function ($match) use ($placeholderContainer) {
-            return $placeholderContainer->addPlaceholder($match[0]);
-        }, $contents);
+        return preg_replace_callback('/<!-{2}\[((?!\]>).)*\]>((?!<!\[endif\]-{2}>).)*<!\[endif\]-{2}>/is',
+            function ($match) use ($placeholderContainer) {
+                return $placeholderContainer->addPlaceholder($match[0]);
+            }, $contents);
     }
 
 }

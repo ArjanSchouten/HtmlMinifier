@@ -28,13 +28,13 @@ class WhitespaceMinifier implements MinifierInterface
      *
      * @return string
      */
-    public function minify($contents)
+    public function process($context)
     {
-        $contents = $this->trailingWhitespaces($contents);
-        $contents = $this->runMinificationRules($contents);
-        $contents = $this->removeSpacesAroundPlaceholders($contents);
+        $context->setContents($this->trailingWhitespaces($context->getContents()));
+        $context->setContents($this->runMinificationRules($context->getContents()));
+        $context->setContents($this->removeSpacesAroundPlaceholders($context->getContents()));
 
-        return $this->maxHtmlLineLength($contents, $this->maxHtmlLineLength);
+        return $context->setContents($this->maxHtmlLineLength($context->getContents(), $this->maxHtmlLineLength));
     }
 
     /**

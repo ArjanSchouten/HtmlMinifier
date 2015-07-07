@@ -1,6 +1,7 @@
 <?php
 namespace ArjanSchouten\HTMLMin\Placeholders;
 
+use ArjanSchouten\HTMLMin\MinifyPipelineContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class Blade implements PlaceholderInterface
@@ -26,11 +27,11 @@ class Blade implements PlaceholderInterface
      *
      * @return string
      */
-    public function setPlaceholders($contents, PlaceholderContainer $placeholderContainer)
+    public function process($context)
     {
-        $contents = $this->setEchosPlaceholder($contents, $placeholderContainer);
+        $contents = $this->setEchosPlaceholder($context->getContents(), $context->getPlaceholderContainer());
 
-        return $this->setBladeControlStructuresPlaceholder($contents, $placeholderContainer);
+        return $this->setBladeControlStructuresPlaceholder($contents, $context->getPlaceholderContainer());
     }
 
     /**

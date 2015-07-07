@@ -16,7 +16,8 @@ class PlaceholderContainer extends Collection
 
     public function __construct()
     {
-        $this->replacementHash = md5(time());
+        $replacementHashLimit = 32;
+        $this->replacementHash = str_limit(md5(time()), $replacementHashLimit);
     }
 
     /**

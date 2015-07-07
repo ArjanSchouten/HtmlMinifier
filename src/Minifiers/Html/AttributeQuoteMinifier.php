@@ -2,6 +2,7 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
+use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 use Illuminate\Support\Str;
 
@@ -26,20 +27,22 @@ class AttributeQuoteMinifier implements MinifierInterface
      *
      * @return string
      */
-    public function minify($contents)
+    public function process($context)
     {
-        $contents = preg_replace_callback('/=\s*"([^"]*(?:[\\"]+[^"]*)*)"/', function ($match) {
+        $context->setContents(preg_replace_callback('/=\s*"([^"]*(?:[\\"]+[^"]*)*)"/', function ($match) {
             return $this->replaceWith($match);
-        }, $contents);
+        }, $context->getContents()));
 
-        return preg_replace_callback('/=\s*\'([^\']*(?:[\\\']+[^\']*)*)\'/', function ($match) {
+        return $context->setContents(preg_replace_callback('/=\s*\'([^\']*(?:[\\\']+[^\']*)*)\'/', function ($match) {
             return $this->replaceWith($match);
-        }, $contents);
+        }, $context->getContents()));
     }
 
     protected function replaceWith($match)
     {
         if (Str::contains($match[1], $this->prohibitedCharsUnquotedAttribute)) {
+            return $match[0];
+        } elseif(preg_match('/'.Constants::PLACEHOLDER_PATTERN.'/is', $match[1])) {
             return $match[0];
         }
 

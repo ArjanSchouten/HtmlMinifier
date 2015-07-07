@@ -15,12 +15,12 @@ class JavascriptEventsMinifier implements MinifierInterface
      *
      * @return string
      */
-    public function minify($contents)
+    public function process($context)
     {
-        return preg_replace_callback('/' . Constants::$htmlEventNamePrefix . Constants::ATTRIBUTE_NAME_REGEX . '\s*=\s*"?\'?\s*javascript:/is',
+        return $context->setContents(preg_replace_callback('/' . Constants::$htmlEventNamePrefix . Constants::ATTRIBUTE_NAME_REGEX . '\s*=\s*"?\'?\s*javascript:/is',
             function ($match) {
                 return str_replace('javascript:', '', $match[0]);
-            }, $contents);
+            }, $context->getContents()));
     }
 
     /**

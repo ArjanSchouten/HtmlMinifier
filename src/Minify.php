@@ -2,22 +2,70 @@
 
 namespace ArjanSchouten\HTMLMin;
 
+use ArjanSchouten\HTMLMin\Minifiers\Html\AttributeQuoteMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\CommentMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\WhitespaceMinifier;
+use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
+use RuntimeException;
+use League\Pipeline\Pipeline;
+use League\Pipeline\CallableStage;
+use ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder;
+
 class Minify
 {
 
     /**
-     * All the available minifiers.
+     * Minification pipeline
      *
-     * @var array
+     * @var \League\Pipeline\Pipeline
      */
-    protected $minifiers = [];
+    protected $pipeline;
 
-    /**
-     * @param array $rules
-     */
-    public function __construct(array $rules)
+    public function buildPipeline($options)
     {
-        $this->minifiers = $rules;
+        if($this->pipeline != null)
+            throw new RuntimeException('Pipeline is already build!');
+
+        $this->pipeline = (new PipelineBuilder())
+            ->add(new CallableStage(function(MinifyPipelineContext $context) use ($options) {
+                $placeholderPipeline = $this->buildPlaceholderPipeline($options);
+                return $placeholderPipeline->process($context);
+            }))
+            ->add(new CallableStage(function(MinifyPipelineContext $context) use ($options) {
+                $minifierPipeline = $this->buildMinifierPipeline($options);
+                return $minifierPipeline->process($context);
+            }))
+            ->add(new CallableStage(function(MinifyPipelineContext $context){
+                return $context->getPlaceholderContainer()->restorePlaceholders($context->getContents());
+            }))
+            ->build();
+    }
+
+    protected function buildPlaceholderPipeline($options)
+    {
+        return (new PipelineBuilder())
+            ->add(new CommentPlaceholder, $options)
+            ->add(new CommentMinifier, $options)
+            ->add(new EmptyAttributeMinifier, $options)
+            ->add(new JavascriptEventsMinifier, $options)
+            ->add(new RedundantAttributeMinifier, $options)
+            ->add(new WhitespaceMinifier, $options)
+            ->build();
+    }
+
+    protected function buildMinifierPipeline()
+    {
+        return (new PipelineBuilder())
+            ->add(new AttributeQuoteMinifier, $options)
+            ->add(new CommentMinifier, $options)
+            ->add(new EmptyAttributeMinifier, $options)
+            ->add(new JavascriptEventsMinifier, $options)
+            ->add(new RedundantAttributeMinifier, $options)
+            ->add(new WhitespaceMinifier, $options)
+            ->build();
     }
 
     /**

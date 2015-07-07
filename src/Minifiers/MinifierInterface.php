@@ -2,17 +2,10 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers;
 
-interface MinifierInterface
-{
+use League\Pipeline\StageInterface;
 
-    /**
-     * Execute the minification rule.
-     *
-     * @param string $contents
-     *
-     * @return string
-     */
-    function minify($contents);
+interface MinifierInterface extends StageInterface
+{
 
     /**
      * Indicates if minification rules depends on command options.

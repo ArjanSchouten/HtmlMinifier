@@ -1,18 +1,9 @@
 <?php
 namespace ArjanSchouten\HTMLMin\Placeholders;
 
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use League\Pipeline\StageInterface;
 
-interface PlaceholderInterface
+interface PlaceholderInterface extends StageInterface
 {
 
-    /**
-     * Replace critical content with a temp placeholder for integrity.
-     *
-     * @param string $contents
-     * @param PlaceholderContainer $placeholderContainer
-     *
-     * @return string
-     */
-    function setPlaceholders($contents, PlaceholderContainer $placeholderContainer);
 }

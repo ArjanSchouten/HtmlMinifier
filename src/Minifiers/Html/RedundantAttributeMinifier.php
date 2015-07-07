@@ -32,18 +32,18 @@ class RedundantAttributeMinifier implements MinifierInterface
      *
      * @return string
      */
-    public function minify($contents)
+    public function process($context)
     {
-        Collection::make($this->redundantAttributes)->each(function ($attributes, $element) use (&$contents) {
-            Collection::make($attributes)->each(function ($value, $attribute) use ($element, &$contents) {
-                $contents = preg_replace_callback('/' . $element . '((?!\s*' . $attribute . '\s*=).)*(\s*' . $attribute . '\s*=\s*"?\'?\s*' . $value . '\s*"?\'?\s*)/is',
+        Collection::make($this->redundantAttributes)->each(function ($attributes, $element) use (&$context) {
+            Collection::make($attributes)->each(function ($value, $attribute) use ($element, &$context) {
+                $context->setContents(preg_replace_callback('/' . $element . '((?!\s*' . $attribute . '\s*=).)*(\s*' . $attribute . '\s*=\s*"?\'?\s*' . $value . '\s*"?\'?\s*)/is',
                     function ($match) {
                         return $this->removeAttribute($match[0], $match[2]);
-                    }, $contents);
+                    }, $context->getContents()));
             });
         });
 
-        return $contents;
+        return $context;
     }
 
     protected function removeAttribute($element, $attribute)

@@ -23,16 +23,16 @@ class EmptyAttributeMinifier implements MinifierInterface
      *
      * @return string
      */
-    public function minify($contents)
+    public function process($context)
     {
-        return preg_replace_callback('/(\s*' . Constants::ATTRIBUTE_NAME_REGEX . '\s*)=\s*["\']\s*["\']\s*/',
+        return $context->setContents(preg_replace_callback('/(\s*' . Constants::ATTRIBUTE_NAME_REGEX . '\s*)=\s*["\']\s*["\']\s*/',
             function ($match) {
                 if ($this->isBooleanAttribute($match[1])) {
                     return Html::isLastAttribute($match[0]) ? $match[1] : $match[1] . ' ';
                 }
 
                 return Html::hasSurroundingAttributes($match[0]) ? ' ' : '';
-            }, $contents);
+            }, $context->getContents()));
     }
 
     private function isBooleanAttribute($attribute)

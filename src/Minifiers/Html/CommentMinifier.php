@@ -2,6 +2,7 @@
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\MinifyPipelineContext;
 
 class CommentMinifier implements MinifierInterface
 {
@@ -13,9 +14,9 @@ class CommentMinifier implements MinifierInterface
      *
      * @return string
      */
-    public function minify($contents)
+    public function process($context)
     {
-        return preg_replace('/<!((?!>).)*>/s', '', $contents);
+        return $context->setContents(preg_replace('/<!((?!>).)*>/s', '', $context->getContents()));
     }
 
     /**

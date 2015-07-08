@@ -1,5 +1,7 @@
 # HTMLMin
 
+[![Build Status](https://travis-ci.org/ArjanSchouten/HtmlMinifier.svg?branch=master)](https://travis-ci.org/ArjanSchouten/HtmlMinifier)
+
 This HTML minifier is currently in development. You can install this package through composer as a vcs repository. 
 Currently it isn't submitted to packagist.
 

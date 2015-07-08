@@ -30,8 +30,8 @@ class Minify
         }
 
         $this->pipeline = (new PipelineBuilder())
-            ->add(new CallableStage(function (MinifyPipelineContext $context) use ($options) {
-                $placeholderPipeline = $this->buildPlaceholderPipeline($options);
+            ->add(new CallableStage(function (MinifyPipelineContext $context) {
+                $placeholderPipeline = $this->buildPlaceholderPipeline();
                 return $placeholderPipeline->process($context);
             }))
             ->add(new CallableStage(function (MinifyPipelineContext $context) use ($options) {

@@ -28,11 +28,13 @@ class WhitespacePlaceholder implements PlaceholderInterface
      */
     public function process($context)
     {
+        $contents = $context->getContents();
+
         foreach ($this->htmlPlaceholderTags as $htmlTag) {
-            $context->setContents($this->setHtmlTagPlaceholder($context->getContents(), $context->getPlaceholderContainer(), $htmlTag));
+            $contents = $this->setHtmlTagPlaceholder($contents, $context->getPlaceholderContainer(), $htmlTag);
         }
 
-        return $context;
+        return $context->setContents($contents);
     }
 
     /**

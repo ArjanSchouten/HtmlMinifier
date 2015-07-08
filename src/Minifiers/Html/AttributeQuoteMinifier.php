@@ -28,11 +28,12 @@ class AttributeQuoteMinifier implements MinifierInterface
      */
     public function process($context)
     {
-        $context->setContents(preg_replace_callback('/=\s*"([^"]*(?:[\\"]+[^"]*)*)"/', function ($match) {
+        $context->setContents(preg_replace_callback('/=\s*"([^\\\\"]*(?:\\\\"[^\\\\"]*)*)"/', function ($match) {
+            var_dump($match);
             return $this->replaceWith($match);
         }, $context->getContents()));
 
-        return $context->setContents(preg_replace_callback('/=\s*\'([^\']*(?:[\\\']+[^\']*)*)\'/', function ($match) {
+        return $context->setContents(preg_replace_callback('/=\s*"([^\\\\\']*(?:\\\\\'[^\\\\\']*)*)"/', function ($match) {
             return $this->replaceWith($match);
         }, $context->getContents()));
     }

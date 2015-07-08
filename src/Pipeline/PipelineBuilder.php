@@ -12,14 +12,14 @@ class PipelineBuilder extends LeaguePipelineBuilder
     {
         if ($options == null) {
             return parent::add($stage);
+        } elseif (array_key_exists('all', $options) && $options['all']) {
+            parent::add($stage);
         }
 
         if ($stage instanceof MinifierInterface && $stage->provides()) {
             if (isset($options[$stage->provides()]) && $options[$stage->provides()]) {
                 parent::add($stage);
             }
-        } else {
-            parent::add($stage);
         }
 
         return $this;

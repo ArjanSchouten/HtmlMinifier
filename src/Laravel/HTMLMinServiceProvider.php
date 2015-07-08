@@ -2,8 +2,11 @@
 
 namespace ArjanSchouten\HTMLMin\Laravel;
 
-use ArjanSchouten\HTMLMin\Command\ViewCompilerCommand;
+use ArjanSchouten\HTMLMin\Minify;
+use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use Illuminate\Support\ServiceProvider;
+use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
 
 class HTMLMinServiceProvider extends ServiceProvider
 {
@@ -66,7 +69,8 @@ class HTMLMinServiceProvider extends ServiceProvider
     protected function addCompilerExtensions()
     {
         $this->app->make('blade.compiler')->extend(function ($value, $compiler) {
-            return $this->app->make('blade.compiler.min')->executeMinification($value);
+            $context = new MinifyPipelineContext(new PlaceholderContainer());
+            return $this->app->make('blade.compiler.min')->process($context->setContents($value))->getContents();
         });
     }
 

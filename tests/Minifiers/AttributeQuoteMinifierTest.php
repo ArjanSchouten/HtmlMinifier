@@ -53,6 +53,9 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->attributeQuote->process($context->setContents('<div onclick="alert(\"test\")"></div>'));
         $this->assertEquals('<div onclick="alert(\"test\")"></div>', $result->getContents());
 
+        $result = $this->attributeQuote->process($context->setContents('<div onclick="alert(\"test\")"></div>'.PHP_EOL.'<div id="test"></div>'));
+        $this->assertEquals('<div onclick="alert(\"test\")"></div>'.PHP_EOL.'<div id=test></div>', $result->getContents());
+
         $result = $this->attributeQuote->process($context->setContents('<div onclick="alert(\'test\')"></div>'));
         $this->assertEquals('<div onclick="alert(\'test\')"></div>', $result->getContents());
 

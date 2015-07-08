@@ -32,7 +32,7 @@ class AttributeQuoteMinifier implements MinifierInterface
             return $this->replaceWith($match);
         }, $context->getContents()));
 
-        return $context->setContents(preg_replace_callback('/=\s*"([^\\\\\']*(?:\\\\\'[^\\\\\']*)*)"/', function ($match) {
+        return $context->setContents(preg_replace_callback('/=\s*\'([^\\\\\']*(?:\\\\\'[^\\\\\']*)*)\'/', function ($match) {
             return $this->replaceWith($match);
         }, $context->getContents()));
     }

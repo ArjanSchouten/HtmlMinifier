@@ -2,7 +2,7 @@
 
 namespace ArjanSchouten\HTMLMin\Laravel\Command;
 
-use ArjanSchouten\HTMLMin\Minify;
+use ArjanSchouten\HTMLMin\Pipeline\BladePipeline;
 use Event;
 use InvalidArgumentException;
 use Illuminate\Console\Command;
@@ -37,7 +37,7 @@ class ViewCompilerCommand extends Command
                 }
 
                 if ($engine instanceof CompilerEngine) {
-                    $this->laravel['blade.compiler.min']->setOptions($this->option());
+                    $this->laravel['blade.compiler.min']->buildPipeline(new BladePipeline(), $this->option());
                     $engine->getCompiler()->compile($file);
                 }
             }

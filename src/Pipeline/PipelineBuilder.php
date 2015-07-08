@@ -8,7 +8,7 @@ use League\Pipeline\PipelineBuilder as LeaguePipelineBuilder;
 
 class PipelineBuilder extends LeaguePipelineBuilder
 {
-    public function add(StageInterface $stage, $options = null)
+    public function add(StageInterface $stage, array $options = null)
     {
         if ($options == null) {
             return parent::add($stage);
@@ -17,11 +17,16 @@ class PipelineBuilder extends LeaguePipelineBuilder
         }
 
         if ($stage instanceof MinifierInterface && $stage->provides()) {
-            if (isset($options[$stage->provides()]) && $options[$stage->provides()]) {
+            if ($this->isEnabledMinifier($stage, $options)) {
                 parent::add($stage);
             }
         }
 
         return $this;
+    }
+
+    protected function isEnabledMinifier(StageInterface $stage, array $options)
+    {
+        return !$stage->provides() || (isset($options[$stage->provides()]) && $options[$stage->provides()]);
     }
 }

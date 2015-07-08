@@ -31,7 +31,7 @@ class BladePlaceholder implements PlaceholderInterface
     {
         $contents = $this->setEchosPlaceholder($context->getContents(), $context->getPlaceholderContainer());
 
-        return $this->setBladeControlStructuresPlaceholder($contents, $context->getPlaceholderContainer());
+        return $context->setContents($this->setBladeControlStructuresPlaceholder($contents, $context->getPlaceholderContainer()));
     }
 
     /**

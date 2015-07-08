@@ -21,7 +21,7 @@ class RedundantAttributeMinifier implements MinifierInterface
         ],
         'form' => [
             'method' => 'get',
-        ]
+        ],
     ];
 
     /**

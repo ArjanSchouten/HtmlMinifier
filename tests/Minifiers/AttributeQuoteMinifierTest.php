@@ -27,8 +27,8 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->attributeQuote->process($context->setContents('<div id="test<test"></div>'));
         $this->assertEquals('<div id="test<test"></div>', $result->getContents());
 
-        $result = $this->attributeQuote->process($context->setContents("<div id=\"test".PHP_EOL."test\"></div>"));
-        $this->assertEquals("<div id=\"test".PHP_EOL."test\"></div>", $result->getContents());
+        $result = $this->attributeQuote->process($context->setContents('<div id="test'.PHP_EOL.'test"></div>'));
+        $this->assertEquals('<div id="test'.PHP_EOL.'test"></div>', $result->getContents());
 
         $result = $this->attributeQuote->process($context->setContents('<div id="test`test"></div>'));
         $this->assertEquals('<div id="test`test"></div>', $result->getContents());

@@ -1,11 +1,12 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Command;
+namespace ArjanSchouten\HTMLMin\Laravel\Command;
 
+use ArjanSchouten\HTMLMin\Minify;
 use Event;
+use InvalidArgumentException;
 use Illuminate\Console\Command;
 use Illuminate\View\Engines\CompilerEngine;
-use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
 class ViewCompilerCommand extends Command
@@ -19,61 +20,9 @@ class ViewCompilerCommand extends Command
      */
     public function fire()
     {
-        $minifiers = $this->getEnabledMinificationRules();
-        $this->registerBladeMinifyEvent($minifiers);
+        $this->laravel['blade.compiler.min']->buildPipeline($this->getOptions());
+
         $this->compileViews();
-    }
-
-    /**
-     * Get all the minifiers which are enabled or doesn't need enabling.
-     *
-     * @return array
-     */
-    protected function getEnabledMinificationRules()
-    {
-        if ($this->option('all')) {
-            return $this->laravel->tagged('bladeMinifyRules');
-        }
-
-        $minifiers = [];
-        foreach ($this->laravel->tagged('bladeMinifyRules') as $minificationRule) {
-            if ($this->isEnabledMinificationRule($minificationRule)) {
-                $minifiers[] = $minificationRule;
-            }
-        }
-
-        return $minifiers;
-    }
-
-    /**
-     * @param MinificationRule $minificationRule
-     *
-     * @return bool
-     */
-    protected function isEnabledMinificationRule($minificationRule)
-    {
-        if (!method_exists($minificationRule, 'minifyOnlyWhenCommandlinOptionProvided')) {
-            return true;
-        }
-
-        $optionName = $minificationRule->minifyOnlyWhenCommandlinOptionProvided();
-        if ($optionName == false) {
-            return true;
-        }
-
-        return $this->option($optionName);
-    }
-
-    /**
-     * Register an event listener which gives the active minifiers.
-     *
-     * @param array $minifiers
-     */
-    protected function registerBladeMinifyEvent(array $minifiers)
-    {
-        Event::listen('bladeMinify', function () use ($minifiers) {
-            return $minifiers;
-        });
     }
 
     /**

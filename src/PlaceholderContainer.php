@@ -20,6 +20,20 @@ class PlaceholderContainer extends Collection
     }
 
     /**
+     * @param string $contents
+     *
+     * @return string
+     */
+    public function restorePlaceholders($contents)
+    {
+        foreach ($this->all() as $placeholder => $original) {
+            $contents = str_replace($placeholder, $original, $contents);
+        }
+
+        return $contents;
+    }
+
+    /**
      * Store a placeholder in the container.
      *
      * @param string $originalContent

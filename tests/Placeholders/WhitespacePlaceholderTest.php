@@ -5,7 +5,7 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\WhitespacePlaceholder;
 use Mockery as m;
 
-class WhitespacePlaceholderText extends PHPUnit_Framework_TestCase
+class WhitespacePlaceholderTest extends PHPUnit_Framework_TestCase
 {
     private $whitespacePlaceholderText;
 

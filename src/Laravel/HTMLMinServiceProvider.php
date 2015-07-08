@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin;
+namespace ArjanSchouten\HTMLMin\Laravel;
 
 use ArjanSchouten\HTMLMin\Command\ViewCompilerCommand;
 use Illuminate\Support\ServiceProvider;

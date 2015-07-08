@@ -24,7 +24,7 @@ class WhitespacePlaceholderText extends PHPUnit_Framework_TestCase
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyPipelineContext($placeholderContainer);
-        
+
         $result = $this->whitespacePlaceholderText->process($context->setContents('<script id="myid">test</script>'));
         $this->assertEquals('<script id="myid">'.$placeholder.'</script>', $result->getContents());
 

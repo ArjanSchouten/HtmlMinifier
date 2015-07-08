@@ -92,13 +92,13 @@ class EmptyAttribute extends PHPUnit_Framework_TestCase
         $result = $this->emptyAttributeMinifier->process($context->setContents('<div id= ""></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 
-        $result = $this->emptyAttributeMinifier->process($context->setContents('<div id=' . PHP_EOL . '""></div>'));
+        $result = $this->emptyAttributeMinifier->process($context->setContents('<div id='.PHP_EOL.'""></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 
-        $result = $this->emptyAttributeMinifier->process($context->setContents('<div id' . PHP_EOL . '=""></div>'));
+        $result = $this->emptyAttributeMinifier->process($context->setContents('<div id'.PHP_EOL.'=""></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 
-        $result = $this->emptyAttributeMinifier->process($context->setContents('<div id="' . PHP_EOL . '"></div>'));
+        $result = $this->emptyAttributeMinifier->process($context->setContents('<div id="'.PHP_EOL.'"></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
     }
 }

@@ -27,18 +27,18 @@ class WhitespacePlaceholderText extends PHPUnit_Framework_TestCase
         $context = new MinifyPipelineContext($placeholderContainer);
         
         $result = $this->whitespacePlaceholderText->process($context->setContents('<script id="myid">test</script>'));
-        $this->assertEquals('<script id="myid">' . $placeholder . '</script>', $result->getContents());
+        $this->assertEquals('<script id="myid">'.$placeholder.'</script>', $result->getContents());
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<script id="test">test</script>'));
-        $this->assertEquals('<script id="test">' . $placeholder . '</script>', $result->getContents());
+        $this->assertEquals('<script id="test">'.$placeholder.'</script>', $result->getContents());
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<script id="tes>t">test</script>'));
-        $this->assertEquals('<script id="tes>t">' . $placeholder . '</script>', $result->getContents());
+        $this->assertEquals('<script id="tes>t">'.$placeholder.'</script>', $result->getContents());
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<script id=test>test</script>'));
-        $this->assertEquals('<script id=test>' . $placeholder . '</script>', $result->getContents());
+        $this->assertEquals('<script id=test>'.$placeholder.'</script>', $result->getContents());
 
-        $result = $this->whitespacePlaceholderText->process($context->setContents('<script id=test>te' . PHP_EOL . 'st</script>'));
-        $this->assertEquals('<script id=test>' . $placeholder . '</script>', $result->getContents());
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<script id=test>te'.PHP_EOL.'st</script>'));
+        $this->assertEquals('<script id=test>'.$placeholder.'</script>', $result->getContents());
     }
 }

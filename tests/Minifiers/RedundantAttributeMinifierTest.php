@@ -27,7 +27,7 @@ class RedundantAttributeMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->redundantAttributeFileMinifier->process($context->setContents('<script id="my-id" language=\'javascript\'></script>'));
         $this->assertEquals('<script id="my-id"></script>', $result->getContents());
 
-        $result = $this->redundantAttributeFileMinifier->process($context->setContents('<script id="my-id" language=' . PHP_EOL . '\'javascript\'></script>'));
+        $result = $this->redundantAttributeFileMinifier->process($context->setContents('<script id="my-id" language='.PHP_EOL.'\'javascript\'></script>'));
         $this->assertEquals('<script id="my-id"></script>', $result->getContents());
 
         $result = $this->redundantAttributeFileMinifier->process($context->setContents('<script id="test" language=\'javascript\' type="text/javascript" class="test"></script>'));

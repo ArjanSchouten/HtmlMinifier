@@ -127,7 +127,7 @@ class ViewCompilerCommand extends Command
                 'a',
                 InputOption::VALUE_NONE,
                 'Use all the minification rules available',
-            ]
+            ],
         ];
     }
 }

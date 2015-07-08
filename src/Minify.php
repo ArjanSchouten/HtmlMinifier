@@ -24,8 +24,9 @@ class Minify
 
     public function buildPipeline($options)
     {
-        if ($this->pipeline != null)
+        if ($this->pipeline != null) {
             throw new RuntimeException('Pipeline is already build!');
+        }
 
         $this->pipeline = (new PipelineBuilder())
             ->add(new CallableStage(function (MinifyPipelineContext $context) use ($options) {
@@ -36,7 +37,7 @@ class Minify
                 $minifierPipeline = $this->buildMinifierPipeline($options);
                 return $minifierPipeline->process($context);
             }))
-            ->add(new CallableStage(function (MinifyPipelineContext $context){
+            ->add(new CallableStage(function (MinifyPipelineContext $context) {
                 return $context->getPlaceholderContainer()->restorePlaceholders($context->getContents());
             }))
             ->build();
@@ -45,24 +46,24 @@ class Minify
     protected function buildPlaceholderPipeline($options)
     {
         return (new PipelineBuilder())
-            ->add(new CommentPlaceholder, $options)
-            ->add(new CommentMinifier, $options)
-            ->add(new EmptyAttributeMinifier, $options)
-            ->add(new JavascriptEventsMinifier, $options)
-            ->add(new RedundantAttributeMinifier, $options)
-            ->add(new WhitespaceMinifier, $options)
+            ->add(new CommentPlaceholder(), $options)
+            ->add(new CommentMinifier(), $options)
+            ->add(new EmptyAttributeMinifier(), $options)
+            ->add(new JavascriptEventsMinifier(), $options)
+            ->add(new RedundantAttributeMinifier(), $options)
+            ->add(new WhitespaceMinifier(), $options)
             ->build();
     }
 
     protected function buildMinifierPipeline()
     {
         return (new PipelineBuilder())
-            ->add(new AttributeQuoteMinifier, $options)
-            ->add(new CommentMinifier, $options)
-            ->add(new EmptyAttributeMinifier, $options)
-            ->add(new JavascriptEventsMinifier, $options)
-            ->add(new RedundantAttributeMinifier, $options)
-            ->add(new WhitespaceMinifier, $options)
+            ->add(new AttributeQuoteMinifier(), $options)
+            ->add(new CommentMinifier(), $options)
+            ->add(new EmptyAttributeMinifier(), $options)
+            ->add(new JavascriptEventsMinifier(), $options)
+            ->add(new RedundantAttributeMinifier(), $options)
+            ->add(new WhitespaceMinifier(), $options)
             ->build();
     }
 

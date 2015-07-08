@@ -63,13 +63,13 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
     {
         $placeholderContainer = new PlaceholderContainer();
         $placeholder = $placeholderContainer->addPlaceholder(null);
-        $result1 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=" ' . $placeholder . '"></a>');
-        $result2 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href="' . $placeholder . ' "></a>');
-        $result3 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=\' ' . $placeholder . ' \'></a>');
-        $expected = '<a href="' . $placeholder . '"></a>';
+        $result1 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=" '.$placeholder.'"></a>');
+        $result2 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href="'.$placeholder.' "></a>');
+        $result3 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=\' '.$placeholder.' \'></a>');
+        $expected = '<a href="'.$placeholder.'"></a>';
         $this->assertEquals($expected, $result1);
         $this->assertEquals($expected, $result2);
-        $this->assertEquals('<a href=\'' . $placeholder . '\'></a>', $result3);
+        $this->assertEquals('<a href=\''.$placeholder.'\'></a>', $result3);
     }
 
     public function testMaxLineLength()

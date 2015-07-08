@@ -27,8 +27,8 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->attributeQuote->process($context->setContents('<div id="test<test"></div>'));
         $this->assertEquals('<div id="test<test"></div>', $result->getContents());
 
-        $result = $this->attributeQuote->process($context->setContents("<div id=\"test" . PHP_EOL . "test\"></div>"));
-        $this->assertEquals("<div id=\"test" . PHP_EOL . "test\"></div>", $result->getContents());
+        $result = $this->attributeQuote->process($context->setContents("<div id=\"test".PHP_EOL."test\"></div>"));
+        $this->assertEquals("<div id=\"test".PHP_EOL."test\"></div>", $result->getContents());
 
         $result = $this->attributeQuote->process($context->setContents('<div id="test`test"></div>'));
         $this->assertEquals('<div id="test`test"></div>', $result->getContents());
@@ -71,7 +71,7 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->attributeQuote->process($context->setContents('<div style= "float:right;"></div>'));
         $this->assertEquals('<div style=float:right;></div>', $result->getContents());
 
-        $result = $this->attributeQuote->process($context->setContents('<div style=' . PHP_EOL . '"float:right;"></div>'));
+        $result = $this->attributeQuote->process($context->setContents('<div style='.PHP_EOL.'"float:right;"></div>'));
         $this->assertEquals('<div style=float:right;></div>', $result->getContents());
     }
 

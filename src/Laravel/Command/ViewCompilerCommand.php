@@ -20,8 +20,6 @@ class ViewCompilerCommand extends Command
      */
     public function fire()
     {
-        $this->laravel['blade.compiler.min']->buildPipeline($this->option());
-
         $this->compileViews();
     }
 
@@ -39,6 +37,7 @@ class ViewCompilerCommand extends Command
                 }
 
                 if ($engine instanceof CompilerEngine) {
+                    $this->laravel['blade.compiler.min']->setOptions($this->option());
                     $engine->getCompiler()->compile($file);
                 }
             }

@@ -1,10 +1,11 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Placeholders;
+namespace ArjanSchouten\HTMLMin\Placeholders\Blade;
 
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HTMLMin\Placeholders\PlaceholderInterface;
 
-class Blade implements PlaceholderInterface
+class BladePlaceholder implements PlaceholderInterface
 {
     protected $bladeReplacements = [
         'Blade',

@@ -37,7 +37,8 @@ class HTMLMinServiceProvider extends ServiceProvider
     protected function registerBladeCompiler()
     {
         $this->app->singleton('blade.compiler.min', function () {
-            return new Minify();
+            $minifier = new Minify();
+            $minifier->addPlaceholder(new BladePlaceholder);
         });
     }
 

@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 
 class HTMLMinServiceProvider extends ServiceProvider
 {
-
     /**
      * Defer loading the service provider until the provided services are needed.
      *

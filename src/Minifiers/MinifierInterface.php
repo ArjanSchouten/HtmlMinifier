@@ -6,7 +6,6 @@ use League\Pipeline\StageInterface;
 
 interface MinifierInterface extends StageInterface
 {
-
     /**
      * Indicates if minification rules depends on command options.
      *

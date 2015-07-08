@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class WhitespacePlaceholder implements PlaceholderInterface
 {
-
     protected $htmlPlaceholderTags = [
         'plaintext',
         'textarea',

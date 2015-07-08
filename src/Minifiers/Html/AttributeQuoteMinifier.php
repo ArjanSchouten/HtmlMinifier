@@ -8,7 +8,6 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class AttributeQuoteMinifier implements MinifierInterface
 {
-
     protected $prohibitedCharsUnquotedAttribute = [
         '\'',
         '"',

@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class CommentMinifier implements MinifierInterface
 {
-
     /**
      * Replace remaining comments.
      *

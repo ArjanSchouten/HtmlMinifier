@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class WhitespaceMinifier implements MinifierInterface
 {
-
     protected $maxHtmlLineLength = 32000;
 
     protected $minifyRules = [

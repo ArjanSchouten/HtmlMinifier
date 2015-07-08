@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 
 class PlaceholderContainer extends Collection
 {
-
     /**
      * Hash used in placeholders.
      *

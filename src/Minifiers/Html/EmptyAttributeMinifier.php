@@ -8,7 +8,6 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class EmptyAttributeMinifier implements MinifierInterface
 {
-
     protected $repository;
 
     public function __construct()

@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class CommentPlaceholder implements PlaceholderInterface
 {
-
     /**
      * Replace critical content with a temp placeholder for integrity.
      *

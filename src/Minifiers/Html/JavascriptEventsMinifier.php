@@ -7,7 +7,6 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class JavascriptEventsMinifier implements MinifierInterface
 {
-
     /**
      * Execute the minification rule.
      *

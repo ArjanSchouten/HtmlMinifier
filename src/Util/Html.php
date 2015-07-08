@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 
 class Html
 {
-
     public static function hasSurroundingAttributes($attribute)
     {
         return Str::startsWith($attribute, ' ') && Str::endsWith($attribute, ' ');

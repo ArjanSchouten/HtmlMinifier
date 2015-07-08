@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ViewCompilerCommand extends Command
 {
-
     protected $name = 'minify:views';
 
     protected $description = 'Minify all the blade templates and save the templates';
@@ -109,25 +108,25 @@ class ViewCompilerCommand extends Command
                 'remove-attributequotes',
                 'aq',
                 InputOption::VALUE_NONE,
-                'Remove quotes around html attributes'
+                'Remove quotes around html attributes',
             ],
             [
                 'remove-defaults',
                 'd',
                 InputOption::VALUE_NONE,
-                'Remove defaults such as from <script type=text/javascript>'
+                'Remove defaults such as from <script type=text/javascript>',
             ],
             [
                 'remove-empty-attributes',
                 'e',
                 InputOption::VALUE_NONE,
-                'Remove empty attributes. HTML boolean attributes are skipped'
+                'Remove empty attributes. HTML boolean attributes are skipped',
             ],
             [
                 'all',
                 'a',
                 InputOption::VALUE_NONE,
-                'Use all the minification rules available'
+                'Use all the minification rules available',
             ]
         ];
     }

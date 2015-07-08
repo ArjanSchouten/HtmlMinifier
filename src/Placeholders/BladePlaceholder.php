@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class Blade implements PlaceholderInterface
 {
-
     protected $bladeReplacements = [
         'Blade',
         'Echos',

@@ -8,7 +8,6 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class RedundantAttributeMinifier implements MinifierInterface
 {
-
     protected $redundantAttributes = [
         'script' => [
             'type' => 'text\/javascript',

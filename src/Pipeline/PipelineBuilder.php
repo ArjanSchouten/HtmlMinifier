@@ -7,7 +7,6 @@ use League\Pipeline\PipelineBuilder as LeaguePipelineBuilder;
 
 class PipelineBuilder extends LeaguePipelineBuilder
 {
-
     public function add(MinifierInterface $stage, $options = null)
     {
         if ($options == null) {

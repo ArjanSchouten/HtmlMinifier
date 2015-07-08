@@ -6,5 +6,4 @@ use League\Pipeline\StageInterface;
 
 interface PlaceholderInterface extends StageInterface
 {
-
 }

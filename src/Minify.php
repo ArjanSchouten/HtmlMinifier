@@ -17,7 +17,7 @@ class Minify
 {
 
     /**
-     * Minification pipeline
+     * Minification pipeline.
      *
      * @var \League\Pipeline\Pipeline
      */
@@ -25,19 +25,19 @@ class Minify
 
     public function buildPipeline($options)
     {
-        if($this->pipeline != null)
+        if ($this->pipeline != null)
             throw new RuntimeException('Pipeline is already build!');
 
         $this->pipeline = (new PipelineBuilder())
-            ->add(new CallableStage(function(MinifyPipelineContext $context) use ($options) {
+            ->add(new CallableStage(function (MinifyPipelineContext $context) use ($options) {
                 $placeholderPipeline = $this->buildPlaceholderPipeline($options);
                 return $placeholderPipeline->process($context);
             }))
-            ->add(new CallableStage(function(MinifyPipelineContext $context) use ($options) {
+            ->add(new CallableStage(function (MinifyPipelineContext $context) use ($options) {
                 $minifierPipeline = $this->buildMinifierPipeline($options);
                 return $minifierPipeline->process($context);
             }))
-            ->add(new CallableStage(function(MinifyPipelineContext $context){
+            ->add(new CallableStage(function (MinifyPipelineContext $context){
                 return $context->getPlaceholderContainer()->restorePlaceholders($context->getContents());
             }))
             ->build();

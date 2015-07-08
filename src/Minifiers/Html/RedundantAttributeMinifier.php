@@ -2,9 +2,9 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\Util\Html;
 use Illuminate\Support\Collection;
+use ArjanSchouten\HTMLMin\Util\Html;
+use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class RedundantAttributeMinifier implements MinifierInterface
 {
@@ -36,7 +36,7 @@ class RedundantAttributeMinifier implements MinifierInterface
     {
         Collection::make($this->redundantAttributes)->each(function ($attributes, $element) use (&$context) {
             Collection::make($attributes)->each(function ($value, $attribute) use ($element, &$context) {
-                $context->setContents(preg_replace_callback('/' . $element . '((?!\s*' . $attribute . '\s*=).)*(\s*' . $attribute . '\s*=\s*"?\'?\s*' . $value . '\s*"?\'?\s*)/is',
+                $context->setContents(preg_replace_callback('/'.$element.'((?!\s*'.$attribute.'\s*=).)*(\s*'.$attribute.'\s*=\s*"?\'?\s*'.$value.'\s*"?\'?\s*)/is',
                     function ($match) {
                         return $this->removeAttribute($match[0], $match[2]);
                     }, $context->getContents()));

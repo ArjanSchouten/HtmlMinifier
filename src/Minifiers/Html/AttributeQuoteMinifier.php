@@ -2,9 +2,9 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
+use Illuminate\Support\Str;
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use Illuminate\Support\Str;
 
 class AttributeQuoteMinifier implements MinifierInterface
 {
@@ -42,11 +42,11 @@ class AttributeQuoteMinifier implements MinifierInterface
     {
         if (Str::contains($match[1], $this->prohibitedCharsUnquotedAttribute)) {
             return $match[0];
-        } elseif(preg_match('/'.Constants::PLACEHOLDER_PATTERN.'/is', $match[1])) {
+        } elseif (preg_match('/'.Constants::PLACEHOLDER_PATTERN.'/is', $match[1])) {
             return $match[0];
         }
 
-        return '=' . $match[1];
+        return '='.$match[1];
     }
 
     /**

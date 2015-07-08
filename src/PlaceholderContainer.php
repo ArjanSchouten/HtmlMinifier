@@ -43,7 +43,7 @@ class PlaceholderContainer extends Collection
      */
     protected function createUniquePlaceholder()
     {
-        return '[[' . $this->replacementHash . $this->count() . ']]';
+        return '[['.$this->replacementHash.$this->count().']]';
     }
 
     /**
@@ -55,7 +55,7 @@ class PlaceholderContainer extends Collection
      */
     protected function removeNestedPlaceholders($originalContent)
     {
-        return preg_replace_callback('/' . Constants::PLACEHOLDER_PATTERN . '/', function ($match) {
+        return preg_replace_callback('/'.Constants::PLACEHOLDER_PATTERN.'/', function ($match) {
             return $this->pull($match[0]);
         }, $originalContent);
     }

@@ -61,7 +61,7 @@ class WhitespaceMinifier implements MinifierInterface
         do {
             $originalContents = $contents;
             array_walk($this->minifyRules, function ($replace, $regex) use (&$contents) {
-                $contents = preg_replace('/' . $regex . '/', $replace, $contents);
+                $contents = preg_replace('/'.$regex.'/', $replace, $contents);
             });
         } while ($originalContents != $contents);
 
@@ -75,7 +75,7 @@ class WhitespaceMinifier implements MinifierInterface
      */
     public function removeSpacesAroundPlaceholders($contents)
     {
-        return preg_replace('/\s*(' . Constants::PLACEHOLDER_PATTERN . ')\s*/', '$1', $contents);
+        return preg_replace('/\s*('.Constants::PLACEHOLDER_PATTERN.')\s*/', '$1', $contents);
     }
 
     /**

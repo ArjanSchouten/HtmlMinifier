@@ -12,5 +12,5 @@ interface MinifierInterface extends StageInterface
      *
      * @return string|bool if an option is needed, return the option name
      */
-    function provides();
+    public function provides();
 }

@@ -29,13 +29,15 @@ class HtmlBooleanAttributeRepository
      * Load the attributes from file.
      *
      * @param string $path
-     * @return array
+     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     *
+     * @return array
      */
     protected function loadAttributes($path = null)
     {
         if (!$path) {
-            $path = __DIR__ . '/HtmlBooleanAttributes.json';
+            $path = __DIR__.'/HtmlBooleanAttributes.json';
         }
 
         $filesystem = new Filesystem();

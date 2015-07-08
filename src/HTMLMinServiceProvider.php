@@ -2,8 +2,8 @@
 
 namespace ArjanSchouten\HTMLMin;
 
-use Illuminate\Support\ServiceProvider;
 use ArjanSchouten\HTMLMin\Command\ViewCompilerCommand;
+use Illuminate\Support\ServiceProvider;
 
 class HTMLMinServiceProvider extends ServiceProvider
 {

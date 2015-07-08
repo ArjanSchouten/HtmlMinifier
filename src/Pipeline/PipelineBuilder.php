@@ -19,6 +19,7 @@ class PipelineBuilder extends LeaguePipelineBuilder
                 parent::add($stage);
             }
         }
+
         return $this;
     }
 }

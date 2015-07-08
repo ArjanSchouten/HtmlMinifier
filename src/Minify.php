@@ -8,11 +8,10 @@ use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\WhitespaceMinifier;
-use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
-use RuntimeException;
-use League\Pipeline\Pipeline;
-use League\Pipeline\CallableStage;
 use ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder;
+use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
+use League\Pipeline\CallableStage;
+use RuntimeException;
 
 class Minify
 {

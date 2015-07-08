@@ -1,4 +1,5 @@
 <?php
+
 namespace ArjanSchouten\HTMLMin\Placeholders;
 
 use ArjanSchouten\HTMLMin\PlaceholderContainer;

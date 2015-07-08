@@ -1,7 +1,7 @@
 <?php
+
 namespace ArjanSchouten\HTMLMin\Placeholders;
 
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class Blade implements PlaceholderInterface

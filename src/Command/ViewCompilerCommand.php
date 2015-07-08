@@ -35,6 +35,7 @@ class ViewCompilerCommand extends Command
         if ($this->option('all')) {
             return $this->laravel->tagged('bladeMinifyRules');
         }
+
         $minifiers = [];
         foreach ($this->laravel->tagged('bladeMinifyRules') as $minificationRule) {
             if ($this->isEnabledMinificationRule($minificationRule)) {
@@ -55,6 +56,7 @@ class ViewCompilerCommand extends Command
         if (!method_exists($minificationRule, 'minifyOnlyWhenCommandlinOptionProvided')) {
             return true;
         }
+
         $optionName = $minificationRule->minifyOnlyWhenCommandlinOptionProvided();
         if ($optionName == false) {
             return true;

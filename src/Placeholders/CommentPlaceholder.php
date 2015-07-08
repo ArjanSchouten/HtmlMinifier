@@ -1,4 +1,5 @@
 <?php
+
 namespace ArjanSchouten\HTMLMin\Placeholders;
 
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
@@ -48,5 +49,4 @@ class CommentPlaceholder implements PlaceholderInterface
                 return $placeholderContainer->addPlaceholder($match[0]);
             }, $contents);
     }
-
 }

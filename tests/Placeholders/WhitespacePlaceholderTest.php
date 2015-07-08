@@ -1,9 +1,9 @@
 <?php
 
 use ArjanSchouten\HTMLMin\MinifyPipelineContext;
-use Mockery as m;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\WhitespacePlaceholder;
+use Mockery as m;
 
 class WhitespacePlaceholderText extends PHPUnit_Framework_TestCase
 {

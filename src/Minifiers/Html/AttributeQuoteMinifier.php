@@ -47,7 +47,6 @@ class AttributeQuoteMinifier implements MinifierInterface
         }
 
         return '=' . $match[1];
-
     }
 
     /**

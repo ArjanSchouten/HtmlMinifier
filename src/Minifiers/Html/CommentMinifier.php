@@ -1,8 +1,8 @@
 <?php
+
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
 
 class CommentMinifier implements MinifierInterface
 {

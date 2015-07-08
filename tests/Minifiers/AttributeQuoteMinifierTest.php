@@ -1,7 +1,7 @@
 <?php
 
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
 use ArjanSchouten\HTMLMin\Minifiers\Html\AttributeQuoteMinifier;
+use ArjanSchouten\HTMLMin\MinifyPipelineContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase

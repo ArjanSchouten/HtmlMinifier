@@ -9,7 +9,6 @@ use Mockery as m;
 
 class EmptyAttribute extends PHPUnit_Framework_TestCase
 {
-
     private $emptyAttributeMinifier;
 
     public function __construct()

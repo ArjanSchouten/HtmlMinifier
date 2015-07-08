@@ -7,7 +7,6 @@ use Mockery as m;
 
 class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
 {
-
     private $commentPlaceholder;
 
     public function __construct()

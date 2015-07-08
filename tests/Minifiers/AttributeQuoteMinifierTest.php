@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
 {
-
     private $attributeQuote;
 
     public function __construct()

@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class RedundantAttributeMinifierTest extends PHPUnit_Framework_TestCase
 {
-
     private $redundantAttributeFileMinifier;
 
     public function __construct()

@@ -5,7 +5,6 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
 {
-
     private $whitespaceMinifier;
 
     public function __construct()
@@ -34,7 +33,7 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testWhitespaces()
     {
-        $result = $this->whitespaceMinifier->runMinificationRules("<a href=//www.example.nl>\n\r\t</a>");
+        $result = $this->whitespaceMinifier->runMinificationRules('<a href=//www.example.nl>\n\r\t</a>');
         $this->assertEquals('<a href=//www.example.nl></a>', $result);
     }
 
@@ -77,6 +76,6 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
         $maxLineLength = 25;
         $result = $this->whitespaceMinifier->maxHtmlLineLength('This should break at <p></p> This should break at <p></p>',
             $maxLineLength);
-        $this->assertEquals("This should break at <p>\n</p> This should break at <p>\n</p>", $result);
+        $this->assertEquals('This should break at <p>\n</p> This should break at <p>\n</p>', $result);
     }
 }

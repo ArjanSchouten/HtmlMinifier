@@ -7,7 +7,6 @@ use Mockery as m;
 
 class WhitespacePlaceholderText extends PHPUnit_Framework_TestCase
 {
-
     private $whitespacePlaceholderText;
 
     public function __construct()

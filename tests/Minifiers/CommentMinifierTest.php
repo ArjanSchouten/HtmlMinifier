@@ -6,7 +6,6 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class CommentMinifierTest extends PHPUnit_Framework_TestCase
 {
-
     private $commentMinifier;
 
     public function __construct()
@@ -24,13 +23,13 @@ class CommentMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->commentMinifier->process($context->setContents('<div><!-- '.PHP_EOL.' TEST '.PHP_EOL.' --></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 
-        $result = $this->commentMinifier->process($context->setContents("<div><!--[if IE]TEST<![ENDIF]--></div>"));
+        $result = $this->commentMinifier->process($context->setContents('<div><!--[if IE]TEST<![ENDIF]--></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 
-        $result = $this->commentMinifier->process($context->setContents("<div><!----></div>"));
+        $result = $this->commentMinifier->process($context->setContents('<div><!----></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 
-        $result = $this->commentMinifier->process($context->setContents("<div><!-- test -- test --></div>"));
+        $result = $this->commentMinifier->process($context->setContents('<div><!-- test -- test --></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
     }
 
@@ -38,7 +37,7 @@ class CommentMinifierTest extends PHPUnit_Framework_TestCase
     {
         $context = new MinifyPipelineContext(new PlaceholderContainer());
 
-        $result = $this->commentMinifier->process($context->setContents("<div><!></div>"));
+        $result = $this->commentMinifier->process($context->setContents('<div><!></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
     }
 }

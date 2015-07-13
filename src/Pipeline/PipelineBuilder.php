@@ -16,7 +16,7 @@ class PipelineBuilder extends LeaguePipelineBuilder
             parent::add($stage);
         }
 
-        if ($stage instanceof MinifierInterface && $stage->provides()) {
+        if ($stage instanceof MinifierInterface) {
             if ($this->isEnabledMinifier($stage, $options)) {
                 parent::add($stage);
             }

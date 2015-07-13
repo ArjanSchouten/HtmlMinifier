@@ -24,7 +24,7 @@ class HTMLMinServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerBladeCompiler();
+        $this->registerBladeMinifier();
 
         $this->addCommands();
     }
@@ -34,9 +34,16 @@ class HTMLMinServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerBladeCompiler()
+    protected function registerBladeMinifier()
     {
         $this->app->singleton('blade.compiler.min', function () {
+            return new Minify();
+        });
+    }
+
+    protected function registerPHPMinifier()
+    {
+        $this->app->singleton('php.min', function () {
             return new Minify();
         });
     }

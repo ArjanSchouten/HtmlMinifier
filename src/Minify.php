@@ -15,6 +15,8 @@ class Minify
             ->pipe($pipeline->placeholders($options)->build())
             ->pipe($pipeline->minifiers($options)->build())
             ->pipe($pipeline->restores($options));
+
+        return $this;
     }
 
     public function process(MinifyPipelineContext $context)

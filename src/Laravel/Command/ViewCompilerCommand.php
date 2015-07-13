@@ -2,12 +2,11 @@
 
 namespace ArjanSchouten\HTMLMin\Laravel\Command;
 
-use ArjanSchouten\HTMLMin\Pipeline\BladePipeline;
-use Event;
 use InvalidArgumentException;
 use Illuminate\Console\Command;
 use Illuminate\View\Engines\CompilerEngine;
 use Symfony\Component\Console\Input\InputOption;
+use ArjanSchouten\HTMLMin\Pipeline\BladePipeline;
 
 class ViewCompilerCommand extends Command
 {
@@ -31,16 +30,21 @@ class ViewCompilerCommand extends Command
         foreach ($this->laravel['view']->getFinder()->getPaths() as $path) {
             foreach ($this->laravel['files']->allFiles($path) as $file) {
                 try {
-                    $engine = $this->laravel['view']->getEngineFromPath($file);
+                    $this->compileView($file);
                 } catch (InvalidArgumentException $e) {
                     continue;
                 }
-
-                if ($engine instanceof CompilerEngine) {
-                    $this->laravel['blade.compiler.min']->buildPipeline(new BladePipeline(), $this->option());
-                    $engine->getCompiler()->compile($file);
-                }
             }
+        }
+    }
+
+    protected function compileView($file)
+    {
+        $engine = $this->laravel['view']->getEngineFromPath($file);
+
+        if ($engine instanceof CompilerEngine) {
+            $this->laravel['blade.compiler.min']->buildPipeline(new BladePipeline(), $this->option());
+            $engine->getCompiler()->compile($file);
         }
     }
 
@@ -54,7 +58,7 @@ class ViewCompilerCommand extends Command
         return [
             [
                 'remove-attributequotes',
-                'aq',
+                'q',
                 InputOption::VALUE_NONE,
                 'Remove quotes around html attributes',
             ],

@@ -20,6 +20,9 @@ class CommentMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->commentMinifier->process($context->setContents('<div><!--TEST--></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 
+        $result = $this->commentMinifier->process($context->setContents('<!DOCTYPE html>'));
+        $this->assertEquals('<!DOCTYPE html>', $result->getContents());
+
         $result = $this->commentMinifier->process($context->setContents('<div><!-- '.PHP_EOL.' TEST '.PHP_EOL.' --></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
 

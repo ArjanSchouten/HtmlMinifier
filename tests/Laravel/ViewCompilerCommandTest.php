@@ -8,6 +8,8 @@ use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Contracts\Foundation\Application;
 use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\NullOutput;
 
 class ViewCompilerCommandTest extends PHPUnit_Framework_TestCase
 {
@@ -28,6 +30,9 @@ class ViewCompilerCommandTest extends PHPUnit_Framework_TestCase
         $viewCompilerCommand = new ViewCompilerCommand();
         $viewCompilerCommand->setLaravel($this->app);
 
+        try {
+            $viewCompilerCommand->run(new ArgvInput(), new NullOutput());
+        } catch (Exception $e) { }
         try {
             $viewCompilerCommand->fire();
         } catch (Exception $e) {

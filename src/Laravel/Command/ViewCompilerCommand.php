@@ -19,7 +19,11 @@ class ViewCompilerCommand extends Command
      */
     public function fire()
     {
+        $this->info('Going to minify you\'re views');
+
         $this->compileViews();
+
+        $this->info('Views are minified!');
     }
 
     /**
@@ -58,19 +62,19 @@ class ViewCompilerCommand extends Command
         return [
             [
                 'remove-attributequotes',
-                'q',
+                null,
                 InputOption::VALUE_NONE,
                 'Remove quotes around html attributes',
             ],
             [
                 'remove-defaults',
-                'd',
+                null,
                 InputOption::VALUE_NONE,
                 'Remove defaults such as from <script type=text/javascript>',
             ],
             [
                 'remove-empty-attributes',
-                'e',
+                null,
                 InputOption::VALUE_NONE,
                 'Remove empty attributes. HTML boolean attributes are skipped',
             ],

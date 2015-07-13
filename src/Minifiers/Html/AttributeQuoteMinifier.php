@@ -17,6 +17,7 @@ class AttributeQuoteMinifier implements MinifierInterface
         '`',
         '>',
         '<',
+        ' ',
     ];
 
     /**

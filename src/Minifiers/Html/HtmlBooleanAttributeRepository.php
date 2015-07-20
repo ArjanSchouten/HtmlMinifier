@@ -33,7 +33,7 @@ class HtmlBooleanAttributeRepository
      */
     protected function loadAttributes($path = null)
     {
-        if ($path == null) {
+        if ($path === null) {
             $path = __DIR__.'/HtmlBooleanAttributes.json';
         }
 

@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Arjan
- * Date: 20/07/2015
- * Time: 22:52
- */
 
 namespace ArjanSchouten\HTMLMin\Pipeline;
-
 
 interface MinifyPipelineInterface
 {

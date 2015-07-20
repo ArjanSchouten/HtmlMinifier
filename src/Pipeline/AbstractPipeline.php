@@ -13,7 +13,7 @@ use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
 
-abstract class AbstractPipeline
+abstract class AbstractPipeline implements MinifyPipelineInterface
 {
     /**
      * @var \ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder

@@ -17,23 +17,23 @@ class HtmlBooleanAttributeRepository
      */
     public function getAttributes()
     {
-        if (static::$attributes == null) {
-            static::$attributes = Collection::make($this->loadAttributes()->attributes);
+        if (self::$attributes == null) {
+            self::$attributes = Collection::make($this->loadAttributes()->attributes);
         }
 
-        return static::$attributes;
+        return self::$attributes;
     }
 
     /**
      * Load the attributes from file.
      *
-     * @param   string  $path
+     * @param  null|string  $path
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      * @return array
      */
     protected function loadAttributes($path = null)
     {
-        if (!$path) {
+        if ($path == null) {
             $path = __DIR__.'/HtmlBooleanAttributes.json';
         }
 

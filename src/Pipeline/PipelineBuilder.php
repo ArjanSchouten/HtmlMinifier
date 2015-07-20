@@ -17,7 +17,7 @@ class PipelineBuilder extends LeaguePipelineBuilder
      */
     public function add(StageInterface $stage, array $options = null)
     {
-        if ($options == null) {
+        if ($options === null) {
             return parent::add($stage);
         } elseif (array_key_exists('all', $options) && $options['all']) {
             parent::add($stage);

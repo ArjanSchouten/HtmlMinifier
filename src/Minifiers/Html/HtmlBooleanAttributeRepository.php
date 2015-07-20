@@ -17,7 +17,7 @@ class HtmlBooleanAttributeRepository
      */
     public function getAttributes()
     {
-        if (self::$attributes == null) {
+        if (self::$attributes === null) {
             self::$attributes = Collection::make($this->loadAttributes()->attributes);
         }
 

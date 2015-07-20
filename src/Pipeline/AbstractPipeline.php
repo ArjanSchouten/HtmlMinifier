@@ -38,7 +38,7 @@ abstract class AbstractPipeline
      */
     public function placeholders($options = [])
     {
-        if (self::$placeholderPipelineBuilder == null) {
+        if (self::$placeholderPipelineBuilder === null) {
             self::$placeholderPipelineBuilder = (new PipelineBuilder())
                 ->add(new CommentPlaceholder())
                 ->add(new WhitespacePlaceholder());
@@ -55,7 +55,7 @@ abstract class AbstractPipeline
      */
     public function minifiers($options = [])
     {
-        if (self::$minifierPipelineBuilder == null) {
+        if (self::$minifierPipelineBuilder === null) {
             self::$minifierPipelineBuilder = (new PipelineBuilder())
                 ->add(new AttributeQuoteMinifier(), $options)
                 ->add(new CommentMinifier(), $options)
@@ -76,7 +76,7 @@ abstract class AbstractPipeline
      */
     public function restores($options = [])
     {
-        if (self::$restorerPipelineBuilder == null) {
+        if (self::$restorerPipelineBuilder === null) {
             self::$restorerPipelineBuilder = (new PipelineBuilder())
                 ->add(new CallableStage(function (MinifyPipelineContext $context) {
                     return $context->setContents($context->getPlaceholderContainer()->restorePlaceholders($context->getContents()));

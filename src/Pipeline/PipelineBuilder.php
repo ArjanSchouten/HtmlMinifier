@@ -35,11 +35,11 @@ class PipelineBuilder extends LeaguePipelineBuilder
     /**
      * Check if the minifier is enabled based on provided restrictions.
      *
-     * @param  \League\Pipeline\StageInterface  $stage
+     * @param  \ArjanSchouten\HTMLMin\Minifiers\MinifierInterface  $stage
      * @param  array  $options
      * @return bool
      */
-    protected function isEnabledMinifier(StageInterface $stage, array $options)
+    protected function isEnabledMinifier(MinifierInterface $stage, array $options)
     {
         return !$stage->provides() || (isset($options[$stage->provides()]) && $options[$stage->provides()]);
     }

@@ -9,7 +9,7 @@ class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
 {
     private $commentPlaceholder;
 
-    public function __construct()
+    public function setUp()
     {
         $this->commentPlaceholder = new CommentPlaceholder();
     }

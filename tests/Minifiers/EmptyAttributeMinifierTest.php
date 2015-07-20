@@ -11,7 +11,7 @@ class EmptyAttribute extends PHPUnit_Framework_TestCase
 {
     private $emptyAttributeMinifier;
 
-    public function __construct()
+    public function setUp()
     {
         $this->emptyAttributeMinifier = new EmptyAttributeMinifier();
     }

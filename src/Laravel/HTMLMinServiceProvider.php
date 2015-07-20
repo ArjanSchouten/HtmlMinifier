@@ -7,6 +7,7 @@ use ArjanSchouten\HTMLMin\MinifyPipelineContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use Illuminate\Support\ServiceProvider;
 use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class HTMLMinServiceProvider extends ServiceProvider
 {
@@ -76,9 +77,25 @@ class HTMLMinServiceProvider extends ServiceProvider
     protected function addCompilerExtensions()
     {
         $this->app->make('blade.compiler')->extend(function ($value, $compiler) {
+            $this->setBladeTags($compiler);
+
             $context = new MinifyPipelineContext(new PlaceholderContainer());
             return $this->app->make('blade.compiler.min')->process($context->setContents($value))->getContents();
         });
+    }
+
+    private function setBladeTags(BladeCompiler $bladeCompiler)
+    {
+        $contentTags = $bladeCompiler->getContentTags();
+
+        $tags = [
+            $contentTags,
+            $bladeCompiler->getRawTags(),
+            $bladeCompiler->getEscapedContentTags(),
+            [$contentTags[0].'--', '--'.$contentTags[1]],
+        ];
+
+        return $tags;
     }
 
     /**

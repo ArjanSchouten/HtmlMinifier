@@ -7,7 +7,7 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
 {
     private $whitespaceMinifier;
 
-    public function __construct()
+    public function setUp()
     {
         $this->whitespaceMinifier = new WhitespaceMinifier();
     }

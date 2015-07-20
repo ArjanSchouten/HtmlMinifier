@@ -9,7 +9,7 @@ class WhitespacePlaceholderTest extends PHPUnit_Framework_TestCase
 {
     private $whitespacePlaceholderText;
 
-    public function __construct()
+    public function setUp()
     {
         $this->whitespacePlaceholderText = new WhitespacePlaceholder();
     }

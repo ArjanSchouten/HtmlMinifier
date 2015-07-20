@@ -8,7 +8,7 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
 {
     private $attributeQuote;
 
-    public function __construct()
+    public function setUp()
     {
         $this->attributeQuote = new AttributeQuoteMinifier();
     }

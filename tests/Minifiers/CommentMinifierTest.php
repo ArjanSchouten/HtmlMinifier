@@ -8,7 +8,7 @@ class CommentMinifierTest extends PHPUnit_Framework_TestCase
 {
     private $commentMinifier;
 
-    public function __construct()
+    public function setUp()
     {
         $this->commentMinifier = new CommentMinifier();
     }

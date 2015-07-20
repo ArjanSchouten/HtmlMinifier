@@ -10,7 +10,7 @@ class PHPPlaceholderTest extends PHPUnit_Framework_TestCase
 
     private $phpPlaceholder;
 
-    public function __construct()
+    public function setUp()
     {
         $this->phpPlaceholder = new PHPPlaceholder();
     }

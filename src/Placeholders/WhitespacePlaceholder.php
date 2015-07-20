@@ -48,10 +48,11 @@ class WhitespacePlaceholder implements PlaceholderInterface
      */
     protected function setHtmlTagPlaceholder($contents, PlaceholderContainer $placeholderContainer, $htmlTag)
     {
-        $pattern = '/(<'.$htmlTag.'((?=([^"]*".[^"]*")*[^"]*)[^>]*>)*)(((?!<\/'.$htmlTag.'>).)*)(<\/'.$htmlTag.'>)/is';
+        // Attributes may contain a ">" which should be skipped due to this unrolling the loop.
+        $pattern = '/(<'.$htmlTag.'(?:[^"\'>]*|"[^"]*"|\'[^\']*\')*>)(((?!<\/'.$htmlTag.'>).)*)(<\/'.$htmlTag.'>)/is';
 
         return preg_replace_callback($pattern, function ($match) use ($placeholderContainer) {
-            return $match[1].$placeholderContainer->addPlaceholder($match[3]).$match[6];
+            return $match[1].$placeholderContainer->addPlaceholder($match[2]).$match[4];
         }, $contents);
     }
 }

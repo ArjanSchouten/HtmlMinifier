@@ -34,6 +34,9 @@ class BladePlaceholderTest extends PHPUnit_Framework_TestCase
         $result = $this->bladePlaceholder->process($context->setContents('{{ echo \'test'.PHP_EOL.'\';}}'));
         $this->assertEquals($placeholder, $result->getContents());
 
+        $result = $this->bladePlaceholder->process($context->setContents('<script src="{{ echo \'test\';}}"></script>'));
+        $this->assertEquals('<script src="'.$placeholder.'"></script>', $result->getContents());
+
         $result = $this->bladePlaceholder->process($context->setContents('test{{ echo \'test'.PHP_EOL.'\';}}test'));
         $this->assertEquals('test'.$placeholder.'test', $result->getContents());
         $this->assertEquals('test'.$placeholder.'test', $result->getContents());

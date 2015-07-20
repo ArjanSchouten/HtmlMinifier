@@ -19,7 +19,7 @@ class ViewCompilerCommand extends Command
      */
     public function fire()
     {
-        $this->info('Going to minify you\'re views');
+        $this->info('Going to minify you\'re views.');
 
         $this->compileViews();
 

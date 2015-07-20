@@ -22,11 +22,10 @@ class WhitespacePlaceholder implements PlaceholderInterface
     ];
 
     /**
-     * Replace critical content with a temp placeholder for integrity.
+     * Replace critical content with a temporary placeholder.
      *
-     * @param  string  $contents
-     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
-     * @return string
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {

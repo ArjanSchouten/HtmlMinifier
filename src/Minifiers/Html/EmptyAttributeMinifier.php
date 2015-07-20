@@ -33,23 +33,32 @@ class EmptyAttributeMinifier implements MinifierInterface
             }, $context->getContents()));
     }
 
+    /**
+     * Check if an attribute is a boolean attribute.
+     *
+     * @param  string  $attribute
+     * @return bool
+     */
     private function isBooleanAttribute($attribute)
     {
         return $this->repository->getAttributes()->search(trim($attribute)) || Html::isDataAttribute($attribute);
     }
 
     /**
+     * @param  \ArjanSchouten\HTMLMin\Minifiers\Html\HtmlBooleanAttributeRepository  $repository
+     */
+    public function setRepository($repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
      * Indicates if minification rules depends on command options.
      *
-     * @return string|bool if an option is needed, return the option name
+     * @return string if an option is needed, return the option name
      */
     public function provides()
     {
         return 'remove-empty-attributes';
-    }
-
-    public function setRepository($repository)
-    {
-        $this->repository = $repository;
     }
 }

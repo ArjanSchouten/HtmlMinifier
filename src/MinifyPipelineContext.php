@@ -15,9 +15,7 @@ class MinifyPipelineContext
     private $contents;
 
     /**
-     * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
-     *
-     * @return self
+     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
      */
     public function __construct(PlaceholderContainer $placeholderContainer)
     {
@@ -25,6 +23,8 @@ class MinifyPipelineContext
     }
 
     /**
+     * Get the placeholdercontainer.
+     *
      * @return \ArjanSchouten\HTMLMin\PlaceholderContainer
      */
     public function getPlaceholderContainer()
@@ -41,8 +41,7 @@ class MinifyPipelineContext
     }
 
     /**
-     * @param string $contents
-     *
+     * @param  string  $contents
      * @return $this
      */
     public function setContents($contents)

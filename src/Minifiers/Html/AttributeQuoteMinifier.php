@@ -8,7 +8,12 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class AttributeQuoteMinifier implements MinifierInterface
 {
-    protected $prohibitedCharsUnquotedAttribute = [
+    /**
+     * Chars which are prohibited from an unquoted attribute.
+     *
+     * @var array
+     */
+    protected $prohibitedChars = [
         '\'',
         '"',
         "\n",
@@ -23,24 +28,29 @@ class AttributeQuoteMinifier implements MinifierInterface
     /**
      * Execute the minification rule.
      *
-     * @param string $contents
-     *
-     * @return string
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {
         $context->setContents(preg_replace_callback('/=\s*"([^\\\\"]*(?:\\\\"[^\\\\"]*)*)"/', function ($match) {
-            return $this->replaceWith($match);
+            return $this->minifyAttribute($match);
         }, $context->getContents()));
 
         return $context->setContents(preg_replace_callback('/=\s*\'([^\\\\\']*(?:\\\\\'[^\\\\\']*)*)\'/', function ($match) {
-            return $this->replaceWith($match);
+            return $this->minifyAttribute($match);
         }, $context->getContents()));
     }
 
-    protected function replaceWith($match)
+    /**
+     * Minify the attribute quotes if allowed.
+     *
+     * @param  array  $match
+     * @return string
+     */
+    protected function minifyAttribute($match)
     {
-        if (Str::contains($match[1], $this->prohibitedCharsUnquotedAttribute)) {
+        if (Str::contains($match[1], $this->prohibitedChars)) {
             return $match[0];
         } elseif (preg_match('/'.Constants::PLACEHOLDER_PATTERN.'/is', $match[1])) {
             return $match[0];

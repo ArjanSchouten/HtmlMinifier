@@ -2,17 +2,16 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 use Illuminate\Support\Str;
+use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class CommentMinifier implements MinifierInterface
 {
     /**
      * Replace remaining comments.
      *
-     * @param string $contents
-     *
-     * @return string
+     * @param \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {

@@ -16,18 +16,22 @@ class ViewCompilerCommand extends Command
 
     /**
      * Fire event and compile and minify the views.
+     *
+     * @return void
      */
     public function fire()
     {
-        $this->info('Going to minify you\'re views.');
+        $this->info('Going to minify you\'re views. Just a few seconds...');
 
         $this->compileViews();
 
-        $this->info('Views are minified!');
+        $this->info('Yeah! You\'re views are minified!');
     }
 
     /**
      * Find and compile all the views.
+     *
+     * @return void
      */
     protected function compileViews()
     {
@@ -42,6 +46,11 @@ class ViewCompilerCommand extends Command
         }
     }
 
+    /**
+     * Compile and minify the given view file.
+     *
+     * @param string  $file
+     */
     protected function compileView($file)
     {
         $engine = $this->laravel['view']->getEngineFromPath($file);

@@ -9,10 +9,8 @@ class CommentPlaceholder implements PlaceholderInterface
     /**
      * Replace critical content with a temp placeholder for integrity.
      *
-     * @param string $contents
-     * @param PlaceholderContainer $placeholderContainer
-     *
-     * @return string
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {
@@ -21,6 +19,13 @@ class CommentPlaceholder implements PlaceholderInterface
         return $context->setContents($this->setConditionalCommentsPlaceholder($context->getContents(), $context->getPlaceholderContainer()));
     }
 
+    /**
+     * Replace CData with a temporary placeholder.
+     *
+     * @param  string  $contents
+     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
+     * @return string
+     */
     protected function setCDataPlaceholder($contents, PlaceholderContainer $placeholderContainer)
     {
         return preg_replace_callback('/<!\[CDATA\[((?!\]\]>).)*\]\]>/s', function ($match) use ($placeholderContainer) {
@@ -29,11 +34,10 @@ class CommentPlaceholder implements PlaceholderInterface
     }
 
     /**
-     * Replace conditional placeholders used by IE.
+     * Replace conditional placeholders used by Internet Explorer.
      *
-     * @param string $contents
-     * @param PlaceholderContainer $placeholderContainer
-     *
+     * @param  string  $contents
+     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
      * @return string
      */
     protected function setConditionalCommentsPlaceholder($contents, PlaceholderContainer $placeholderContainer)

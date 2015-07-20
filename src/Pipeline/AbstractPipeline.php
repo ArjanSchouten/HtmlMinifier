@@ -15,10 +15,27 @@ use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
 
 abstract class AbstractPipeline
 {
+    /**
+     * @var \ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder
+     */
     private static $placeholderPipelineBuilder;
 
+    /**
+     * @var \ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder
+     */
     private static $minifierPipelineBuilder;
 
+    /**
+     * @var \ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder
+     */
+    private static $restorerPipelineBuilder;
+
+    /**
+     * Add placeholders to the pipeline based on provided options.
+     *
+     * @param  array  $options
+     * @return \ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder
+     */
     public function placeholders($options = [])
     {
         if (self::$placeholderPipelineBuilder == null) {
@@ -30,6 +47,12 @@ abstract class AbstractPipeline
         return self::$placeholderPipelineBuilder;
     }
 
+    /**
+     * Add minifiers to the pipeline based on provided options.
+     *
+     * @param  array  $options
+     * @return \ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder
+     */
     public function minifiers($options = [])
     {
         if (self::$minifierPipelineBuilder == null) {
@@ -45,10 +68,21 @@ abstract class AbstractPipeline
         return self::$minifierPipelineBuilder;
     }
 
+    /**
+     * Add restorers to the pipeline based on provided options.
+     *
+     * @param  array  $options
+     * @return \ArjanSchouten\HTMLMin\Pipeline\PipelineBuilder
+     */
     public function restores($options = [])
     {
-        return new CallableStage(function (MinifyPipelineContext $context) {
-            return $context->setContents($context->getPlaceholderContainer()->restorePlaceholders($context->getContents()));
-        });
+        if (self::$restorerPipelineBuilder == null) {
+            self::$restorerPipelineBuilder = (new PipelineBuilder())
+                ->add(new CallableStage(function (MinifyPipelineContext $context) {
+                    return $context->setContents($context->getPlaceholderContainer()->restorePlaceholders($context->getContents()));
+                }));
+    }
+
+        return self::$minifierPipelineBuilder;
     }
 }

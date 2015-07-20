@@ -2,8 +2,8 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Util\Html;
 use ArjanSchouten\HTMLMin\Constants;
+use ArjanSchouten\HTMLMin\Util\Html;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class EmptyAttributeMinifier implements MinifierInterface
@@ -18,9 +18,8 @@ class EmptyAttributeMinifier implements MinifierInterface
     /**
      * Execute the minification rule.
      *
-     * @param string $contents
-     *
-     * @return string
+     * @param \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {

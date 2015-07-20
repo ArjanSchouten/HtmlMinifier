@@ -6,8 +6,17 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class WhitespaceMinifier implements MinifierInterface
 {
+    /**
+     * Max allowed html line length for old e.g. browsers, firewalls and routers.
+     * @var int
+     */
     protected $maxHtmlLineLength = 32000;
 
+    /**
+     * Minification regexp's for replacing redundant whitespaces.
+     *
+     * @var array
+     */
     protected $minifyRules = [
         '\s?=\s?' => '=',
         '\s?\/>' => '>',
@@ -21,11 +30,10 @@ class WhitespaceMinifier implements MinifierInterface
     ];
 
     /**
-     * Execute the minification rules.
+     * Minify redundant whitespaces.
      *
-     * @param string $contents
-     *
-     * @return string
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {
@@ -39,8 +47,7 @@ class WhitespaceMinifier implements MinifierInterface
     /**
      * Remove trailing whitespaces around the contents.
      *
-     * @param string $contents
-     *
+     * @param  string  $contents
      * @return string
      */
     public function trailingWhitespaces($contents)
@@ -51,8 +58,7 @@ class WhitespaceMinifier implements MinifierInterface
     /**
      * Loop over the minification rules as long as changes in output occur.
      *
-     * @param string $contents
-     *
+     * @param  string  $contents
      * @return string
      */
     public function runMinificationRules($contents)
@@ -68,8 +74,9 @@ class WhitespaceMinifier implements MinifierInterface
     }
 
     /**
-     * @param string $contents
+     * Remove all spaces around placeholders.
      *
+     * @param  string  $contents
      * @return string
      */
     public function removeSpacesAroundPlaceholders($contents)
@@ -81,9 +88,8 @@ class WhitespaceMinifier implements MinifierInterface
      * Old browsers, firewalls and more can't handle to long lines.
      * Therefore add a linebreak after specified character length.
      *
-     * @param int $maxHtmlLineLength
-     * @param string $contents
-     *
+     * @param  int  $maxHtmlLineLength
+     * @param  string  $contents
      * @return string
      */
     public function maxHtmlLineLength($contents, $maxHtmlLineLength)

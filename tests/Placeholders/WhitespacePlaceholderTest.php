@@ -50,6 +50,5 @@ ga('create', 'xxxx', 'auto');
 ga('send', 'pageview');
 </script>"));
         $this->assertEquals('<script>'.$placeholder.'</script><script>'.$placeholder.'</script>', $result->getContents());
-
     }
 }

@@ -3,11 +3,12 @@
 namespace ArjanSchouten\HTMLMin\Laravel;
 
 use ArjanSchouten\HTMLMin\Minify;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 use Illuminate\Support\ServiceProvider;
-use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
 use Illuminate\View\Compilers\BladeCompiler;
+use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
 
 class HTMLMinServiceProvider extends ServiceProvider
 {
@@ -42,6 +43,11 @@ class HTMLMinServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Register the php minifier.
+     *
+     * @return void
+     */
     protected function registerPHPMinifier()
     {
         $this->app->singleton('php.min', function () {
@@ -50,7 +56,7 @@ class HTMLMinServiceProvider extends ServiceProvider
     }
 
     /**
-     * Add the available commands.
+     * Add the available CLI commands.
      *
      * @return void
      */
@@ -77,14 +83,20 @@ class HTMLMinServiceProvider extends ServiceProvider
     protected function addCompilerExtensions()
     {
         $this->app->make('blade.compiler')->extend(function ($value, $compiler) {
-            $this->setBladeTags($compiler);
+            BladePlaceholder::setBladeTags($this->getBladeTags($compiler));
 
             $context = new MinifyPipelineContext(new PlaceholderContainer());
             return $this->app->make('blade.compiler.min')->process($context->setContents($value))->getContents();
         });
     }
 
-    private function setBladeTags(BladeCompiler $bladeCompiler)
+    /**
+     * Get the blade tags which might be overruled by user.
+     *
+     * @param  \Illuminate\View\Compilers\BladeCompiler  $bladeCompiler
+     * @return array
+     */
+    private function getBladeTags(BladeCompiler $bladeCompiler)
     {
         $contentTags = $bladeCompiler->getContentTags();
 

@@ -8,6 +8,13 @@ use League\Pipeline\PipelineBuilder as LeaguePipelineBuilder;
 
 class PipelineBuilder extends LeaguePipelineBuilder
 {
+    /**
+     * Add stage to the pipelinebuilder if there are no restrictions.
+     *
+     * @param  \League\Pipeline\StageInterface  $stage
+     * @param  array|null  $options
+     * @return $this
+     */
     public function add(StageInterface $stage, array $options = null)
     {
         if ($options == null) {
@@ -25,6 +32,13 @@ class PipelineBuilder extends LeaguePipelineBuilder
         return $this;
     }
 
+    /**
+     * Check if the minifier is enabled based on provided restrictions.
+     *
+     * @param  \League\Pipeline\StageInterface  $stage
+     * @param  array  $options
+     * @return bool
+     */
     protected function isEnabledMinifier(StageInterface $stage, array $options)
     {
         return !$stage->provides() || (isset($options[$stage->provides()]) && $options[$stage->provides()]);

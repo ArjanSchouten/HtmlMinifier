@@ -4,11 +4,12 @@ namespace ArjanSchouten\HTMLMin\Placeholders\Blade;
 
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\PlaceholderInterface;
-use Illuminate\View\Compilers\BladeCompiler;
 
 class BladePlaceholder implements PlaceholderInterface
 {
-
+    /**
+     * @var array
+     */
     private static $tags = [
         ['{{{', '}}}'],
         ['{!!', '!!}'],
@@ -16,11 +17,12 @@ class BladePlaceholder implements PlaceholderInterface
         ['{{', '}}'],
     ];
 
+
     /**
-     * Replace critical content with a temp placeholder for integrity.
+     * Replace blade tags with a temporary placeholder
      *
-     * @param mixed $context
-     * @return string
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {
@@ -34,8 +36,8 @@ class BladePlaceholder implements PlaceholderInterface
     /**
      * Add placeholder for blade echo statements.
      *
-     * @param string $contents
-     * @param PlaceholderContainer $placeholderContainer
+     * @param  string  $contents
+     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
      * @return string
      */
     protected function setEchosPlaceholder($contents, PlaceholderContainer $placeholderContainer)
@@ -53,8 +55,8 @@ class BladePlaceholder implements PlaceholderInterface
     /**
      * Add placeholder for blade specific control structures.
      *
-     * @param string $contents
-     * @param PlaceholderContainer $placeholderContainer
+     * @param  string  $contents
+     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
      * @return string
      */
     protected function setBladeControlStructuresPlaceholder($contents, PlaceholderContainer $placeholderContainer)
@@ -64,12 +66,22 @@ class BladePlaceholder implements PlaceholderInterface
         }, $contents);
     }
 
+    /**
+     * Get blade tags.
+     *
+     * @return array
+     */
     public static function getBladeTags()
     {
         return self::$tags;
     }
 
-    public static function setBladeTags($tags)
+    /**
+     * Set blade tags.
+     *
+     * @param  array  $tags
+     */
+    public static function setBladeTags(array $tags)
     {
         self::$tags = $tags;
     }

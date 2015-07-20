@@ -13,15 +13,20 @@ class PlaceholderContainer extends Collection
      */
     protected $replacementHash;
 
-    public function __construct()
+    /**
+     * Create a new placeholdercontainer.
+     *
+     * @param  array  $items
+     */
+    public function __construct($items = [])
     {
         $replacementHashLimit = 32;
         $this->replacementHash = str_limit(md5(time()), $replacementHashLimit);
+        parent::__construct($items);
     }
 
     /**
-     * @param string $contents
-     *
+     * @param  string  $contents
      * @return string
      */
     public function restorePlaceholders($contents)
@@ -36,8 +41,7 @@ class PlaceholderContainer extends Collection
     /**
      * Store a placeholder in the container.
      *
-     * @param string $originalContent
-     *
+     * @param  string $originalContent
      * @return string $placeholder
      */
     public function addPlaceholder($originalContent)
@@ -62,8 +66,7 @@ class PlaceholderContainer extends Collection
     /**
      * Remove nested placeholders so no nested placholders remain in the original contents.
      *
-     * @param string $originalContent
-     *
+     * @param  string  $originalContent
      * @return string
      */
     protected function removeNestedPlaceholders($originalContent)

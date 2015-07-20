@@ -8,18 +8,19 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 class JavascriptEventsMinifier implements MinifierInterface
 {
     /**
-     * Execute the minification rule.
+     * Minify javascript prefixes on html event attributes.
      *
-     * @param string $contents
-     *
-     * @return string
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {
-        return $context->setContents(preg_replace_callback('/'.Constants::$htmlEventNamePrefix.Constants::ATTRIBUTE_NAME_REGEX.'\s*=\s*"?\'?\s*javascript:/is',
+        $contents = preg_replace_callback('/'.Constants::$htmlEventNamePrefix.Constants::ATTRIBUTE_NAME_REGEX.'\s*=\s*"?\'?\s*javascript:/is',
             function ($match) {
                 return str_replace('javascript:', '', $match[0]);
-            }, $context->getContents()));
+            }, $context->getContents());
+
+        return $context->setContents($contents);
     }
 
     /**

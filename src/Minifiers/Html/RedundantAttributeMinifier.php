@@ -8,6 +8,11 @@ use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
 
 class RedundantAttributeMinifier implements MinifierInterface
 {
+    /**
+     * Attributes which are not needed by the browser.
+     *
+     * @var array
+     */
     protected $redundantAttributes = [
         'script' => [
             'type' => 'text\/javascript',
@@ -25,11 +30,10 @@ class RedundantAttributeMinifier implements MinifierInterface
     ];
 
     /**
-     * Execute the minification rule.
+     * Minify redundant attributes which are not needed by the browser.
      *
-     * @param string $contents
-     *
-     * @return string
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {
@@ -45,6 +49,13 @@ class RedundantAttributeMinifier implements MinifierInterface
         return $context;
     }
 
+    /**
+     * Remove the attribute from the element.
+     *
+     * @param  string  $element
+     * @param  string  $attribute
+     * @return string
+     */
     protected function removeAttribute($element, $attribute)
     {
         $replacement = Html::hasSurroundingAttributes($attribute) ? ' ' : '';

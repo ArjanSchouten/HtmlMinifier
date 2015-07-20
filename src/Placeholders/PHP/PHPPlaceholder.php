@@ -2,17 +2,16 @@
 
 namespace ArjanSchouten\HTMLMin\Placeholders\PHP;
 
-
 use ArjanSchouten\HTMLMin\Placeholders\PlaceholderInterface;
 
 class PHPPlaceholder implements PlaceholderInterface
 {
 
     /**
-     * Process the payload.
+     * Replace PHP tags with a temporary placeholder.
      *
-     * @param mixed $context
-     * @return mixed
+     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
      */
     public function process($context)
     {

@@ -81,8 +81,8 @@ abstract class AbstractPipeline
                 ->add(new CallableStage(function (MinifyPipelineContext $context) {
                     return $context->setContents($context->getPlaceholderContainer()->restorePlaceholders($context->getContents()));
                 }));
-    }
+        }
 
-        return self::$minifierPipelineBuilder;
+        return self::$restorerPipelineBuilder;
     }
 }

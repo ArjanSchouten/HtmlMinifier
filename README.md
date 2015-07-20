@@ -13,7 +13,7 @@ Features included (or are WIP):
  * Support for Laravel/Lumen
  * Support for Symfony
  * Support for empty composer projects
- * Attribute comment minification
+ * Attribute quote minification
  * Removing comments
  * Removing empty attributes
  * Removing redundant attributes

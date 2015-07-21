@@ -4,7 +4,7 @@ namespace ArjanSchouten\HTMLMin\Pipeline;
 
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 
-class BladePipeline extends AbstractPipeline
+class BladePipeline extends BasePipeline
 {
     /**
      * Add placeholders to the pipeline based on provided options.

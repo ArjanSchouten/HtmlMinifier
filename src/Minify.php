@@ -3,7 +3,7 @@
 namespace ArjanSchouten\HTMLMin;
 
 use League\Pipeline\Pipeline;
-use ArjanSchouten\HTMLMin\Pipeline\AbstractPipeline;
+use ArjanSchouten\HTMLMin\Pipeline\BasePipeline;
 
 class Minify
 {
@@ -15,11 +15,11 @@ class Minify
     /**
      * Build the complete minification pipeline.
      *
-     * @param  \ArjanSchouten\HTMLMin\Pipeline\AbstractPipeline  $pipeline
+     * @param  \ArjanSchouten\HTMLMin\Pipeline\BasePipeline  $pipeline
      * @param  array  $options
      * @return $this
      */
-    public function buildPipeline(AbstractPipeline $pipeline, array $options)
+    public function buildPipeline(BasePipeline $pipeline, array $options)
     {
         $this->pipeline = (new Pipeline())
             ->pipe($pipeline->placeholders($options)->build())

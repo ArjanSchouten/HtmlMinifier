@@ -1,9 +1,9 @@
 <?php
 
-use Mockery as m;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\MinifyContext;
+use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
+use Mockery as m;
 
 class BladePlaceholderTest extends PHPUnit_Framework_TestCase
 {

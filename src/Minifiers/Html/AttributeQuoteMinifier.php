@@ -2,9 +2,9 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
-use Illuminate\Support\Str;
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use Illuminate\Support\Str;
 
 class AttributeQuoteMinifier implements MinifierInterface
 {
@@ -28,7 +28,8 @@ class AttributeQuoteMinifier implements MinifierInterface
     /**
      * Execute the minification rule.
      *
-     * @param  \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -45,7 +46,8 @@ class AttributeQuoteMinifier implements MinifierInterface
     /**
      * Minify the attribute quotes if allowed.
      *
-     * @param  array  $match
+     * @param array $match
+     *
      * @return string
      */
     protected function minifyAttribute($match)

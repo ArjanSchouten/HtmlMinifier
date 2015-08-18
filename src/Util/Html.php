@@ -9,7 +9,8 @@ class Html
     /**
      * Check if an attribute has surrounding attributes.
      *
-     * @param  string  $attribute
+     * @param string $attribute
+     *
      * @return bool
      */
     public static function hasSurroundingAttributes($attribute)
@@ -20,7 +21,8 @@ class Html
     /**
      * Check if an attribute is a HTML 5 data-* attribute.
      *
-     * @param  string  $attribute
+     * @param string $attribute
+     *
      * @return int
      */
     public static function isDataAttribute($attribute)
@@ -32,6 +34,7 @@ class Html
      * Check if an attribute is the last attribute of the element.
      *
      * @param  $attribute
+     *
      * @return bool
      */
     public static function isLastAttribute($attribute)

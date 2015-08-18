@@ -2,13 +2,9 @@
 
 namespace ArjanSchouten\HTMLMin\Laravel;
 
-use ArjanSchouten\HTMLMin\Minify;
-use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\View\Compilers\BladeCompiler;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
+use ArjanSchouten\HTMLMin\Minify;
+use Illuminate\Support\ServiceProvider;
 
 class HTMLMinServiceProvider extends ServiceProvider
 {

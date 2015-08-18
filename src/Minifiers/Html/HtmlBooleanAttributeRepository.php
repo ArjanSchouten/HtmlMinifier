@@ -2,9 +2,9 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
-use Illuminate\Support\Collection;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
 
 class HtmlBooleanAttributeRepository
 {
@@ -27,8 +27,10 @@ class HtmlBooleanAttributeRepository
     /**
      * Load the attributes from file.
      *
-     * @param  null|string  $path
+     * @param null|string $path
+     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     *
      * @return array
      */
     protected function loadAttributes($path = null)

@@ -1,6 +1,6 @@
 <?php
 
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\PHP\PHPPlaceholder;
 use Mockery as m;
@@ -24,7 +24,7 @@ class PHPPlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $result = $this->phpPlaceholder->process($context->setContents('<?php echo \''.PHP_EOL.'\';?>'));
         $this->assertEquals($placeholder, $result->getContents());
@@ -40,7 +40,7 @@ class PHPPlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $result = $this->phpPlaceholder->process($context->setContents('<?= echo \'\';?>'));
         $this->assertEquals($placeholder, $result->getContents());

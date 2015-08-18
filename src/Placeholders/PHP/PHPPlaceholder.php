@@ -10,8 +10,8 @@ class PHPPlaceholder implements PlaceholderInterface
     /**
      * Replace PHP tags with a temporary placeholder.
      *
-     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
-     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
+     * @param  \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
     {

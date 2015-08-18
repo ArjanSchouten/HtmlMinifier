@@ -1,7 +1,7 @@
 <?php
 
 use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class JavascriptEventsMinifierTest extends PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ class JavascriptEventsMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testMinify()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->javascriptEventsMinifier->process($context->setContents('<button onclick="javascript:alert(\'test\');"></button>'));
         $this->assertEquals('<button onclick="alert(\'test\');"></button>', $result->getContents());

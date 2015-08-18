@@ -1,7 +1,7 @@
 <?php
 
 use ArjanSchouten\HTMLMin\Minifiers\Html\AttributeQuoteMinifier;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testAttributeQuoteMinifier()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->attributeQuote->process($context->setContents('<div id="test"></div>'));
         $this->assertEquals('<div id=test></div>', $result->getContents());
@@ -50,7 +50,7 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testEscapedQuotes()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         //test if the unrolling the loop technique is implemented correctly
         $result = $this->attributeQuote->process($context->setContents('<div onclick="alert(\"test\")"></div>'));
@@ -68,7 +68,7 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testWhitespaces()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->attributeQuote->process($context->setContents('<div style ="float:right;"></div>'));
         $this->assertEquals('<div style =float:right;></div>', $result->getContents());
@@ -82,7 +82,7 @@ class AttributeQuoteMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testPlaceholders()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->attributeQuote->process($context->setContents('<a href="[[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1]]"></a>'));
         $this->assertEquals('<a href="[[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1]]"></a>', $result->getContents());

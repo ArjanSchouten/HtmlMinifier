@@ -2,7 +2,7 @@
 
 use Mockery as m;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 
 class BladePlaceholderTest extends PHPUnit_Framework_TestCase
@@ -23,7 +23,7 @@ class BladePlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $tags = [['{{', '}}']];
         BladePlaceholder::setBladeTags($tags);
@@ -46,7 +46,7 @@ class BladePlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $tags = [['{{', '}}']];
         BladePlaceholder::setBladeTags($tags);

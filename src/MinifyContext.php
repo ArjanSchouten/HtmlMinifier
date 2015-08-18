@@ -2,7 +2,7 @@
 
 namespace ArjanSchouten\HTMLMin;
 
-class MinifyPipelineContext
+class MinifyContext
 {
     /**
      * @var \ArjanSchouten\HTMLMin\PlaceholderContainer

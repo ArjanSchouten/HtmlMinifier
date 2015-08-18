@@ -1,6 +1,6 @@
 <?php
 
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\WhitespacePlaceholder;
 use Mockery as m;
@@ -23,7 +23,7 @@ class WhitespacePlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<script id="myid">test</script>'));
         $this->assertEquals('<script id="myid">'.$placeholder.'</script>', $result->getContents());

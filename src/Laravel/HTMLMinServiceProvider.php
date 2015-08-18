@@ -7,7 +7,7 @@ use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
 
 class HTMLMinServiceProvider extends ServiceProvider
@@ -63,51 +63,6 @@ class HTMLMinServiceProvider extends ServiceProvider
     protected function addCommands()
     {
         $this->commands(ViewCompilerCommand::class);
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->addCompilerExtensions();
-    }
-
-    /**
-     * Extend the original blade compiler with minification rules.
-     *
-     * @return void
-     */
-    protected function addCompilerExtensions()
-    {
-        $this->app->make('blade.compiler')->extend(function ($value, $compiler) {
-            BladePlaceholder::setBladeTags($this->getBladeTags($compiler));
-
-            $context = new MinifyPipelineContext(new PlaceholderContainer());
-            return $this->app->make('blade.compiler.min')->process($context->setContents($value))->getContents();
-        });
-    }
-
-    /**
-     * Get the blade tags which might be overruled by user.
-     *
-     * @param  \Illuminate\View\Compilers\BladeCompiler  $bladeCompiler
-     * @return array
-     */
-    private function getBladeTags(BladeCompiler $bladeCompiler)
-    {
-        $contentTags = $bladeCompiler->getContentTags();
-
-        $tags = [
-            $contentTags,
-            $bladeCompiler->getRawTags(),
-            $bladeCompiler->getEscapedContentTags(),
-            [$contentTags[0].'--', '--'.$contentTags[1]],
-        ];
-
-        return $tags;
     }
 
     /**

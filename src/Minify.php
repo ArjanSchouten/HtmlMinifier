@@ -2,41 +2,91 @@
 
 namespace ArjanSchouten\HTMLMin;
 
-use League\Pipeline\Pipeline;
-use ArjanSchouten\HTMLMin\Pipeline\BasePipeline;
+use ArjanSchouten\HTMLMin\Minifiers\Html\AttributeQuoteMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\CommentMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\WhitespaceMinifier;
+use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
+use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
+use ArjanSchouten\HTMLMin\Placeholders\PHP\PHPPlaceholder;
+use ArjanSchouten\HTMLMin\Placeholders\WhitespacePlaceholder;
 
 class Minify
 {
-    /**
-     * @var \League\Pipeline\Pipeline
-     */
-    private $pipeline;
+    private $placeholders = [
+        PHPPlaceholder::class,
+        BladePlaceholder::class,
+        CommentPlaceholder::class,
+        WhitespacePlaceholder::class,
+    ];
+
+    private $minifiers = [
+        CommentMinifier::class,
+        WhitespaceMinifier::class,
+        AttributeQuoteMinifier::class,
+        EmptyAttributeMinifier::class,
+        JavascriptEventsMinifier::class,
+        RedundantAttributeMinifier::class,
+    ];
 
     /**
-     * Build the complete minification pipeline.
-     *
-     * @param  \ArjanSchouten\HTMLMin\Pipeline\BasePipeline  $pipeline
-     * @param  array  $options
-     * @return $this
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     * @param array $options
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
-    public function buildPipeline(BasePipeline $pipeline, array $options)
+    public function run(MinifyContext $context, $options = [])
     {
-        $this->pipeline = (new Pipeline())
-            ->pipe($pipeline->placeholders($options)->build())
-            ->pipe($pipeline->minifiers($options)->build())
-            ->pipe($pipeline->restores($options)->build());
+        $context = $this->placeholders($context);
+        $context = $this->minifiers($context, $options);
 
-        return $this;
+        return $this->restore($context);
     }
 
     /**
-     * Execute the pipeline to minify views.
-     *
-     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
-     * @return  string
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
-    public function process(MinifyPipelineContext $context)
+    protected function placeholders(MinifyContext $context)
     {
-        return $this->pipeline->process($context);
+        foreach ($this->placeholders as $placeholder) {
+            $placeholder = new $placeholder();
+            $context = $placeholder->process($context);
+        }
+
+        return $context;
+    }
+
+    /**
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     * @param array $options
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     */
+    protected function minifiers(MinifyContext $context, $options = [])
+    {
+        foreach ($this->minifiers as $minifier) {
+            $minifier = new $minifier();
+
+            $provides = $minifier->provides();
+            if ($provides === false || (isset($options[$provides]) && $options[$provides] === true)) {
+                $context = $minifier->process($context);
+            }
+        }
+
+        return $context;
+    }
+
+    /**
+     * Restore placeholders with their original content.
+     *
+     * @param  \ArjanSchouten\HTMLMin\MinifyContext $context
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     */
+    public function restore(MinifyContext $context)
+    {
+        $withoutPlaceholders = $context->getPlaceholderContainer()->restorePlaceholders($context->getContents());
+
+        return $context->setContents($withoutPlaceholders);
     }
 }

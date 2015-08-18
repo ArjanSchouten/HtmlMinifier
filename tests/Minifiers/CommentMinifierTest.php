@@ -1,7 +1,7 @@
 <?php
 
 use ArjanSchouten\HTMLMin\Minifiers\Html\CommentMinifier;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class CommentMinifierTest extends PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ class CommentMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testCommentMinifier()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->commentMinifier->process($context->setContents('<div><!--TEST--></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
@@ -38,7 +38,7 @@ class CommentMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testEmptyComment()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->commentMinifier->process($context->setContents('<div><!></div>'));
         $this->assertEquals('<div></div>', $result->getContents());

@@ -1,6 +1,6 @@
 <?php
 
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
 use Mockery as m;
@@ -23,7 +23,7 @@ class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $result = $this->commentPlaceholder->process($context->setContents('<!--[if IE 6]><![endif]-->'));
         $this->assertEquals($placeholder, $result->getContents());
@@ -48,7 +48,7 @@ class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $result = $this->commentPlaceholder->process($context->setContents('<!--[if true]><![if IE 7]><p>This nested comment is displayed in IE 7.</p><![endif]><![endif]-->'));
         $this->assertEquals($placeholder, $result->getContents());
@@ -58,7 +58,7 @@ class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
     {
         $placeholder = 'myPlaceholder';
         $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
-        $context = new MinifyPipelineContext($placeholderContainer);
+        $context = new MinifyContext($placeholderContainer);
 
         $result = $this->commentPlaceholder->process($context->setContents('<![CDATA[<greeting>Hello, world!</greeting>]]>'));
         $this->assertEquals($placeholder, $result->getContents());

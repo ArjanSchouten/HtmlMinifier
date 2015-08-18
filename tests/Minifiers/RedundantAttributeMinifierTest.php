@@ -1,7 +1,7 @@
 <?php
 
 use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 
 class RedundantAttributeMinifierTest extends PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ class RedundantAttributeMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testAttributeRemoval()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->redundantAttributeFileMinifier->process($context->setContents('<script language="javascript"></script>'));
         $this->assertEquals('<script></script>', $result->getContents());

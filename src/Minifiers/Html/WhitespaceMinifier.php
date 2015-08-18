@@ -8,6 +8,7 @@ class WhitespaceMinifier implements MinifierInterface
 {
     /**
      * Max allowed html line length for old e.g. browsers, firewalls and routers.
+     *
      * @var int
      */
     protected $maxHtmlLineLength = 32000;
@@ -32,8 +33,8 @@ class WhitespaceMinifier implements MinifierInterface
     /**
      * Minify redundant whitespaces.
      *
-     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
-     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
+     * @param  \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
     {
@@ -94,6 +95,10 @@ class WhitespaceMinifier implements MinifierInterface
      */
     public function maxHtmlLineLength($contents, $maxHtmlLineLength)
     {
+        if(strlen($contents) <= $maxHtmlLineLength) {
+            return $contents;
+        }
+
         $result = '';
         $splits = str_split($contents, $maxHtmlLineLength);
         foreach ($splits as $split) {
@@ -101,7 +106,7 @@ class WhitespaceMinifier implements MinifierInterface
             if ($pos === false) {
                 $result .= $split;
             } else {
-                $result .= substr_replace($split, "\n", $pos + 1, 0);
+                $result .= substr_replace($split, PHP_EOL, $pos + 1, 0);
             }
         }
 

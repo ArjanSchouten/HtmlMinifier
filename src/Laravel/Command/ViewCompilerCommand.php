@@ -2,11 +2,13 @@
 
 namespace ArjanSchouten\HTMLMin\Laravel\Command;
 
+use ArjanSchouten\HTMLMin\MinifyContext;
+use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 use InvalidArgumentException;
 use Illuminate\Console\Command;
 use Illuminate\View\Engines\CompilerEngine;
 use Symfony\Component\Console\Input\InputOption;
-use ArjanSchouten\HTMLMin\Pipeline\BladePipeline;
 
 class ViewCompilerCommand extends Command
 {
@@ -23,9 +25,41 @@ class ViewCompilerCommand extends Command
     {
         $this->info('Going to minify you\'re views. Just a few seconds...');
 
+        $this->setupCompiler();
+
         $this->compileViews();
 
         $this->info('Yeah! You\'re views are minified!');
+    }
+
+    protected function setupCompiler()
+    {
+        $this->laravel->make('blade.compiler')->extend(function ($value, $compiler) {
+            BladePlaceholder::setBladeTags($this->getBladeTags($compiler));
+
+            $context = new MinifyContext(new PlaceholderContainer());
+            return $this->laravel->make('blade.compiler.min')->run($context->setContents($value), $this->option())->getContents();
+        });
+    }
+
+    /**
+     * Get the blade tags which might be overruled by user.
+     *
+     * @param  \Illuminate\View\Compilers\BladeCompiler  $bladeCompiler
+     * @return array
+     */
+    private function getBladeTags(BladeCompiler $bladeCompiler)
+    {
+        $contentTags = $bladeCompiler->getContentTags();
+
+        $tags = [
+            $contentTags,
+            $bladeCompiler->getRawTags(),
+            $bladeCompiler->getEscapedContentTags(),
+            [$contentTags[0].'--', '--'.$contentTags[1]],
+        ];
+
+        return $tags;
     }
 
     /**
@@ -56,7 +90,6 @@ class ViewCompilerCommand extends Command
         $engine = $this->laravel['view']->getEngineFromPath($file);
 
         if ($engine instanceof CompilerEngine) {
-            $this->laravel['blade.compiler.min']->buildPipeline(new BladePipeline(), $this->option());
             $engine->getCompiler()->compile($file);
         }
     }

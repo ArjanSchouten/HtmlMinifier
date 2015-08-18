@@ -32,8 +32,8 @@ class RedundantAttributeMinifier implements MinifierInterface
     /**
      * Minify redundant attributes which are not needed by the browser.
      *
-     * @param  \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
-     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
+     * @param  \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
     {

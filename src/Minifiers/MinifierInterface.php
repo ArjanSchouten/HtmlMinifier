@@ -2,10 +2,17 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers;
 
-use League\Pipeline\StageInterface;
-
-interface MinifierInterface extends StageInterface
+interface MinifierInterface
 {
+    /**
+     * Process the payload.
+     *
+     * @param mixed $payload
+     *
+     * @return mixed
+     */
+    public function process($payload);
+
     /**
      * Indicates if minification rules depends on command options.
      *

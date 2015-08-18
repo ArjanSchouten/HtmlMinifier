@@ -18,8 +18,8 @@ class EmptyAttributeMinifier implements MinifierInterface
     /**
      * Execute the minification rule.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyPipelineContext  $context
-     * @return \ArjanSchouten\HTMLMin\MinifyPipelineContext
+     * @param \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
     {

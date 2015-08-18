@@ -2,7 +2,7 @@
 
 use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\HtmlBooleanAttributeRepository;
-use ArjanSchouten\HTMLMin\MinifyPipelineContext;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use Illuminate\Support\Collection;
 use Mockery as m;
@@ -23,7 +23,7 @@ class EmptyAttribute extends PHPUnit_Framework_TestCase
 
     public function testEmptyAttributes()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->emptyAttributeMinifier->process($context->setContents('<div id=""></div>'));
         $this->assertEquals('<div></div>', $result->getContents());
@@ -46,7 +46,7 @@ class EmptyAttribute extends PHPUnit_Framework_TestCase
 
     public function testDataAttributes()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->emptyAttributeMinifier->process($context->setContents('<div data-my-data-attribute></div>'));
         $this->assertEquals('<div data-my-data-attribute></div>', $result->getContents());
@@ -60,7 +60,7 @@ class EmptyAttribute extends PHPUnit_Framework_TestCase
 
     public function testBooleanAttributes()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $repository = m::mock(HtmlBooleanAttributeRepository::class)->shouldReceive('getAttributes')->andReturn(
             new Collection(['async', 'defer'])
@@ -83,7 +83,7 @@ class EmptyAttribute extends PHPUnit_Framework_TestCase
 
     public function testWhitespaces()
     {
-        $context = new MinifyPipelineContext(new PlaceholderContainer());
+        $context = new MinifyContext(new PlaceholderContainer());
 
         $result = $this->emptyAttributeMinifier->process($context->setContents('<div id =""></div>'));
         $this->assertEquals('<div></div>', $result->getContents());

@@ -2,9 +2,9 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
-use Illuminate\Support\Collection;
-use ArjanSchouten\HTMLMin\Util\Html;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\Util\Html;
+use Illuminate\Support\Collection;
 
 class RedundantAttributeMinifier implements MinifierInterface
 {
@@ -15,7 +15,7 @@ class RedundantAttributeMinifier implements MinifierInterface
      */
     protected $redundantAttributes = [
         'script' => [
-            'type' => 'text\/javascript',
+            'type'     => 'text\/javascript',
             'language' => 'javascript',
         ],
         'link' => [
@@ -32,7 +32,8 @@ class RedundantAttributeMinifier implements MinifierInterface
     /**
      * Minify redundant attributes which are not needed by the browser.
      *
-     * @param  \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -52,8 +53,9 @@ class RedundantAttributeMinifier implements MinifierInterface
     /**
      * Remove the attribute from the element.
      *
-     * @param  string  $element
-     * @param  string  $attribute
+     * @param string $element
+     * @param string $attribute
+     *
      * @return string
      */
     protected function removeAttribute($element, $attribute)

@@ -24,7 +24,8 @@ class WhitespacePlaceholder implements PlaceholderInterface
     /**
      * Replace critical content with a temporary placeholder.
      *
-     * @param  \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -41,9 +42,10 @@ class WhitespacePlaceholder implements PlaceholderInterface
     /**
      * Add placeholder for html tags with a placeholder to prevent data violation.
      *
-     * @param  string  $contents
-     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
-     * @param  string $htmlTag
+     * @param string                                      $contents
+     * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
+     * @param string                                      $htmlTag
+     *
      * @return string
      */
     protected function setHtmlTagPlaceholder($contents, PlaceholderContainer $placeholderContainer, $htmlTag)

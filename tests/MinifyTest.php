@@ -2,9 +2,7 @@
 
 use ArjanSchouten\HTMLMin\Minify;
 use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\Pipeline\BladePipeline;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use Mockery\CountValidator\Exception;
 
 class MinifyTest extends PHPUnit_Framework_TestCase
 {

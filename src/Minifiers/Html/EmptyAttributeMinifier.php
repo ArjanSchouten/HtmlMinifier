@@ -3,8 +3,8 @@
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
-use ArjanSchouten\HTMLMin\Util\Html;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\Util\Html;
 
 class EmptyAttributeMinifier implements MinifierInterface
 {
@@ -18,7 +18,8 @@ class EmptyAttributeMinifier implements MinifierInterface
     /**
      * Execute the minification rule.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -36,7 +37,8 @@ class EmptyAttributeMinifier implements MinifierInterface
     /**
      * Check if an attribute is a boolean attribute.
      *
-     * @param  string  $attribute
+     * @param string $attribute
+     *
      * @return bool
      */
     private function isBooleanAttribute($attribute)
@@ -45,7 +47,7 @@ class EmptyAttributeMinifier implements MinifierInterface
     }
 
     /**
-     * @param  \ArjanSchouten\HTMLMin\Minifiers\Html\HtmlBooleanAttributeRepository  $repository
+     * @param \ArjanSchouten\HTMLMin\Minifiers\Html\HtmlBooleanAttributeRepository $repository
      */
     public function setRepository($repository)
     {

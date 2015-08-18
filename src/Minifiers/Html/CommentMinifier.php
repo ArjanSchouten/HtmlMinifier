@@ -2,15 +2,16 @@
 
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
-use Illuminate\Support\Str;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use Illuminate\Support\Str;
 
 class CommentMinifier implements MinifierInterface
 {
     /**
      * Replace remaining comments.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -19,7 +20,7 @@ class CommentMinifier implements MinifierInterface
                 <!          # search for the start of a comment
                     [^>]*   # search for everything without a ">"
                 >           # match the end of the comment
-            /xs', function($match) {
+            /xs', function ($match) {
             if (Str::contains(strtolower($match[0]), 'doctype')) {
                 return $match[0];
             }

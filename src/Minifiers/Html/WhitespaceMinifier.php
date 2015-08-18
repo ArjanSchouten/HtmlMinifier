@@ -1,4 +1,5 @@
 <?php
+
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
@@ -20,20 +21,21 @@ class WhitespaceMinifier implements MinifierInterface
      */
     protected $minifyRules = [
         '\s?=\s?' => '=',
-        '\s?\/>' => '>',
-        '>\s<' => '><',
-        '\s\s' => ' ',
+        '\s?\/>'  => '>',
+        '>\s<'    => '><',
+        '\s\s'    => ' ',
         '\s?>\s?' => '>',
         '\s?<\s?' => '<',
-        '\t' => ' ',
-        '\r' => '',
-        '\n' => '',
+        '\t'      => ' ',
+        '\r'      => '',
+        '\n'      => '',
     ];
 
     /**
      * Minify redundant whitespaces.
      *
-     * @param  \ArjanSchouten\HTMLMin\MinifyContext  $context
+     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
+     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -48,7 +50,8 @@ class WhitespaceMinifier implements MinifierInterface
     /**
      * Remove trailing whitespaces around the contents.
      *
-     * @param  string  $contents
+     * @param string $contents
+     *
      * @return string
      */
     public function trailingWhitespaces($contents)
@@ -59,7 +62,8 @@ class WhitespaceMinifier implements MinifierInterface
     /**
      * Loop over the minification rules as long as changes in output occur.
      *
-     * @param  string  $contents
+     * @param string $contents
+     *
      * @return string
      */
     public function runMinificationRules($contents)
@@ -77,7 +81,8 @@ class WhitespaceMinifier implements MinifierInterface
     /**
      * Remove all spaces around placeholders.
      *
-     * @param  string  $contents
+     * @param string $contents
+     *
      * @return string
      */
     public function removeSpacesAroundPlaceholders($contents)
@@ -89,13 +94,14 @@ class WhitespaceMinifier implements MinifierInterface
      * Old browsers, firewalls and more can't handle to long lines.
      * Therefore add a linebreak after specified character length.
      *
-     * @param  int  $maxHtmlLineLength
-     * @param  string  $contents
+     * @param int    $maxHtmlLineLength
+     * @param string $contents
+     *
      * @return string
      */
     public function maxHtmlLineLength($contents, $maxHtmlLineLength)
     {
-        if(strlen($contents) <= $maxHtmlLineLength) {
+        if (strlen($contents) <= $maxHtmlLineLength) {
             return $contents;
         }
 

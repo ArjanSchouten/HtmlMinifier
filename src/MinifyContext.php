@@ -15,7 +15,7 @@ class MinifyContext
     private $contents;
 
     /**
-     * @param  \ArjanSchouten\HTMLMin\PlaceholderContainer  $placeholderContainer
+     * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
      */
     public function __construct(PlaceholderContainer $placeholderContainer)
     {
@@ -41,7 +41,8 @@ class MinifyContext
     }
 
     /**
-     * @param  string  $contents
+     * @param string $contents
+     *
      * @return $this
      */
     public function setContents($contents)

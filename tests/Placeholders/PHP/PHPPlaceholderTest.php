@@ -7,7 +7,6 @@ use Mockery as m;
 
 class PHPPlaceholderTest extends PHPUnit_Framework_TestCase
 {
-
     private $phpPlaceholder;
 
     public function setUp()

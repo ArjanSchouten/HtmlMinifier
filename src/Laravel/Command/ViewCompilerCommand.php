@@ -5,9 +5,9 @@ namespace ArjanSchouten\HTMLMin\Laravel\Command;
 use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
-use InvalidArgumentException;
 use Illuminate\Console\Command;
 use Illuminate\View\Engines\CompilerEngine;
+use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
 class ViewCompilerCommand extends Command
@@ -38,6 +38,7 @@ class ViewCompilerCommand extends Command
             BladePlaceholder::setBladeTags($this->getBladeTags($compiler));
 
             $context = new MinifyContext(new PlaceholderContainer());
+
             return $this->laravel->make('blade.compiler.min')->run($context->setContents($value), $this->option())->getContents();
         });
     }
@@ -45,7 +46,8 @@ class ViewCompilerCommand extends Command
     /**
      * Get the blade tags which might be overruled by user.
      *
-     * @param  \Illuminate\View\Compilers\BladeCompiler  $bladeCompiler
+     * @param \Illuminate\View\Compilers\BladeCompiler $bladeCompiler
+     *
      * @return array
      */
     private function getBladeTags(BladeCompiler $bladeCompiler)
@@ -83,7 +85,7 @@ class ViewCompilerCommand extends Command
     /**
      * Compile and minify the given view file.
      *
-     * @param string  $file
+     * @param string $file
      */
     protected function compileView($file)
     {

@@ -50,10 +50,6 @@ class AttributeQuoteMinifier implements MinifierInterface
             /x', function ($match) {
             return $this->minifyAttribute($match);
         }, $context->getContents()));
-
-        return $context->setContents(preg_replace_callback('/=\s*\'([^\\\\\']*(?:\\\\\'[^\\\\\']*)*)\'/', function ($match) {
-            return $this->minifyAttribute($match);
-        }, $context->getContents()));
     }
 
     /**

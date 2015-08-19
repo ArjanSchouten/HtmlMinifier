@@ -4,6 +4,7 @@ namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\ProvidesConstants;
 use Illuminate\Support\Str;
 
 class AttributeQuoteMinifier implements MinifierInterface
@@ -80,6 +81,6 @@ class AttributeQuoteMinifier implements MinifierInterface
      */
     public function provides()
     {
-        return 'remove-attributequotes';
+        return ProvidesConstants::ATTRIBUTE_QUOTES;
     }
 }

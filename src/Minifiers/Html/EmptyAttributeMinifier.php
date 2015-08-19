@@ -4,6 +4,7 @@ namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\ProvidesConstants;
 use ArjanSchouten\HTMLMin\Util\Html;
 
 class EmptyAttributeMinifier implements MinifierInterface
@@ -61,6 +62,6 @@ class EmptyAttributeMinifier implements MinifierInterface
      */
     public function provides()
     {
-        return 'remove-empty-attributes';
+        return ProvidesConstants::EMPTY_ATTRIBUTES;
     }
 }

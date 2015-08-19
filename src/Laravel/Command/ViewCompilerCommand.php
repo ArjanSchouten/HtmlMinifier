@@ -5,8 +5,8 @@ namespace ArjanSchouten\HTMLMin\Laravel\Command;
 use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
+use ArjanSchouten\HTMLMin\ProvidesConstants;
 use Illuminate\Console\Command;
-use Illuminate\View\Engines\CompilerEngine;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -105,25 +105,25 @@ class ViewCompilerCommand extends Command
     {
         return [
             [
-                'remove-attributequotes',
+                ProvidesConstants::ATTRIBUTE_QUOTES,
                 null,
                 InputOption::VALUE_NONE,
                 'Remove quotes around html attributes',
             ],
             [
-                'remove-defaults',
+                ProvidesConstants::REMOVE_DEFAULTS,
                 null,
                 InputOption::VALUE_NONE,
                 'Remove defaults such as from <script type=text/javascript>',
             ],
             [
-                'remove-empty-attributes',
+                ProvidesConstants::EMPTY_ATTRIBUTES,
                 null,
                 InputOption::VALUE_NONE,
                 'Remove empty attributes. HTML boolean attributes are skipped',
             ],
             [
-                'all',
+                ProvidesConstants::ALL,
                 'a',
                 InputOption::VALUE_NONE,
                 'Use all the minification rules available',

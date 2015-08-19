@@ -3,6 +3,7 @@
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\ProvidesConstants;
 use Illuminate\Support\Str;
 
 class CommentMinifier implements MinifierInterface
@@ -36,6 +37,6 @@ class CommentMinifier implements MinifierInterface
      */
     public function provides()
     {
-        return false;
+        return ProvidesConstants::ALWAYS;
     }
 }

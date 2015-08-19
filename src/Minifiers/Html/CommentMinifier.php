@@ -17,7 +17,8 @@ class CommentMinifier implements MinifierInterface
      */
     public function process($context)
     {
-        return $context->setContents(preg_replace_callback('/
+        return $context->setContents(preg_replace_callback(
+            '/
                 <!          # search for the start of a comment
                     [^>]*   # search for everything without a ">"
                 >           # match the end of the comment

@@ -25,7 +25,15 @@ class EmptyAttributeMinifier implements MinifierInterface
      */
     public function process($context)
     {
-        return $context->setContents(preg_replace_callback('/(\s*'.Constants::ATTRIBUTE_NAME_REGEX.'\s*)=\s*["\']\s*["\']\s*/',
+        return $context->setContents(preg_replace_callback(
+            '/
+                (\s*'.Constants::ATTRIBUTE_NAME_REGEX.'\s*)     # Match the attribute name
+                =\s*                                            # Match the equal sign with optional whitespaces
+                (["\'])                                         # Match quotes and capture for backreferencing
+                \s*                                             # Strange but possible to have a whitespace in an attribute
+                \2                                              # Backreference to the matched quote
+                \s*
+            /x',
             function ($match) {
                 if ($this->isBooleanAttribute($match[1])) {
                     return Html::isLastAttribute($match[0]) ? $match[1] : $match[1].' ';

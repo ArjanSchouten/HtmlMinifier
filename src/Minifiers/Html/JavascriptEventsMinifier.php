@@ -17,7 +17,13 @@ class JavascriptEventsMinifier implements MinifierInterface
      */
     public function process($context)
     {
-        $contents = preg_replace_callback('/'.Constants::$htmlEventNamePrefix.Constants::ATTRIBUTE_NAME_REGEX.'\s*=\s*"?\'?\s*javascript:/is',
+        $contents = preg_replace_callback(
+            '/'.
+                Constants::$htmlEventNamePrefix.Constants::ATTRIBUTE_NAME_REGEX.'   # Match an on{attribute}
+                \s*=\s*             # Match equals sign with optional whitespaces around it
+                ["\']?              # Match an optional quote
+                \s*javascript:      # Match the text "javascript:" which should be removed
+            /xis',
             function ($match) {
                 return str_replace('javascript:', '', $match[0]);
             }, $context->getContents());

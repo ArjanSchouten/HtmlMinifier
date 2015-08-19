@@ -71,8 +71,8 @@ class WhitespaceMinifier implements MinifierInterface
     {
         do {
             $originalContents = $contents;
-            array_walk($this->minifyRules, function ($replace, $regex) use (&$contents) {
-                $contents = preg_replace('/'.$regex.'/', $replace, $contents);
+            array_walk($this->minifyRules, function ($replace, $minifyRule) use (&$contents) {
+                $contents = preg_replace('/'.$minifyRule.'/', $replace, $contents);
             });
         } while ($originalContents != $contents);
 

@@ -36,7 +36,7 @@ class ViewCompilerCommand extends Command
 
     protected function setupCompiler()
     {
-        $this->laravel->make('blade.compiler')->extend(function ($value, $compiler) {
+        Blade::extend(function ($value, $compiler) {
             BladePlaceholder::setBladeTags($this->getBladeTags($compiler));
 
             $context = new MinifyContext(new PlaceholderContainer());

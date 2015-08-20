@@ -11,8 +11,8 @@ class HtmlInlineElementsRepository extends AbstractRepository
     /**
      * Get inline Html Elements.
      *
-     * @return \Illuminate\Support\Collection
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @return \Illuminate\Support\Collection
      */
     public function getElements()
     {

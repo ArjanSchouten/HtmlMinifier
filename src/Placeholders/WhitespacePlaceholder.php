@@ -33,6 +33,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
         $contents = $context->getContents();
 
         $contents = $this->whitespaceBetweenInlineElements($contents, $context->getPlaceholderContainer());
+        $contents = $this->whitespaceInInlineElements($contents, $context->getPlaceholderContainer());
         $contents = $this->replaceElements($contents, $context->getPlaceholderContainer());
 
         return $context->setContents($contents);
@@ -40,11 +41,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
 
     protected function whitespaceBetweenInlineElements($contents, PlaceholderContainer $placeholderContainer)
     {
-        $inlineElementsRepository = new HtmlInlineElementsRepository();
-        $elements = $inlineElementsRepository->getElements();
-
-        $elementsRegex = implode('|', $elements->all());
-
+        $elementsRegex = $this->getInlineElementsRegex();
         return preg_replace_callback(
             '/
                 (
@@ -62,6 +59,31 @@ class WhitespacePlaceholder implements PlaceholderInterface
                 $placeholder = $placeholderContainer->addPlaceholder(' ');
                 return $match[1].$placeholder.$match[3];
         }, $contents);
+    }
+
+    protected function whitespaceInInlineElements($contents, PlaceholderContainer $placeholderContainer)
+    {
+        $elementsRegex = $this->getInlineElementsRegex();
+        return preg_replace_callback(
+            '/
+                <('.$elementsRegex.')   # Match an inline element
+                (?:(?!<\/\1>).)*        # Match everything except its end tag
+                <\/\1>                  # Match the end tag
+            /xi',
+            function ($match) use ($placeholderContainer) {
+                return $this->replaceWhitespacesInInlineElements($match[0], $placeholderContainer);
+            }, $contents);
+    }
+
+    private function replaceWhitespacesInInlineElements($element, PlaceholderContainer $placeholderContainer)
+    {
+        return preg_replace_callback(['/(>)\s/', '/\s(<)/'], function ($match) use($placeholderContainer) {
+            if($match[1] === '>') {
+                return '>'.$placeholderContainer->addPlaceholder(' ');
+            } else {
+                return $placeholderContainer->addPlaceholder(' ').'<';
+            }
+        }, $element);
     }
 
     protected function replaceElements($contents, PlaceholderContainer $placeholderContainer)
@@ -89,5 +111,13 @@ class WhitespacePlaceholder implements PlaceholderInterface
         return preg_replace_callback($pattern, function ($match) use ($placeholderContainer) {
             return $match[1].$placeholderContainer->addPlaceholder($match[2]).$match[4];
         }, $contents);
+    }
+
+    private function getInlineElementsRegex()
+    {
+        $inlineElementsRepository = new HtmlInlineElementsRepository();
+        $elements = $inlineElementsRepository->getElements();
+
+        return implode('|', $elements->all());
     }
 }

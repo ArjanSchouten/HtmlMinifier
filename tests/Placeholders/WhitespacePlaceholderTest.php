@@ -75,5 +75,8 @@ ga('send', 'pageview');
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<small></small><span></span>'));
         $this->assertEquals('<small></small><span></span>', $result->getContents());
+
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<button>Minify <i>!</i></button>'));
+        $this->assertEquals('<button>Minify'.$placeholder.'<i>!</i></button>', $result->getContents());
     }
 }

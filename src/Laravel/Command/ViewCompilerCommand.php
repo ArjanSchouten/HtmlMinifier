@@ -115,13 +115,15 @@ class ViewCompilerCommand extends Command
                     InputOption::VALUE_NONE,
                     $option->getDescription(),
                 ];
-            });
+            })->all();
 
-        return $options[] = [
+        $options[Options::ALL] = [
             Options::ALL,
             'a',
             InputOption::VALUE_NONE,
             'Use all the minification rules available',
         ];
+
+        return $options;
     }
 }

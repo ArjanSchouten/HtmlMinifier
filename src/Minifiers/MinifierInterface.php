@@ -8,7 +8,6 @@ interface MinifierInterface
      * Process the payload.
      *
      * @param mixed $payload
-     *
      * @return mixed
      */
     public function process($payload);
@@ -16,7 +15,7 @@ interface MinifierInterface
     /**
      * Indicates if minification rules depends on command options.
      *
-     * @return string|bool if an option is needed, return the option name
+     * @return string
      */
     public function provides();
 }

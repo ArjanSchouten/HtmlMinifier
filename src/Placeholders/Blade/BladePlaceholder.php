@@ -21,7 +21,6 @@ class BladePlaceholder implements PlaceholderInterface
      * Replace blade tags with a temporary placeholder.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -38,7 +37,6 @@ class BladePlaceholder implements PlaceholderInterface
      *
      * @param string                                      $contents
      * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
-     *
      * @return string
      */
     protected function setEchosPlaceholder($contents, PlaceholderContainer $placeholderContainer)
@@ -58,7 +56,6 @@ class BladePlaceholder implements PlaceholderInterface
      *
      * @param string                                      $contents
      * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
-     *
      * @return string
      */
     protected function setBladeControlStructuresPlaceholder($contents, PlaceholderContainer $placeholderContainer)

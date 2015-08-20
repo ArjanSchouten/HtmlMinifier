@@ -7,6 +7,8 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 use ArjanSchouten\HTMLMin\ProvidesConstants;
 use Illuminate\Console\Command;
+use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Engines\CompilerEngine;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -47,7 +49,6 @@ class ViewCompilerCommand extends Command
      * Get the blade tags which might be overruled by user.
      *
      * @param \Illuminate\View\Compilers\BladeCompiler $bladeCompiler
-     *
      * @return array
      */
     private function getBladeTags(BladeCompiler $bladeCompiler)

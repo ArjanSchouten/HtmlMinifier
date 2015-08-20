@@ -10,7 +10,6 @@ class CommentPlaceholder implements PlaceholderInterface
      * Replace critical content with a temp placeholder for integrity.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -25,7 +24,6 @@ class CommentPlaceholder implements PlaceholderInterface
      *
      * @param string                                      $contents
      * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
-     *
      * @return string
      */
     protected function setCDataPlaceholder($contents, PlaceholderContainer $placeholderContainer)
@@ -40,7 +38,6 @@ class CommentPlaceholder implements PlaceholderInterface
      *
      * @param string                                      $contents
      * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
-     *
      * @return string
      */
     protected function setConditionalCommentsPlaceholder($contents, PlaceholderContainer $placeholderContainer)

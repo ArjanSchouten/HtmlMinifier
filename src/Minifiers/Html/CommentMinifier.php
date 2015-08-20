@@ -12,7 +12,6 @@ class CommentMinifier implements MinifierInterface
      * Replace remaining comments.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -34,7 +33,7 @@ class CommentMinifier implements MinifierInterface
     /**
      * Indicates if minification rules depends on command options.
      *
-     * @return bool if an option is needed, return the option name
+     * @return string
      */
     public function provides()
     {

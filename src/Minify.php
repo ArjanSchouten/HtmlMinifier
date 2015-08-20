@@ -34,7 +34,6 @@ class Minify
     /**
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @param array                                $options
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function run(MinifyContext $context, $options = [])
@@ -47,7 +46,6 @@ class Minify
 
     /**
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     protected function placeholders(MinifyContext $context)
@@ -63,7 +61,6 @@ class Minify
     /**
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @param array                                $options
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     protected function minifiers(MinifyContext $context, $options = [])
@@ -72,7 +69,7 @@ class Minify
             $minifier = new $minifier();
 
             $provides = $minifier->provides();
-            if ($provides === false || (isset($options[$provides]) && $options[$provides] === true)) {
+            if ($provides === ProvidesConstants::ALWAYS || (isset($options[$provides]) && $options[$provides] === true)) {
                 $context = $minifier->process($context);
             }
         }
@@ -84,7 +81,6 @@ class Minify
      * Restore placeholders with their original content.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function restore(MinifyContext $context)

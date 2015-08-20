@@ -30,7 +30,6 @@ class AttributeQuoteMinifier implements MinifierInterface
      * Execute the minification rule.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -56,7 +55,6 @@ class AttributeQuoteMinifier implements MinifierInterface
      * Minify the attribute quotes if allowed.
      *
      * @param array $match
-     *
      * @return string
      */
     protected function minifyAttribute($match)
@@ -73,7 +71,7 @@ class AttributeQuoteMinifier implements MinifierInterface
     /**
      * Indicates if minification rules depends on command options.
      *
-     * @return string if an option is needed, return the option name
+     * @return string
      */
     public function provides()
     {

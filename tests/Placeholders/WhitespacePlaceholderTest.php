@@ -51,4 +51,29 @@ ga('send', 'pageview');
 </script>"));
         $this->assertEquals('<script>'.$placeholder.'</script><script>'.$placeholder.'</script>', $result->getContents());
     }
+
+    public function testWhitespacesBetweenInlineElements()
+    {
+        $placeholder = 'myPlaceholder';
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $context = new MinifyContext($placeholderContainer);
+
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<span></span> <span></span>'));
+        $this->assertEquals('<span></span>'.$placeholder.'<span></span>', $result->getContents());
+
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<button></button> <span></span>'));
+        $this->assertEquals('<button></button>'.$placeholder.'<span></span>', $result->getContents());
+
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<button id="test"></button> <span></span>'));
+        $this->assertEquals('<button id="test"></button>'.$placeholder.'<span></span>', $result->getContents());
+
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<button id="test">bla</button>    <span></span>'));
+        $this->assertEquals('<button id="test">bla</button>'.$placeholder.'<span></span>', $result->getContents());
+
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<button id="test">bla</button>'.PHP_EOL.'<span></span>'));
+        $this->assertEquals('<button id="test">bla</button>'.$placeholder.'<span></span>', $result->getContents());
+
+        $result = $this->whitespacePlaceholderText->process($context->setContents('<small></small><span></span>'));
+        $this->assertEquals('<small></small><span></span>', $result->getContents());
+    }
 }

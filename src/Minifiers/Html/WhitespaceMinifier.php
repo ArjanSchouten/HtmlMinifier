@@ -36,7 +36,6 @@ class WhitespaceMinifier implements MinifierInterface
      * Minify redundant whitespaces.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -52,7 +51,6 @@ class WhitespaceMinifier implements MinifierInterface
      * Remove trailing whitespaces around the contents.
      *
      * @param string $contents
-     *
      * @return string
      */
     public function trailingWhitespaces($contents)
@@ -64,7 +62,6 @@ class WhitespaceMinifier implements MinifierInterface
      * Loop over the minification rules as long as changes in output occur.
      *
      * @param string $contents
-     *
      * @return string
      */
     public function runMinificationRules($contents)
@@ -83,7 +80,6 @@ class WhitespaceMinifier implements MinifierInterface
      * Remove all spaces around placeholders.
      *
      * @param string $contents
-     *
      * @return string
      */
     public function removeSpacesAroundPlaceholders($contents)
@@ -97,7 +93,6 @@ class WhitespaceMinifier implements MinifierInterface
      *
      * @param int    $maxHtmlLineLength
      * @param string $contents
-     *
      * @return string
      */
     public function maxHtmlLineLength($contents, $maxHtmlLineLength)
@@ -123,7 +118,7 @@ class WhitespaceMinifier implements MinifierInterface
     /**
      * Indicates if minification rules depends on command options.
      *
-     * @return bool if an option is needed, return the option name
+     * @return string
      */
     public function provides()
     {

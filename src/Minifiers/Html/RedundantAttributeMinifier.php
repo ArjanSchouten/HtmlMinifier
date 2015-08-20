@@ -34,7 +34,6 @@ class RedundantAttributeMinifier implements MinifierInterface
      * Minify redundant attributes which are not needed by the browser.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     *
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
     public function process($context)
@@ -56,7 +55,6 @@ class RedundantAttributeMinifier implements MinifierInterface
      *
      * @param string $element
      * @param string $attribute
-     *
      * @return string
      */
     protected function removeAttribute($element, $attribute)
@@ -69,7 +67,7 @@ class RedundantAttributeMinifier implements MinifierInterface
     /**
      * Indicates if minification rules depends on command options.
      *
-     * @return bool if an option is needed, return the option name
+     * @return string
      */
     public function provides()
     {

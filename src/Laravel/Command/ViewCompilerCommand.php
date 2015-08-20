@@ -7,6 +7,7 @@ use ArjanSchouten\HTMLMin\PlaceholderContainer;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 use ArjanSchouten\HTMLMin\ProvidesConstants;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Engines\CompilerEngine;
 use InvalidArgumentException;

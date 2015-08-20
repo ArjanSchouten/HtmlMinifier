@@ -3,7 +3,7 @@
 use ArjanSchouten\HTMLMin\Minify;
 use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\ProvidesConstants;
+use ArjanSchouten\HTMLMin\Options;
 
 class MinifyTest extends PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         $minify = new Minify();
 
         $context = $minify->run($context, [
-            ProvidesConstants::ALL => true
+            Options::ALL => true
         ]);
         $this->assertContains('id=test', $context->getContents());
         $this->assertNotContains(PHP_EOL, $context->getContents());
@@ -27,7 +27,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         $minify = new Minify();
 
         $context = $minify->run($context, [
-            ProvidesConstants::EMPTY_ATTRIBUTES => true
+            Options::EMPTY_ATTRIBUTES => true
         ]);
         $this->assertNotContains('id=test', $context->getContents());
         $this->assertNotContains(PHP_EOL, $context->getContents());

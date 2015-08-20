@@ -42,7 +42,11 @@ class BladePlaceholder implements PlaceholderInterface
     protected function setEchosPlaceholder($contents, PlaceholderContainer $placeholderContainer)
     {
         foreach (self::$tags as $tag) {
-            $pattern = sprintf('/%s\s*(.+?)\s*%s(\r?\n)?/s', $tag[0], $tag[1]);
+            $pattern = sprintf(
+                '/
+                    @?              # Match a @ for blades ignore echo
+                    %s\s*(.+?)\s*%s(\r?\n)?
+                 /xs', $tag[0], $tag[1]);
             $contents = preg_replace_callback($pattern, function ($match) use ($placeholderContainer) {
                 return $placeholderContainer->addPlaceholder($match[0]);
             }, $contents);

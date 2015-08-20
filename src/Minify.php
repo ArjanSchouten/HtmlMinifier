@@ -79,12 +79,12 @@ class Minify
 
     protected function runAll($options = [])
     {
-        return isset($options[ProvidesConstants::ALL]) && $options[ProvidesConstants::ALL];
+        return isset($options[Options::ALL]) && $options[Options::ALL];
     }
 
     protected function isOptionSet($provides, $options = [])
     {
-        return $provides === ProvidesConstants::ALWAYS || (isset($options[$provides]) && $options[$provides] === true);
+        return (isset($options[$provides]) && $options[$provides] === true) || Options::options()[$provides]->isDefault();
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\ProvidesConstants;
+use ArjanSchouten\HTMLMin\Options;
 use ArjanSchouten\HTMLMin\Util\Html;
 use Illuminate\Support\Collection;
 
@@ -71,6 +71,6 @@ class RedundantAttributeMinifier implements MinifierInterface
      */
     public function provides()
     {
-        return ProvidesConstants::ALWAYS;
+        return Options::REMOVE_DEFAULTS;
     }
 }

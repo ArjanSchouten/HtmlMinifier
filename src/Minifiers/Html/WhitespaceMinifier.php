@@ -4,7 +4,7 @@ namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\ProvidesConstants;
+use ArjanSchouten\HTMLMin\Options;
 
 class WhitespaceMinifier implements MinifierInterface
 {
@@ -122,6 +122,6 @@ class WhitespaceMinifier implements MinifierInterface
      */
     public function provides()
     {
-        return ProvidesConstants::ALWAYS;
+        return Options::WHITESPACES;
     }
 }

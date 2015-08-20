@@ -28,7 +28,7 @@ class BladePlaceholderTest extends PHPUnit_Framework_TestCase
         $tags = [['{{', '}}']];
         BladePlaceholder::setBladeTags($tags);
 
-        $result = $this->bladePlaceholder->process($context->setContents('{{ echo \'test\';}}'));
+        $result = $this->bladePlaceholder->process($context->setContents('@{{ echo \'test\';}}'));
         $this->assertEquals($placeholder, $result->getContents());
 
         $result = $this->bladePlaceholder->process($context->setContents('{{ echo \'test'.PHP_EOL.'\';}}'));

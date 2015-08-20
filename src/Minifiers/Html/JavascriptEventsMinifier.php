@@ -4,7 +4,7 @@ namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\ProvidesConstants;
+use ArjanSchouten\HTMLMin\Options;
 
 class JavascriptEventsMinifier implements MinifierInterface
 {
@@ -37,6 +37,6 @@ class JavascriptEventsMinifier implements MinifierInterface
      */
     public function provides()
     {
-        return ProvidesConstants::REMOVE_DEFAULTS;
+        return Options::REMOVE_DEFAULTS;
     }
 }

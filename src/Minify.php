@@ -69,12 +69,22 @@ class Minify
             $minifier = new $minifier();
 
             $provides = $minifier->provides();
-            if ($provides === ProvidesConstants::ALWAYS || (isset($options[$provides]) && $options[$provides] === true)) {
+            if ($this->runAll($options) || $this->isOptionSet($provides, $options)) {
                 $context = $minifier->process($context);
             }
         }
 
         return $context;
+    }
+
+    protected function runAll($options = [])
+    {
+        return isset($options[ProvidesConstants::ALL]) && $options[ProvidesConstants::ALL];
+    }
+
+    protected function isOptionSet($provides, $options = [])
+    {
+        return $provides === ProvidesConstants::ALWAYS || (isset($options[$provides]) && $options[$provides] === true);
     }
 
     /**
@@ -83,7 +93,7 @@ class Minify
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
-    public function restore(MinifyContext $context)
+    protected function restore(MinifyContext $context)
     {
         $withoutPlaceholders = $context->getPlaceholderContainer()->restorePlaceholders($context->getContents());
 

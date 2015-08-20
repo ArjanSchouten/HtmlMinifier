@@ -20,15 +20,18 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testEqualSignRule()
     {
-        $result1 = $this->whitespaceMinifier->runMinificationRules('<a href = "http://www.example.com">Lorum Ipsum</a>');
-        $result2 = $this->whitespaceMinifier->runMinificationRules('<a href ="http://www.example.com">Lorum Ipsum</a>');
-        $result3 = $this->whitespaceMinifier->runMinificationRules('<a href= \'http://www.example.com\'>Lorum Ipsum</a>');
-        $result4 = $this->whitespaceMinifier->runMinificationRules('<a href = http://www.example.com >Lorum Ipsum</a>');
         $expected = '<a href="http://www.example.com">Lorum Ipsum</a>';
-        $this->assertEquals($expected, $result1);
-        $this->assertEquals($expected, $result2);
-        $this->assertEquals('<a href=\'http://www.example.com\'>Lorum Ipsum</a>', $result3);
-        $this->assertEquals('<a href=http://www.example.com>Lorum Ipsum</a>', $result4);
+        $result = $this->whitespaceMinifier->runMinificationRules('<a href = "http://www.example.com">Lorum Ipsum</a>');
+        $this->assertEquals($expected, $result);
+
+        $result = $this->whitespaceMinifier->runMinificationRules('<a href ="http://www.example.com">Lorum Ipsum</a>');
+        $this->assertEquals($expected, $result);
+
+        $result = $this->whitespaceMinifier->runMinificationRules('<a href= \'http://www.example.com\'>Lorum Ipsum</a>');
+        $this->assertEquals('<a href=\'http://www.example.com\'>Lorum Ipsum</a>', $result);
+
+        $result = $this->whitespaceMinifier->runMinificationRules('<a href = http://www.example.com >Lorum Ipsum</a>');
+        $this->assertEquals('<a href=http://www.example.com>Lorum Ipsum</a>', $result);
     }
 
     public function testWhitespaces()
@@ -39,11 +42,13 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
 
     public function testHtmlSelfClosingTags()
     {
-        $result1 = $this->whitespaceMinifier->runMinificationRules('<link rel=stylesheet type="text/css" href=""/>');
-        $result2 = $this->whitespaceMinifier->runMinificationRules('<link rel=stylesheet type="text/css" href="" />');
         $expected = '<link rel=stylesheet type="text/css" href="">';
-        $this->assertEquals($expected, $result1);
-        $this->assertEquals($expected, $result2);
+
+        $result = $this->whitespaceMinifier->runMinificationRules('<link rel=stylesheet type="text/css" href=""/>');
+        $this->assertEquals($expected, $result);
+
+        $result = $this->whitespaceMinifier->runMinificationRules('<link rel=stylesheet type="text/css" href="" />');
+        $this->assertEquals($expected, $result);
     }
 
     public function testSpaceBetweenTags()
@@ -52,23 +57,20 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<p></p>', $result);
     }
 
-    public function testMultipleSpaces()
-    {
-        $result = $this->whitespaceMinifier->runMinificationRules('<p>  Lorum  Ipsum  </p>');
-        $this->assertEquals('<p>Lorum Ipsum</p>', $result);
-    }
-
     public function testSpacesAroundPlaceholders()
     {
         $placeholderContainer = new PlaceholderContainer();
         $placeholder = $placeholderContainer->addPlaceholder(null);
-        $result1 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=" '.$placeholder.'"></a>');
-        $result2 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href="'.$placeholder.' "></a>');
-        $result3 = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=\' '.$placeholder.' \'></a>');
         $expected = '<a href="'.$placeholder.'"></a>';
-        $this->assertEquals($expected, $result1);
-        $this->assertEquals($expected, $result2);
-        $this->assertEquals('<a href=\''.$placeholder.'\'></a>', $result3);
+
+        $result = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=" '.$placeholder.'"></a>');
+        $this->assertEquals($expected, $result);
+
+        $result = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href="'.$placeholder.' "></a>');
+        $this->assertEquals($expected, $result);
+
+        $result = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a href=\' '.$placeholder.' \'></a>');
+        $this->assertEquals('<a href=\''.$placeholder.'\'></a>', $result);
     }
 
     public function testMaxLineLength()

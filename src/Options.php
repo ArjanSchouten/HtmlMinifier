@@ -17,11 +17,11 @@ class Options
     {
         if (self::$options === null) {
             self::$options = [
-                Options::WHITESPACES        => new Option(Options::WHITESPACES, 'Remove redundant spaces', true),
-                Options::COMMENTS           => new Option(Options::COMMENTS, 'Remove comments', true),
-                Options::ATTRIBUTE_QUOTES   => new Option(Options::ATTRIBUTE_QUOTES, 'Remove quotes around html attributes', false),
-                Options::REMOVE_DEFAULTS    => new Option(Options::REMOVE_DEFAULTS, 'Remove defaults such as from <script type=text/javascript>', false),
-                Options::EMPTY_ATTRIBUTES   => new Option(Options::EMPTY_ATTRIBUTES, 'Remove empty attributes. HTML boolean attributes are skipped', false)
+                self::WHITESPACES        => new Option(self::WHITESPACES, 'Remove redundant spaces', true),
+                self::COMMENTS           => new Option(self::COMMENTS, 'Remove comments', true),
+                self::ATTRIBUTE_QUOTES   => new Option(self::ATTRIBUTE_QUOTES, 'Remove quotes around html attributes', false),
+                self::REMOVE_DEFAULTS    => new Option(self::REMOVE_DEFAULTS, 'Remove defaults such as from <script type=text/javascript>', false),
+                self::EMPTY_ATTRIBUTES   => new Option(self::EMPTY_ATTRIBUTES, 'Remove empty attributes. HTML boolean attributes are skipped', false)
             ];
         }
 

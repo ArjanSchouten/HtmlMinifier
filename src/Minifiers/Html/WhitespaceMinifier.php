@@ -4,6 +4,7 @@ namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\Options;
 
 class WhitespaceMinifier implements MinifierInterface
@@ -38,7 +39,7 @@ class WhitespaceMinifier implements MinifierInterface
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
-    public function process($context)
+    public function process(MinifyContext $context)
     {
         $context->setContents($this->trailingWhitespaces($context->getContents()));
         $context->setContents($this->runMinificationRules($context->getContents()));

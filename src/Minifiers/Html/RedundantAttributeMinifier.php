@@ -3,6 +3,7 @@
 namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\Options;
 use ArjanSchouten\HTMLMin\Util\Html;
 use Illuminate\Support\Collection;
@@ -36,7 +37,7 @@ class RedundantAttributeMinifier implements MinifierInterface
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
-    public function process($context)
+    public function process(MinifyContext $context)
     {
         Collection::make($this->redundantAttributes)->each(function ($attributes, $element) use (&$context) {
             Collection::make($attributes)->each(function ($value, $attribute) use ($element, &$context) {

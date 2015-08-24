@@ -4,6 +4,7 @@ namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\Options;
 use Illuminate\Support\Str;
 
@@ -32,7 +33,7 @@ class AttributeQuoteMinifier implements MinifierInterface
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
-    public function process($context)
+    public function process(MinifyContext $context)
     {
         return $context->setContents(preg_replace_callback(
             '/

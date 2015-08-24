@@ -4,6 +4,7 @@ namespace ArjanSchouten\HTMLMin\Minifiers\Html;
 
 use ArjanSchouten\HTMLMin\Constants;
 use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
+use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\Options;
 
 class JavascriptEventsMinifier implements MinifierInterface
@@ -14,7 +15,7 @@ class JavascriptEventsMinifier implements MinifierInterface
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @return \ArjanSchouten\HTMLMin\MinifyContext
      */
-    public function process($context)
+    public function process(MinifyContext $context)
     {
         $contents = preg_replace_callback(
             '/'.

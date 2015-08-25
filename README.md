@@ -50,3 +50,40 @@ With Laravel 5 you can start the minification process by using ```artisan```:
 ```php
 php artisan minify:views
 ```
+
+## Options
+This minifier have some minification options which are:
+
+| Minification strategy                                         | Option Name             | Enabled by default  |
+|---------------------------------------------------------------|-------------------------| --------------------|
+| Remove redundant whitespaces                                  | whitespaces             | yes                 |
+| Remove comments                                               | comments                | yes                 |
+| Collapse boolean attributes from checked="checked" to checked | boolean-attributes      | yes                 |
+| Remove quotes around html attributes                          | remove-attributequotes  | no                  |
+| Remove optional elements which can be implied by the browser  | optional-elements       | no                  |
+| Remove defaults such as from ```<script type=text/javascript>```    | remove-defaults         | no                  |
+| Remove empty attributes. HTML boolean attributes are skipped  | remove-empty-attributes | no                  |
+
+For example running the defaults and remove-defaults with optional elements can be done with:
+```php
+php artisan minify:views --remove-defaults --optional-elements
+```
+
+If you want to run all minification strategies you can run:
+```php 
+php artisan minify:views --all
+# or
+php artisan minify:views -a
+```
+
+You can also do this from code by passing a second array to the run method:
+```php
+...
+$options = [
+  'whitespace' => false,
+  'remove-defaults' => true,
+];
+
+$minify->run($context, $options);
+```
+This will disable ```whitespace``` and enables ```remove-defaults```.

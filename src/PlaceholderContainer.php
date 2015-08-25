@@ -46,7 +46,12 @@ class PlaceholderContainer extends Collection
      */
     public function addPlaceholder($originalContent)
     {
-        $placeholder = $this->createUniquePlaceholder();
+        if (($key = array_search($originalContent, $this->all()))) {
+            $placeholder = $key;
+        } else {
+            $placeholder = $this->createUniquePlaceholder();
+        }
+
         $originalContent = $this->removeNestedPlaceholders($originalContent);
         $this->items[$placeholder] = $originalContent;
 
@@ -72,7 +77,7 @@ class PlaceholderContainer extends Collection
     protected function removeNestedPlaceholders($originalContent)
     {
         return preg_replace_callback('/'.Constants::PLACEHOLDER_PATTERN.'/', function ($match) {
-            return $this->pull($match[0]);
+            return $this->get($match[0]);
         }, $originalContent);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Util;
+namespace ArjanSchouten\HtmlMinifier\Util;
 
 use Illuminate\Support\Str;
 

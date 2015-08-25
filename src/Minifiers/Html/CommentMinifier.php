@@ -1,10 +1,10 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Minifiers\Html;
+namespace ArjanSchouten\HtmlMinifier\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\Options;
+use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\Options;
 use Illuminate\Support\Str;
 
 class CommentMinifier implements MinifierInterface
@@ -12,8 +12,8 @@ class CommentMinifier implements MinifierInterface
     /**
      * Replace remaining comments.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
     {

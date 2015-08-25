@@ -1,8 +1,8 @@
 <?php
 
-use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\RedundantAttributeMinifier;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 
 class RedundantAttributeMinifierTest extends PHPUnit_Framework_TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Placeholders\Blade;
+namespace ArjanSchouten\HtmlMinifier\Placeholders\Blade;
 
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\Placeholders\PlaceholderInterface;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface;
 
 class BladePlaceholder implements PlaceholderInterface
 {
@@ -20,8 +20,8 @@ class BladePlaceholder implements PlaceholderInterface
     /**
      * Replace blade tags with a temporary placeholder.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process($context)
     {
@@ -36,7 +36,7 @@ class BladePlaceholder implements PlaceholderInterface
      * Add placeholder for blade echo statements.
      *
      * @param string                                      $contents
-     * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      * @return string
      */
     protected function setEchosPlaceholder($contents, PlaceholderContainer $placeholderContainer)
@@ -59,7 +59,7 @@ class BladePlaceholder implements PlaceholderInterface
      * Add placeholder for blade specific control structures.
      *
      * @param string                                      $contents
-     * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      * @return string
      */
     protected function setBladeControlStructuresPlaceholder($contents, PlaceholderContainer $placeholderContainer)

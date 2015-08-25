@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Repositories;
+namespace ArjanSchouten\HtmlMinifier\Repositories;
 
 class OptionalElementsRepository extends AbstractRepository
 {

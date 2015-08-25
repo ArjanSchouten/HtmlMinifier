@@ -1,8 +1,8 @@
 <?php
 
-use ArjanSchouten\HTMLMin\Minifiers\Html\OptionalElementMinifier;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\OptionalElementMinifier;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 
 class OptionalElementMinifierTest extends PHPUnit_Framework_TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\HtmlBooleanAttributeRepository;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\EmptyAttributeMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\HtmlBooleanAttributeRepository;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 use Illuminate\Support\Collection;
 use Mockery as m;
 

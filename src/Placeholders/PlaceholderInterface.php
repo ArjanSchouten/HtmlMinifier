@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Placeholders;
+namespace ArjanSchouten\HtmlMinifier\Placeholders;
 
 interface PlaceholderInterface
 {

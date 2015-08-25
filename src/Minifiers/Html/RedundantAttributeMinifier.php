@@ -1,11 +1,11 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Minifiers\Html;
+namespace ArjanSchouten\HtmlMinifier\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\Options;
-use ArjanSchouten\HTMLMin\Util\Html;
+use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\Options;
+use ArjanSchouten\HtmlMinifier\Util\Html;
 use Illuminate\Support\Collection;
 
 class RedundantAttributeMinifier implements MinifierInterface
@@ -34,8 +34,8 @@ class RedundantAttributeMinifier implements MinifierInterface
     /**
      * Minify redundant attributes which are not needed by the browser.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
     {

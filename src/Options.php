@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin;
+namespace ArjanSchouten\HtmlMinifier;
 
 class Options
 {
@@ -15,6 +15,11 @@ class Options
 
     private static $options;
 
+    /**
+     * Get all the options available for this minifier.
+     *
+     * @return array
+     */
     public static function options()
     {
         if (self::$options === null) {
@@ -30,5 +35,10 @@ class Options
         }
 
         return self::$options;
+    }
+
+    public static function addOption()
+    {
+
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Placeholders;
+namespace ArjanSchouten\HtmlMinifier\Placeholders;
 
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\Repositories\HtmlInlineElementsRepository;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Repositories\HtmlInlineElementsRepository;
 
 class WhitespacePlaceholder implements PlaceholderInterface
 {
@@ -25,8 +25,8 @@ class WhitespacePlaceholder implements PlaceholderInterface
     /**
      * Replace critical content with a temporary placeholder.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process($context)
     {
@@ -99,7 +99,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
      * Add placeholder for html tags with a placeholder to prevent data violation.
      *
      * @param string                                      $contents
-     * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      * @param string                                      $htmlTag
      * @return string
      */

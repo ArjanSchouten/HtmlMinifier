@@ -1,8 +1,8 @@
 <?php
 
-use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\JavascriptEventsMinifier;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 
 class JavascriptEventsMinifierTest extends PHPUnit_Framework_TestCase
 {

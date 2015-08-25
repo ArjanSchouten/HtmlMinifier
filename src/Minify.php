@@ -1,30 +1,33 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin;
+namespace ArjanSchouten\HtmlMinifier;
 
-use ArjanSchouten\HTMLMin\Minifiers\Html\AttributeQuoteMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\BooleanAttributeMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\CommentMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\OptionalElementMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
-use ArjanSchouten\HTMLMin\Minifiers\Html\WhitespaceMinifier;
-use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
-use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
-use ArjanSchouten\HTMLMin\Placeholders\PHP\PhpPlaceholder;
-use ArjanSchouten\HTMLMin\Placeholders\WhitespacePlaceholder;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\AttributeQuoteMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\BooleanAttributeMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\CommentMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\EmptyAttributeMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\JavascriptEventsMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\OptionalElementMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\RedundantAttributeMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\WhitespaceMinifier;
+use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
+use ArjanSchouten\HtmlMinifier\Placeholders\Blade\BladePlaceholder;
+use ArjanSchouten\HtmlMinifier\Placeholders\CommentPlaceholder;
+use ArjanSchouten\HtmlMinifier\Placeholders\Php\PhpPlaceholder;
+use ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface;
+use ArjanSchouten\HtmlMinifier\Placeholders\WhitespacePlaceholder;
+use InvalidArgumentException;
 
 class Minify
 {
-    private $placeholders = [
+    protected static $placeholders = [
         PhpPlaceholder::class,
         BladePlaceholder::class,
         CommentPlaceholder::class,
         WhitespacePlaceholder::class,
     ];
 
-    private $minifiers = [
+    protected static $minifiers = [
         CommentMinifier::class,
         WhitespaceMinifier::class,
         AttributeQuoteMinifier::class,
@@ -36,9 +39,9 @@ class Minify
     ];
 
     /**
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @param array                                $options
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @param array $options
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function run(MinifyContext $context, $options = [])
     {
@@ -49,12 +52,12 @@ class Minify
     }
 
     /**
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     protected function placeholders(MinifyContext $context)
     {
-        foreach ($this->placeholders as $placeholder) {
+        foreach (self::$placeholders as $placeholder) {
             $placeholder = new $placeholder();
             $context = $placeholder->process($context);
         }
@@ -63,13 +66,13 @@ class Minify
     }
 
     /**
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @param array                                $options
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @param array $options
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     protected function minifiers(MinifyContext $context, $options = [])
     {
-        foreach ($this->minifiers as $minifier) {
+        foreach (self::$minifiers as $minifier) {
             $minifier = new $minifier();
 
             $provides = $minifier->provides();
@@ -81,11 +84,24 @@ class Minify
         return $context;
     }
 
+    /**
+     * Checks if all minifiers should be runned.
+     *
+     * @param array $options
+     * @return bool
+     */
     protected function runAll($options = [])
     {
         return isset($options[Options::ALL]) && $options[Options::ALL];
     }
 
+    /**
+     * Check whether an option is set in the options aray.
+     *
+     * @param string $provides
+     * @param array $options
+     * @return bool
+     */
     protected function isOptionSet($provides, $options = [])
     {
         return (isset($options[$provides]) && $options[$provides] === true) || Options::options()[$provides]->isDefault();
@@ -94,13 +110,67 @@ class Minify
     /**
      * Restore placeholders with their original content.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     protected function restore(MinifyContext $context)
     {
         $withoutPlaceholders = $context->getPlaceholderContainer()->restorePlaceholders($context->getContents());
 
         return $context->setContents($withoutPlaceholders);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPlaceholders()
+    {
+        return self::$placeholders;
+    }
+
+    /**
+     * Add a placeholder strategy to the registered placeholders.
+     *
+     * @param string $placeholder
+     * @return array
+     */
+    public static function addPlaceholder($placeholder)
+    {
+        if (!isset(class_implements($placeholder)[PlaceholderInterface::class])) {
+            throw new InvalidArgumentException('The class ['.$placeholder.'] should be a member of the ['. PlaceholderInterface::class.']');
+        } elseif (in_array($placeholder, self::$placeholders)) {
+            throw new InvalidArgumentException('The placeholder ['.$placeholder.'] is already added to the minifier!');
+        }
+
+        self::$placeholders[] = $placeholder;
+
+        return self::$placeholders;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getMinifiers()
+    {
+        return self::$minifiers;
+    }
+
+    /**
+     * Add a placeholder strategy to the registered placeholders.
+     *
+     * @param string $minifier
+     * @return array
+     */
+    public static function addMinifier($minifier)
+    {
+        if (!isset(class_implements($minifier)[MinifierInterface::class])) {
+            throw new InvalidArgumentException('The class ['.$minifier.'] should be a member of the ['. MinifierInterface::class.']');
+        } elseif (in_array($minifier, self::$minifiers)) {
+            throw new InvalidArgumentException('The minifier ['.$minifier.'] is already added to the minifier!');
+        }
+
+        self::$minifiers[] = $minifier;
+
+        return self::$minifiers;
     }
 }

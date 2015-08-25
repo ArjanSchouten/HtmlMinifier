@@ -1,8 +1,8 @@
 <?php
 
-use ArjanSchouten\HTMLMin\Minifiers\Html\CommentMinifier;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\CommentMinifier;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 
 class CommentMinifierTest extends PHPUnit_Framework_TestCase
 {

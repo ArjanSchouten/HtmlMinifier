@@ -1,13 +1,13 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Minifiers\Html;
+namespace ArjanSchouten\HtmlMinifier\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Constants;
-use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\Options;
-use ArjanSchouten\HTMLMin\Repositories\HtmlBooleanAttributeRepository;
-use ArjanSchouten\HTMLMin\Util\Html;
+use ArjanSchouten\HtmlMinifier\Constants;
+use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\Options;
+use ArjanSchouten\HtmlMinifier\Repositories\HtmlBooleanAttributeRepository;
+use ArjanSchouten\HtmlMinifier\Util\Html;
 
 class EmptyAttributeMinifier implements MinifierInterface
 {
@@ -21,8 +21,8 @@ class EmptyAttributeMinifier implements MinifierInterface
     /**
      * Execute the minification rule.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
     {
@@ -56,7 +56,7 @@ class EmptyAttributeMinifier implements MinifierInterface
     }
 
     /**
-     * @param \ArjanSchouten\HTMLMin\Minifiers\Html\HtmlBooleanAttributeRepository $repository
+     * @param \ArjanSchouten\HtmlMinifier\Minifiers\Html\HtmlBooleanAttributeRepository $repository
      */
     public function setRepository($repository)
     {

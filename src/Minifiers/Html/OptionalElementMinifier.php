@@ -1,19 +1,19 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Minifiers\Html;
+namespace ArjanSchouten\HtmlMinifier\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\Options;
-use ArjanSchouten\HTMLMin\Repositories\OptionalElementsRepository;
+use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\Options;
+use ArjanSchouten\HtmlMinifier\Repositories\OptionalElementsRepository;
 
 class OptionalElementMinifier implements MinifierInterface
 {
     /**
      * Execute the minification rule.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
     {

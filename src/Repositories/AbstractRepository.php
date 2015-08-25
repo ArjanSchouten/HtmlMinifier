@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Repositories;
+namespace ArjanSchouten\HtmlMinifier\Repositories;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;

@@ -1,8 +1,8 @@
 <?php
 
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\Placeholders\WhitespacePlaceholder;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Placeholders\WhitespacePlaceholder;
 use Mockery as m;
 
 class WhitespacePlaceholderTest extends PHPUnit_Framework_TestCase

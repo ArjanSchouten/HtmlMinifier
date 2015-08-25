@@ -1,16 +1,16 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Minifiers;
+namespace ArjanSchouten\HtmlMinifier\Minifiers;
 
-use ArjanSchouten\HTMLMin\MinifyContext;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
 
 interface MinifierInterface
 {
     /**
      * Process the payload.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context);
 

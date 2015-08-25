@@ -1,7 +1,7 @@
 <?php
 
-use ArjanSchouten\HTMLMin\Minifiers\Html\WhitespaceMinifier;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Minifiers\Html\WhitespaceMinifier;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 
 class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
 {

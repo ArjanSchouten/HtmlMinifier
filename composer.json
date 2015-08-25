@@ -1,7 +1,7 @@
 {
-  "name": "arjanschouten/htmlmin",
+  "name": "arjanschouten/htmlminifier",
   "description": "Minify html for Laravel 5",
-  "keywords": ["laravel", "html minifier", "html", "HTMLMin", "Laravel HTMLMin"],
+  "keywords": ["laravel", "html minifier", "html", "Laravel HtmlMinifier"],
   "license": "MIT",
   "authors": [
     {
@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "ArjanSchouten\\HTMLMin\\": "src/"
+      "ArjanSchouten\\HtmlMinifier\\": "src"
     }
   },
   "prefer-stable": true

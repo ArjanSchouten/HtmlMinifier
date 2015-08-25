@@ -1,11 +1,11 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Minifiers\Html;
+namespace ArjanSchouten\HtmlMinifier\Minifiers\Html;
 
-use ArjanSchouten\HTMLMin\Constants;
-use ArjanSchouten\HTMLMin\Minifiers\MinifierInterface;
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\Options;
+use ArjanSchouten\HtmlMinifier\Constants;
+use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\Options;
 use Illuminate\Support\Str;
 
 class AttributeQuoteMinifier implements MinifierInterface
@@ -30,8 +30,8 @@ class AttributeQuoteMinifier implements MinifierInterface
     /**
      * Execute the minification rule.
      *
-     * @param \ArjanSchouten\HTMLMin\MinifyContext $context
-     * @return \ArjanSchouten\HTMLMin\MinifyContext
+     * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
     {

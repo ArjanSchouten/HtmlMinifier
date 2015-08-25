@@ -1,8 +1,8 @@
 <?php
 
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\Placeholders\PHP\PhpPlaceholder;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Placeholders\Php\PhpPlaceholder;
 use Mockery as m;
 
 class PHPPlaceholderTest extends PHPUnit_Framework_TestCase

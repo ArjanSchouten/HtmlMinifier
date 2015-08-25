@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin;
+namespace ArjanSchouten\HtmlMinifier;
 
 use Illuminate\Support\Collection;
 

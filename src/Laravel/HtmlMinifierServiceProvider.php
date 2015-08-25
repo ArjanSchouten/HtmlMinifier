@@ -1,12 +1,12 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Laravel;
+namespace ArjanSchouten\HtmlMinifier\Laravel;
 
-use ArjanSchouten\HTMLMin\Laravel\Command\ViewCompilerCommand;
-use ArjanSchouten\HTMLMin\Minify;
+use ArjanSchouten\HtmlMinifier\Laravel\Command\ViewCompilerCommand;
+use ArjanSchouten\HtmlMinifier\Minify;
 use Illuminate\Support\ServiceProvider;
 
-class HTMLMinServiceProvider extends ServiceProvider
+class HtmlMinifierServiceProvider extends ServiceProvider
 {
     /**
      * Defer loading the service provider until the provided services are needed.

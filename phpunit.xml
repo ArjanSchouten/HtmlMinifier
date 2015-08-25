@@ -13,7 +13,7 @@
          verbose="true"
         >
     <testsuites>
-        <testsuite name="HTMLMin test suite">
+        <testsuite name="HtmlMinifier test suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>

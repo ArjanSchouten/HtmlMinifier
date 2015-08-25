@@ -1,12 +1,12 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin\Laravel\Command;
+namespace ArjanSchouten\HtmlMinifier\Laravel\Command;
 
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\Option;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
-use ArjanSchouten\HTMLMin\Options;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\Option;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Placeholders\Blade\BladePlaceholder;
+use ArjanSchouten\HtmlMinifier\Options;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;

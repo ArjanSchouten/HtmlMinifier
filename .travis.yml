@@ -22,6 +22,6 @@ before_install:
   - composer self-update
 
 install:
-  - travis_retry composer update --prefer-stable
+  - travis_retry composer update --prefer-stable --no-interaction --prefer-source
 
 script: vendor/bin/phpunit

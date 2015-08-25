@@ -1,4 +1,4 @@
-# HTMLMin
+# HtmlMinifier
 
 [![Build Status](https://travis-ci.org/ArjanSchouten/HtmlMinifier.svg?branch=master)](https://travis-ci.org/ArjanSchouten/HtmlMinifier)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/?branch=master)

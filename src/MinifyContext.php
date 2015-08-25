@@ -1,11 +1,11 @@
 <?php
 
-namespace ArjanSchouten\HTMLMin;
+namespace ArjanSchouten\HtmlMinifier;
 
 class MinifyContext
 {
     /**
-     * @var \ArjanSchouten\HTMLMin\PlaceholderContainer
+     * @var \ArjanSchouten\HtmlMinifier\PlaceholderContainer
      */
     private $placeholderContainer;
 
@@ -15,7 +15,7 @@ class MinifyContext
     private $contents;
 
     /**
-     * @param \ArjanSchouten\HTMLMin\PlaceholderContainer $placeholderContainer
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      */
     public function __construct(PlaceholderContainer $placeholderContainer)
     {
@@ -25,7 +25,7 @@ class MinifyContext
     /**
      * Get the placeholdercontainer.
      *
-     * @return \ArjanSchouten\HTMLMin\PlaceholderContainer
+     * @return \ArjanSchouten\HtmlMinifier\PlaceholderContainer
      */
     public function getPlaceholderContainer()
     {

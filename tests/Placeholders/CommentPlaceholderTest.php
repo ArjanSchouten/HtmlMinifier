@@ -1,8 +1,8 @@
 <?php
 
-use ArjanSchouten\HTMLMin\MinifyContext;
-use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
+use ArjanSchouten\HtmlMinifier\MinifyContext;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
+use ArjanSchouten\HtmlMinifier\Placeholders\CommentPlaceholder;
 use Mockery as m;
 
 class CommentPlaceholderTest extends PHPUnit_Framework_TestCase

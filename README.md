@@ -14,7 +14,7 @@
 Html Minification can be extremely powerfull and can reduce the size of you're website drastically! This Html Minifier should be runned only once! It will minify you're templates so it's a one time process. During every request the Html Minifier isn't using  unneeded resources (also because of a defered service provider). **Finally there is no overhead, only advantages for you and your user!**
 
 ## Installation (Couldn't be easier!)
-Let composer do the most work for us!
+Let composer do the hard work for us!
 ```php
 composer require arjanschouten/htmlminifier dev-master
 ```

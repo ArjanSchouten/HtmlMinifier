@@ -4,25 +4,44 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/?branch=master)
 
-This HTML minifier is currently in development. You can install this package through composer as a vcs repository. 
-Currently it isn't submitted to packagist.
+**Never lose customers because of a slow response time!**
 
-The goal of this package is to minify as much as possible without any performance loss for the whole application.
-Minification is only done when you run a command and not on the fly. Most of the packages handles minification on the fly.
+[Research](http://www.nngroup.com/articles/response-times-3-important-limits/) has shown that the response time of a website is incredibly important. You should return a response within a second!
 
-Features included (or are WIP):
+## Why should you use a/this html minifier?!
+Html Minification can be extremely powerfull and can reduce the size of you're website drastically! This Html Minifier should be runned only once! It will minify you're templates so it's a one time process. During every request the Html Minifier isn't using  unneeded resources (also because of a defered service provider). **Finally there is no overhead, only advantages for you and your user!**
 
- * Support for Laravel/Lumen
- * Support for Symfony
- * Support for empty composer projects
- * Attribute quote minification
- * Removing comments
- * Removing empty attributes
- * Removing redundant attributes
- * Removing unnecessary whitespaces
-  
-This minifier takes 3 steps:
+## Installation (Couldn't be easier!)
+Let composer do the most work for us!
+```php
+composer require arjanschouten/htmlminifier dev-master
+```
+#### Laravel 5.1
+With Laravel 5.1 you've to register the service provider in the ```config/app.php``` file and add it to the providers array:
+```php
+ArjanSchouten\HtmlMinifier\Laravel\HtmlMinifierServiceProvider::class
+```
 
- * Replacing critical contents with a placeholder
- * Run the minification rules
- * Restore the original content
+#### Lumen
+With Lumen you've to register the service provider in the ```bootstrap/app.php``` file and add the following line:
+```php
+$app->register(ArjanSchouten\HtmlMinifier\Laravel\HtmlMinifierServiceProvider::class);
+```
+
+#### Plain php projects with composer
+If you're not using a php framework you can use the minifier by using the code below:
+```php
+// create a minify context which will be used through the minification process
+$context = new MinifyContext(new PlaceholderContainer());
+// save the html contents in the context
+$context->setContents('<html>My html...</html>');
+$minify = new Minify();
+// start the process and give the context with it as parameter
+$context = $minify->run($context);
+
+// $context now contains the minified version
+$minifiedContents = $context->getContents();
+
+```
+
+## Running

@@ -1,4 +1,5 @@
 > This package is still in Beta version! Use it with care!
+
 # HtmlMinifier
 
 [![Build Status](https://travis-ci.org/ArjanSchouten/HtmlMinifier.svg?branch=master)](https://travis-ci.org/ArjanSchouten/HtmlMinifier)

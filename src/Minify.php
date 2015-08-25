@@ -3,9 +3,11 @@
 namespace ArjanSchouten\HTMLMin;
 
 use ArjanSchouten\HTMLMin\Minifiers\Html\AttributeQuoteMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\BooleanAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\CommentMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\EmptyAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\JavascriptEventsMinifier;
+use ArjanSchouten\HTMLMin\Minifiers\Html\OptionalElementMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\WhitespaceMinifier;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
@@ -27,6 +29,8 @@ class Minify
         WhitespaceMinifier::class,
         AttributeQuoteMinifier::class,
         EmptyAttributeMinifier::class,
+        OptionalElementMinifier::class,
+        BooleanAttributeMinifier::class,
         JavascriptEventsMinifier::class,
         RedundantAttributeMinifier::class,
     ];

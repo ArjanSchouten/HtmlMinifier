@@ -1,0 +1,27 @@
+{
+  "elements": [{
+      "element": "<html>",
+      "regex": "<html>(?!<!--)"
+    },
+    {
+      "element": "</html>",
+      "regex": "</html>(?!<!--)"
+    },
+    {
+      "element": "<head>",
+      "regex": "<head>(?=(</head>|<[a-zA-Z]+))"
+    },
+    {
+      "element": "</head>",
+      "regex": "</head>(?!(\\s|<!--))"
+    },
+    {
+      "element": "<body>",
+      "regex": "<body>(</body>|(?!\\s)(?!<!--)(?!<script)(?!<style))"
+    },
+    {
+      "element": "</body>",
+      "regex": "</body>(?!<!--)"
+    }
+  ]
+}

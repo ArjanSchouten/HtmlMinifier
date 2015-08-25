@@ -89,3 +89,7 @@ $options = [
 $minify->run($context, $options);
 ```
 This will disable ```whitespace``` and enables ```remove-defaults```.
+
+### Contributing
+**Contributions are always welcome**. Please rather create a pull request with a fix, or if you can't fix it a pull request with a failing test, than an issue!
+For pull requests please follow the [PSR-2](http://www.php-fig.org/psr/psr-2/) guide.

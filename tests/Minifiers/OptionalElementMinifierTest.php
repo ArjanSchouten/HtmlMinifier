@@ -60,4 +60,12 @@ class OptionalElementMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->minifier->process($context->setContents('<body><a href="http://www.example.com"></a></body>'));
         $this->assertEquals('<a href="http://www.example.com"></a>', $result->getContents());
     }
+
+    public function testLiTag()
+    {
+        $context = new MinifyContext(new PlaceholderContainer());
+
+        $result = $this->minifier->process($context->setContents('<ul><li>foo</li><li>bar</li></ul>'));
+        $this->assertEquals('<ul><li>foo<li>bar</ul>', $result->getContents());
+    }
 }

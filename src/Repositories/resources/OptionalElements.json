@@ -22,6 +22,10 @@
     {
       "element": "</body>",
       "regex": "</body>(?!<!--)"
+    },
+    {
+      "element": "</li>",
+      "regex": "</li>(?=(<li>|</[a-zA-Z]+))"
     }
   ]
 }

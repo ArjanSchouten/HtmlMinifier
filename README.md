@@ -45,3 +45,8 @@ $minifiedContents = $context->getContents();
 ```
 
 ## Running
+### Laravel 5 and Lumen
+With Laravel 5 you can start the minification process by using ```artisan```:
+```php
+php artisan minify:views
+```

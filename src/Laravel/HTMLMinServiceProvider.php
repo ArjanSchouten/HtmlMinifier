@@ -44,7 +44,7 @@ class HTMLMinServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerPHPMinifier()
+    protected function registerPhpMinifier()
     {
         $this->app->singleton('php.min', function () {
             return new Minify();

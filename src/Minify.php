@@ -12,13 +12,13 @@ use ArjanSchouten\HTMLMin\Minifiers\Html\RedundantAttributeMinifier;
 use ArjanSchouten\HTMLMin\Minifiers\Html\WhitespaceMinifier;
 use ArjanSchouten\HTMLMin\Placeholders\Blade\BladePlaceholder;
 use ArjanSchouten\HTMLMin\Placeholders\CommentPlaceholder;
-use ArjanSchouten\HTMLMin\Placeholders\PHP\PHPPlaceholder;
+use ArjanSchouten\HTMLMin\Placeholders\PHP\PhpPlaceholder;
 use ArjanSchouten\HTMLMin\Placeholders\WhitespacePlaceholder;
 
 class Minify
 {
     private $placeholders = [
-        PHPPlaceholder::class,
+        PhpPlaceholder::class,
         BladePlaceholder::class,
         CommentPlaceholder::class,
         WhitespacePlaceholder::class,

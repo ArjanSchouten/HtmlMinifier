@@ -37,6 +37,11 @@ class ViewCompilerCommand extends Command
         $this->info('Yeah! You\'re views are minified!');
     }
 
+    /**
+     * Extend the blade compiler for the minification process.
+     *
+     * @return void
+     */
     protected function setupCompiler()
     {
         Blade::extend(function ($value, $compiler) {

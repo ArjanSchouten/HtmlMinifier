@@ -10,7 +10,7 @@ use ArjanSchouten\HTMLMin\Repositories\HtmlBooleanAttributeRepository;
 class BooleanAttributeMinifier implements MinifierInterface
 {
     /**
-     * Process the payload.
+     * Execute the minification rule.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @return \ArjanSchouten\HTMLMin\MinifyContext

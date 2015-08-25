@@ -10,7 +10,7 @@ use ArjanSchouten\HTMLMin\Repositories\OptionalElementsRepository;
 class OptionalElementMinifier implements MinifierInterface
 {
     /**
-     * Process the payload.
+     * Execute the minification rule.
      *
      * @param \ArjanSchouten\HTMLMin\MinifyContext $context
      * @return \ArjanSchouten\HTMLMin\MinifyContext
@@ -27,6 +27,13 @@ class OptionalElementMinifier implements MinifierInterface
         return $context->setContents($contents);
     }
 
+    /**
+     * Remove an optional element.
+     *
+     * @param object $element
+     * @param string $contents
+     * @return string
+     */
     protected function removeElement($element, $contents)
     {
         $newContents = preg_replace('@'.$element->regex.'@xi', '', $contents);

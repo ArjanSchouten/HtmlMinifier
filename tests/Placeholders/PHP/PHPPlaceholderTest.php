@@ -2,7 +2,7 @@
 
 use ArjanSchouten\HTMLMin\MinifyContext;
 use ArjanSchouten\HTMLMin\PlaceholderContainer;
-use ArjanSchouten\HTMLMin\Placeholders\PHP\PHPPlaceholder;
+use ArjanSchouten\HTMLMin\Placeholders\PHP\PhpPlaceholder;
 use Mockery as m;
 
 class PHPPlaceholderTest extends PHPUnit_Framework_TestCase
@@ -11,7 +11,7 @@ class PHPPlaceholderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->phpPlaceholder = new PHPPlaceholder();
+        $this->phpPlaceholder = new PhpPlaceholder();
     }
 
     public function tearDown()

@@ -29,7 +29,7 @@ class OptionalElementMinifier implements MinifierInterface
 
     protected function removeElement($element, $contents)
     {
-        $newContents = preg_replace('@'.$element->regex.'@i', '', $contents);
+        $newContents = preg_replace('@'.$element->regex.'@xi', '', $contents);
 
         if($newContents !== $contents && isset($element->elements)) {
             foreach ($element->elements as $element) {

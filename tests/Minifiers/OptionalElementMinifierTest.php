@@ -68,4 +68,43 @@ class OptionalElementMinifierTest extends PHPUnit_Framework_TestCase
         $result = $this->minifier->process($context->setContents('<ul><li>foo</li><li>bar</li></ul>'));
         $this->assertEquals('<ul><li>foo<li>bar</ul>', $result->getContents());
     }
+
+    public function testDtDdTag()
+    {
+        $context = new MinifyContext(new PlaceholderContainer());
+
+        $result = $this->minifier->process($context->setContents('<dt>foo</dt><dd>bar</dd>'));
+        $this->assertEquals('<dt>foo<dd>bar</dd>', $result->getContents());
+
+        $result = $this->minifier->process($context->setContents('<dl><dt>foo</dt><dd>bar</dd></dl>'));
+        $this->assertEquals('<dl><dt>foo<dd>bar</dl>', $result->getContents());
+    }
+
+    public function testPTag()
+    {
+        $context = new MinifyContext(new PlaceholderContainer());
+
+        $result = $this->minifier->process($context->setContents('<p>test</p>'));
+        $this->assertEquals('<p>test</p>', $result->getContents());
+
+        $result = $this->minifier->process($context->setContents('<p>test</p><h1>test</h1>'));
+        $this->assertEquals('<p>test<h1>test</h1>', $result->getContents());
+
+        $result = $this->minifier->process($context->setContents('<a><p>test</p></a>'));
+        $this->assertEquals('<a><p>test</p></a>', $result->getContents());
+
+        $result = $this->minifier->process($context->setContents('<div><p>test</p></div>'));
+        $this->assertEquals('<div><p>test</div>', $result->getContents());
+    }
+
+    public function testColgroupTag()
+    {
+        $context = new MinifyContext(new PlaceholderContainer());
+
+        $result = $this->minifier->process($context->setContents('<colgroup><col></colgroup>'));
+        $this->assertEquals('<colgroup><col>', $result->getContents());
+
+        $result = $this->minifier->process($context->setContents('<colgroup><col></colgroup><!---->'));
+        $this->assertEquals('<colgroup><col></colgroup><!---->', $result->getContents());
+    }
 }

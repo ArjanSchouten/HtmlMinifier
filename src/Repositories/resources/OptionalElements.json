@@ -26,6 +26,62 @@
     {
       "element": "</li>",
       "regex": "</li>(?=(<li>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</dt>",
+      "regex": "</dt>(?=(<dt>|<dd>))"
+    },
+    {
+      "element": "</dd>",
+      "regex": "</dd>(?=(<dd>|<dt>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</p>",
+      "regex": "</p>((?=<(address|article|aside|blockquote|dir|div|dl|fieldset|footer|form|h[1-6]|header|hgroup|hr|menu|nav|ol|p|pre|section|table|ul))|(?!</a>)(?=</[a-zA-Z]+))"
+    },
+    {
+      "element": "</rt>",
+      "regex": "</rt>(?=(<rt>|<rp>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</rp>",
+      "regex": "</rp>(?=(<rt>|<rp>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</optgroup>",
+      "regex": "</optgroup>(?=(<optgroup>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</option>",
+      "regex": "</option>(?=(<option>|<optgroup>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</colgroup>",
+      "regex": "</colgroup>(?!(\\s|<!--))"
+    },
+    {
+      "element": "</thead>",
+      "regex": "</thead>(?=(</tbody>|</tfoot>))"
+    },
+    {
+      "element": "</tbody>",
+      "regex": "</tbody>(?=(</tbody>|</tfoot>)|</[a-zA-Z]+)"
+    },
+    {
+      "element": "</tfoot>",
+      "regex": "</tfoot>(?=(</tbody>|</tfoot>)|</[a-zA-Z]+)"
+    },
+    {
+      "element": "</tr>",
+      "regex": "</tr>(?=(</tr>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</td>",
+      "regex": "</td>(?=(</td>|</th>|</[a-zA-Z]+))"
+    },
+    {
+      "element": "</th>",
+      "regex": "</th>(?=(</td>|</th>|</[a-zA-Z]+))"
     }
   ]
 }

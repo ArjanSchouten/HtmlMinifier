@@ -102,5 +102,3 @@ This package is licensed under the [MIT License](https://github.com/ArjanSchoute
 
 ### Creator and Maintainer
 This package is created and maintained by [Arjan Schouten](http://www.arjan-schouten.nl).
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ArjanSchouten/htmlminifier/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

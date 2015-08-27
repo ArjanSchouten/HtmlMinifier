@@ -48,8 +48,9 @@ class ViewCompilerCommand extends Command
             BladePlaceholder::setBladeTags($this->getBladeTags($compiler));
 
             $context = new MinifyContext(new PlaceholderContainer());
+            $minifier = $this->laravel->make('blade.compiler.min');
 
-            return $this->laravel->make('blade.compiler.min')->run($context->setContents($value), $this->option())->getContents();
+            return $minifier->run($context->setContents($value), $this->option())->getContents();
         });
     }
 

@@ -64,7 +64,7 @@ class HtmlMinifierServiceProvider extends ServiceProvider
     /**
      * Services provided by this service provider.
      *
-     * @return array
+     * @return string[]
      */
     public function provides()
     {

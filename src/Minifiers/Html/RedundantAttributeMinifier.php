@@ -42,10 +42,24 @@ class RedundantAttributeMinifier implements MinifierInterface
     {
         Collection::make($this->redundantAttributes)->each(function ($attributes, $element) use (&$context) {
             Collection::make($attributes)->each(function ($value, $attribute) use ($element, &$context) {
-                $context->setContents(preg_replace_callback('/'.$element.'((?!\s*'.$attribute.'\s*=).)*(\s*'.$attribute.'\s*=\s*"?\'?\s*'.$value.'\s*"?\'?\s*)/is',
+                $contents = preg_replace_callback(
+                    '/
+                        '.$element.'                    # Match the given element
+                        ((?!\s*'.$attribute.'\s*=).)*   # Match everything except the given attribute
+                        (
+                            \s*'.$attribute.'\s*        # Match the attribute
+                            =\s*                        # Match the equals sign
+                            (["\']?)                    # Match the opening quotes
+                            \s*'.$value.'\s*            # Match the value
+                            \3?                         # Match the captured opening quotes again
+                            \s*
+                        )
+                    /xis',
                     function ($match) {
                         return $this->removeAttribute($match[0], $match[2]);
-                    }, $context->getContents()));
+                    }, $context->getContents());
+
+                $context->setContents($contents);
             });
         });
 

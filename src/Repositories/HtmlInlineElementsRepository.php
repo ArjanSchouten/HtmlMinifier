@@ -12,11 +12,12 @@ class HtmlInlineElementsRepository extends AbstractRepository
      * Get inline Html Elements.
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getElements()
     {
-        if(self::$inlineElements === null) {
+        if (self::$inlineElements === null) {
             $elements = $this->loadJson($this->resource('HtmlInlineElements.json'))->elements;
             self::$inlineElements = Collection::make($elements);
         }

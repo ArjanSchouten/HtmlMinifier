@@ -10,6 +10,7 @@ class CommentPlaceholder implements PlaceholderInterface
      * Replace critical content with a temp placeholder for integrity.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process($context)
@@ -22,8 +23,9 @@ class CommentPlaceholder implements PlaceholderInterface
     /**
      * Replace CData with a temporary placeholder.
      *
-     * @param string                                      $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
      * @return string
      */
     protected function setCDataPlaceholder($contents, PlaceholderContainer $placeholderContainer)
@@ -36,8 +38,9 @@ class CommentPlaceholder implements PlaceholderInterface
     /**
      * Replace conditional placeholders used by Internet Explorer.
      *
-     * @param string                                      $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
      * @return string
      */
     protected function setConditionalCommentsPlaceholder($contents, PlaceholderContainer $placeholderContainer)

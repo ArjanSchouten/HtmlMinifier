@@ -13,6 +13,7 @@ class CommentMinifier implements MinifierInterface
      * Replace remaining comments.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)

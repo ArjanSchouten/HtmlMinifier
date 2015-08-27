@@ -2,7 +2,6 @@
 
 namespace ArjanSchouten\HtmlMinifier;
 
-
 class Option
 {
     private $name;
@@ -35,7 +34,7 @@ class Option
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDefault()
     {

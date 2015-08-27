@@ -9,8 +9,9 @@ class OptionalElementsRepository extends AbstractRepository
     /**
      * Get the optional html elments.
      *
-     * @return mixed
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     *
+     * @return mixed
      */
     public function getElements()
     {

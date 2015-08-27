@@ -10,6 +10,7 @@ interface MinifierInterface
      * Process the payload.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context);

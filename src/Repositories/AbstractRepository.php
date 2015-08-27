@@ -18,8 +18,10 @@ abstract class AbstractRepository
      * Load a json file and decode it.
      *
      * @param string $file
-     * @return mixed
+     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     *
+     * @return mixed
      */
     protected function loadJson($file)
     {
@@ -37,7 +39,8 @@ abstract class AbstractRepository
     /**
      * Get the absolute path to the given resource file.
      *
-     * @param  string $file
+     * @param string $file
+     *
      * @return string
      */
     protected function resource($file)

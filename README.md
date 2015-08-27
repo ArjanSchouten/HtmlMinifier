@@ -91,8 +91,7 @@ $minify->run($context, $options);
 This will disable ```whitespace``` and enables ```remove-defaults```.
 
 ### Contributing
-**Contributions are always welcome**. Please rather create a pull request with a fix, or if you can't fix it a pull request with a failing test, than an issue!
-For pull requests please follow the [PSR-2](http://www.php-fig.org/psr/psr-2/) standard.
+**Contributions are always welcome**. Please read the [CONTRIBUTING.md readme](https://github.com/ArjanSchouten/HtmlMinifier/blob/master/CONTRIBUTING.md).
 
 ### Testing
 HtmlMinifier uses ```phpunit``` for testing. You can run the tests with ```vendor/bin/phpunit ```.

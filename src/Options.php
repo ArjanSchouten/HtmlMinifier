@@ -24,7 +24,7 @@ class Options
     {
         if (self::$options === null) {
             self::$options = [
-                self::WHITESPACES        => new Option(self::WHITESPACES, 'Remove redundant spaces', true),
+                self::WHITESPACES        => new Option(self::WHITESPACES, 'Remove redundant whitespaces', true),
                 self::COMMENTS           => new Option(self::COMMENTS, 'Remove comments', true),
                 self::BOOLEAN_ATTRIBUTES => new Option(self::BOOLEAN_ATTRIBUTES, 'Collapse boolean attributes from checked="checked" to checked', true),
                 self::ATTRIBUTE_QUOTES   => new Option(self::ATTRIBUTE_QUOTES, 'Remove quotes around html attributes', false),

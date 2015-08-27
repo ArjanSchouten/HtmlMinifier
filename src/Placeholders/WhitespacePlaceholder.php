@@ -40,6 +40,15 @@ class WhitespacePlaceholder implements PlaceholderInterface
         return $context->setContents($contents);
     }
 
+    /**
+     * Whitespaces between inline html elements must be replaced with a placeholder because
+     * a browser is showing that whitespace.
+     *
+     * @param string $contents
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
+     * @return string
+     */
     protected function whitespaceBetweenInlineElements($contents, PlaceholderContainer $placeholderContainer)
     {
         $elementsRegex = $this->getInlineElementsRegex();
@@ -64,6 +73,14 @@ class WhitespacePlaceholder implements PlaceholderInterface
         }, $contents);
     }
 
+    /**
+     * Whitespaces in an inline element have a function so we replace it.
+     *
+     * @param string $contents
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
+     * @return string
+     */
     protected function whitespaceInInlineElements($contents, PlaceholderContainer $placeholderContainer)
     {
         $elementsRegex = $this->getInlineElementsRegex();
@@ -79,6 +96,14 @@ class WhitespacePlaceholder implements PlaceholderInterface
             }, $contents);
     }
 
+    /**
+     * Replace the whitespaces in inline elements with a placeholder.
+     *
+     * @param string $element
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
+     * @return string
+     */
     private function replaceWhitespacesInInlineElements($element, PlaceholderContainer $placeholderContainer)
     {
         return preg_replace_callback(['/(>)\s/', '/\s(<)/'], function ($match) use ($placeholderContainer) {
@@ -90,6 +115,12 @@ class WhitespacePlaceholder implements PlaceholderInterface
         }, $element);
     }
 
+    /**
+     * @param string $contents
+     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
+     * @return string
+     */
     protected function replaceElements($contents, PlaceholderContainer $placeholderContainer)
     {
         foreach ($this->htmlPlaceholderTags as $htmlTag) {
@@ -118,6 +149,11 @@ class WhitespacePlaceholder implements PlaceholderInterface
         }, $contents);
     }
 
+    /**
+     * Get the regular expression for matching the inline element names.
+     *
+     * @return string
+     */
     private function getInlineElementsRegex()
     {
         $inlineElementsRepository = new HtmlInlineElementsRepository();

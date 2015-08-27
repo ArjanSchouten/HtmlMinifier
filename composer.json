@@ -1,7 +1,7 @@
 {
   "name": "arjanschouten/htmlminifier",
-  "description": "Minify html for Laravel 5",
-  "keywords": ["laravel", "html minifier", "html", "Laravel HtmlMinifier"],
+  "description": "PHP based Html minifier with support for Laravel/Lumen. This minifier will improve you're application size drastically!",
+  "keywords": ["minifier", "html", "laravel html minifier", "lumen html minifier", "html compressor", "html minifier"],
   "license": "MIT",
   "authors": [
     {

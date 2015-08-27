@@ -20,6 +20,9 @@ use InvalidArgumentException;
 
 class Minify
 {
+    /**
+     * @var \ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface[]
+     */
     protected static $placeholders = [
         PhpPlaceholder::class,
         BladePlaceholder::class,
@@ -27,6 +30,9 @@ class Minify
         WhitespacePlaceholder::class,
     ];
 
+    /**
+     * @var \ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface[]
+     */
     protected static $minifiers = [
         CommentMinifier::class,
         WhitespaceMinifier::class,
@@ -127,7 +133,7 @@ class Minify
     }
 
     /**
-     * @return array
+     * @return \ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface[]
      */
     public static function getPlaceholders()
     {
@@ -139,7 +145,7 @@ class Minify
      *
      * @param string $placeholder
      *
-     * @return array
+     * @return \ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface[]
      */
     public static function addPlaceholder($placeholder)
     {
@@ -155,7 +161,7 @@ class Minify
     }
 
     /**
-     * @return array
+     * @return \ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface[]
      */
     public static function getMinifiers()
     {
@@ -167,7 +173,7 @@ class Minify
      *
      * @param string $minifier
      *
-     * @return array
+     * @return \ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface[]
      */
     public static function addMinifier($minifier)
     {

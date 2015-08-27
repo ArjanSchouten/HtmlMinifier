@@ -27,6 +27,7 @@ class PlaceholderContainer extends Collection
 
     /**
      * @param string $contents
+     *
      * @return string
      */
     public function restorePlaceholders($contents)
@@ -42,6 +43,7 @@ class PlaceholderContainer extends Collection
      * Store a placeholder in the container.
      *
      * @param string $originalContent
+     *
      * @return string $placeholder
      */
     public function addPlaceholder($originalContent)
@@ -72,6 +74,7 @@ class PlaceholderContainer extends Collection
      * Remove nested placeholders so no nested placholders remain in the original contents.
      *
      * @param string $originalContent
+     *
      * @return string
      */
     protected function removeNestedPlaceholders($originalContent)

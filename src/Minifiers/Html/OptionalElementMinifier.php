@@ -13,6 +13,7 @@ class OptionalElementMinifier implements MinifierInterface
      * Execute the minification rule.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
@@ -32,13 +33,14 @@ class OptionalElementMinifier implements MinifierInterface
      *
      * @param object $element
      * @param string $contents
+     *
      * @return string
      */
     protected function removeElement($element, $contents)
     {
         $newContents = preg_replace('@'.$element->regex.'@xi', '', $contents);
 
-        if($newContents !== $contents && isset($element->elements)) {
+        if ($newContents !== $contents && isset($element->elements)) {
             foreach ($element->elements as $element) {
                 $newContents = $this->removeElement($element, $newContents);
             }

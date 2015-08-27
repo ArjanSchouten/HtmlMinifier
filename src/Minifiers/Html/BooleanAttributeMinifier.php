@@ -13,6 +13,7 @@ class BooleanAttributeMinifier implements MinifierInterface
      * Execute the minification rule.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
@@ -30,13 +31,13 @@ class BooleanAttributeMinifier implements MinifierInterface
                 ([\'"])?                    # optional to use a quote
                 (\1|true|false|([\s>"\']))    # match the boolean attribute name again or true|false
                 \2?                         # match the quote again
-            /xi', function($match) {
+            /xi', function ($match) {
                 if (isset($match[4])) {
                     return ' '.$match[1];
                 }
 
                 if ($match[3] == 'false') {
-                   return '';
+                    return '';
                 }
 
                 return ' '.$match[1];

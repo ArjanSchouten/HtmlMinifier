@@ -4,9 +4,9 @@ namespace ArjanSchouten\HtmlMinifier\Laravel\Command;
 
 use ArjanSchouten\HtmlMinifier\MinifyContext;
 use ArjanSchouten\HtmlMinifier\Option;
+use ArjanSchouten\HtmlMinifier\Options;
 use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 use ArjanSchouten\HtmlMinifier\Placeholders\Blade\BladePlaceholder;
-use ArjanSchouten\HtmlMinifier\Options;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
@@ -58,6 +58,7 @@ class ViewCompilerCommand extends Command
      * Get the blade tags which might be overruled by user.
      *
      * @param \Illuminate\View\Compilers\BladeCompiler $bladeCompiler
+     *
      * @return array
      */
     private function getBladeTags(BladeCompiler $bladeCompiler)
@@ -114,7 +115,7 @@ class ViewCompilerCommand extends Command
     protected function getOptions()
     {
         $options = Collection::make(Options::options())
-            ->map(function(Option $option){
+            ->map(function (Option $option) {
                 return [
                     $option->getName(),
                     null,

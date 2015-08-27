@@ -40,7 +40,8 @@ class Minify
 
     /**
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
-     * @param array $options
+     * @param array                                     $options
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function run(MinifyContext $context, $options = [])
@@ -53,6 +54,7 @@ class Minify
 
     /**
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     protected function placeholders(MinifyContext $context)
@@ -67,7 +69,8 @@ class Minify
 
     /**
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
-     * @param array $options
+     * @param array                                     $options
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     protected function minifiers(MinifyContext $context, $options = [])
@@ -88,6 +91,7 @@ class Minify
      * Checks if all minifiers should be runned.
      *
      * @param array $options
+     *
      * @return bool
      */
     protected function runAll($options = [])
@@ -99,7 +103,8 @@ class Minify
      * Check whether an option is set in the options aray.
      *
      * @param string $provides
-     * @param array $options
+     * @param array  $options
+     *
      * @return bool
      */
     protected function isOptionSet($provides, $options = [])
@@ -111,6 +116,7 @@ class Minify
      * Restore placeholders with their original content.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     protected function restore(MinifyContext $context)
@@ -132,12 +138,13 @@ class Minify
      * Add a placeholder strategy to the registered placeholders.
      *
      * @param string $placeholder
+     *
      * @return array
      */
     public static function addPlaceholder($placeholder)
     {
         if (!isset(class_implements($placeholder)[PlaceholderInterface::class])) {
-            throw new InvalidArgumentException('The class ['.$placeholder.'] should be a member of the ['. PlaceholderInterface::class.']');
+            throw new InvalidArgumentException('The class ['.$placeholder.'] should be a member of the ['.PlaceholderInterface::class.']');
         } elseif (in_array($placeholder, self::$placeholders)) {
             throw new InvalidArgumentException('The placeholder ['.$placeholder.'] is already added to the minifier!');
         }
@@ -159,12 +166,13 @@ class Minify
      * Add a placeholder strategy to the registered placeholders.
      *
      * @param string $minifier
+     *
      * @return array
      */
     public static function addMinifier($minifier)
     {
         if (!isset(class_implements($minifier)[MinifierInterface::class])) {
-            throw new InvalidArgumentException('The class ['.$minifier.'] should be a member of the ['. MinifierInterface::class.']');
+            throw new InvalidArgumentException('The class ['.$minifier.'] should be a member of the ['.MinifierInterface::class.']');
         } elseif (in_array($minifier, self::$minifiers)) {
             throw new InvalidArgumentException('The minifier ['.$minifier.'] is already added to the minifier!');
         }

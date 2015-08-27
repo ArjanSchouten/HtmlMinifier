@@ -22,6 +22,7 @@ class EmptyAttributeMinifier implements MinifierInterface
      * Execute the minification rule.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)
@@ -48,6 +49,7 @@ class EmptyAttributeMinifier implements MinifierInterface
      * Check if an attribute is a boolean attribute.
      *
      * @param string $attribute
+     *
      * @return bool
      */
     private function isBooleanAttribute($attribute)

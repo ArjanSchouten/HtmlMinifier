@@ -42,6 +42,7 @@ class MinifyContext
 
     /**
      * @param string $contents
+     *
      * @return $this
      */
     public function setContents($contents)

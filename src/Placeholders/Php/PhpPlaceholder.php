@@ -10,6 +10,7 @@ class PhpPlaceholder implements PlaceholderInterface
      * Replace PHP tags with a temporary placeholder.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process($context)
@@ -21,6 +22,7 @@ class PhpPlaceholder implements PlaceholderInterface
         $contents = preg_replace_callback('/<\?php((?!\?>).)*(\?>)?/s', function ($match) use ($context) {
             return $context->getPlaceholderContainer()->addPlaceholder($match[0]);
         }, $contents);
+
         return $context->setContents($contents);
     }
 }

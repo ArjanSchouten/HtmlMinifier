@@ -13,6 +13,7 @@ class JavascriptEventsMinifier implements MinifierInterface
      * Minify javascript prefixes on html event attributes.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process(MinifyContext $context)

@@ -39,6 +39,5 @@ class Options
 
     public static function addOption()
     {
-
     }
 }

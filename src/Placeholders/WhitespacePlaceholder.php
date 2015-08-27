@@ -26,6 +26,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
      * Replace critical content with a temporary placeholder.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process($context)
@@ -42,6 +43,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
     protected function whitespaceBetweenInlineElements($contents, PlaceholderContainer $placeholderContainer)
     {
         $elementsRegex = $this->getInlineElementsRegex();
+
         return preg_replace_callback(
             '/
                 (
@@ -57,6 +59,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
             function ($match) use ($placeholderContainer) {
                 // Where going to respect one space between the inline elements.
                 $placeholder = $placeholderContainer->addPlaceholder(' ');
+
                 return $match[1].$placeholder.$match[3];
         }, $contents);
     }
@@ -64,6 +67,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
     protected function whitespaceInInlineElements($contents, PlaceholderContainer $placeholderContainer)
     {
         $elementsRegex = $this->getInlineElementsRegex();
+
         return preg_replace_callback(
             '/
                 <('.$elementsRegex.')   # Match an inline element
@@ -77,8 +81,8 @@ class WhitespacePlaceholder implements PlaceholderInterface
 
     private function replaceWhitespacesInInlineElements($element, PlaceholderContainer $placeholderContainer)
     {
-        return preg_replace_callback(['/(>)\s/', '/\s(<)/'], function ($match) use($placeholderContainer) {
-            if($match[1] === '>') {
+        return preg_replace_callback(['/(>)\s/', '/\s(<)/'], function ($match) use ($placeholderContainer) {
+            if ($match[1] === '>') {
                 return '>'.$placeholderContainer->addPlaceholder(' ');
             } else {
                 return $placeholderContainer->addPlaceholder(' ').'<';
@@ -98,9 +102,10 @@ class WhitespacePlaceholder implements PlaceholderInterface
     /**
      * Add placeholder for html tags with a placeholder to prevent data violation.
      *
-     * @param string                                      $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
-     * @param string                                      $htmlTag
+     * @param string                                           $htmlTag
+     *
      * @return string
      */
     protected function setHtmlTagPlaceholder($contents, PlaceholderContainer $placeholderContainer, $htmlTag)

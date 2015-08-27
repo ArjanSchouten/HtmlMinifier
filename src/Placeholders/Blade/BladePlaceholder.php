@@ -21,6 +21,7 @@ class BladePlaceholder implements PlaceholderInterface
      * Replace blade tags with a temporary placeholder.
      *
      * @param \ArjanSchouten\HtmlMinifier\MinifyContext $context
+     *
      * @return \ArjanSchouten\HtmlMinifier\MinifyContext
      */
     public function process($context)
@@ -35,8 +36,9 @@ class BladePlaceholder implements PlaceholderInterface
     /**
      * Add placeholder for blade echo statements.
      *
-     * @param string                                      $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
      * @return string
      */
     protected function setEchosPlaceholder($contents, PlaceholderContainer $placeholderContainer)
@@ -58,8 +60,9 @@ class BladePlaceholder implements PlaceholderInterface
     /**
      * Add placeholder for blade specific control structures.
      *
-     * @param string                                      $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     *
      * @return string
      */
     protected function setBladeControlStructuresPlaceholder($contents, PlaceholderContainer $placeholderContainer)

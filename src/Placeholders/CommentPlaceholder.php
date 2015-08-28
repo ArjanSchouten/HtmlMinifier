@@ -45,14 +45,34 @@ class CommentPlaceholder implements PlaceholderInterface
      */
     protected function setConditionalCommentsPlaceholder($contents, PlaceholderContainer $placeholderContainer)
     {
-        $contents = preg_replace_callback('/<!\[((?!\]>).)*\]>((?!<!\[endif\]>).)*<!\[endif\]>/is',
+        return preg_replace_callback(
+            '/
+                (
+                    <!                  # Match the start of a comment
+                    (-{2})?             # IE can understand comments without dashes
+                    \[                  # Match the start ("[" is a metachar => escape it)
+                        (?:(?!\]>).)*   # Match everything except "]>"
+                    \]>                 # Match end
+                )
+                (
+                    (?:
+                        (?!<!\[endif\]-{2}?>)
+                    .)*
+                )                     # Match everything except end of conditional comment
+                (
+                    <!\[endif\]
+                          (?:\2|(?=>))  # Use a trick to ensure that when dashes are captured they are...
+                                        # matched at the end! Else make sure that the next char is a ">"!
+                    >                   # Match the endif with the captured dashes
+                )
+            /xis',
             function ($match) use ($placeholderContainer) {
-                return $placeholderContainer->addPlaceholder($match[0]);
-            }, $contents);
-
-        return preg_replace_callback('/<!-{2}\[((?!\]>).)*\]>((?!<!\[endif\]-{2}>).)*<!\[endif\]-{2}>/is',
-            function ($match) use ($placeholderContainer) {
-                return $placeholderContainer->addPlaceholder($match[0]);
+                var_dump($match);
+                if (!empty(preg_replace('/\s*/', '', $match[3]))) {
+                    return $placeholderContainer->addPlaceholder($match[1]).$match[3].$placeholderContainer->addPlaceholder($match[4]);
+                } else {
+                    return '';
+                }
             }, $contents);
     }
 }

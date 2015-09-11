@@ -7,6 +7,7 @@ use ArjanSchouten\HtmlMinifier\MinifyContext;
 use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 use ArjanSchouten\HtmlMinifier\Options;
 use ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface;
+use Illuminate\Support\Arr;
 
 class MinifyTest extends PHPUnit_Framework_TestCase
 {
@@ -67,6 +68,23 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         //restore the original strategies
         $minify->setMinifiers($oldMinifiers);
         $minify->setPlaceholders($oldPlaceholders);
+    }
+
+    public function testMinifyMeasurement()
+    {
+        $context = new MinifyContext(new PlaceholderContainer());
+        $context->setContents('<html>'.PHP_EOL.'<p id="test" class="">test</p></html>');
+        $minify = new Minify();
+
+        $context = $minify->run($context, [
+            Options::EMPTY_ATTRIBUTES => true
+        ]);
+
+        $measurement = $context->getMeasurement();
+        $this->assertEquals(5, count($measurement->getSteps()));
+
+        $callable = function() { return true; };
+        $this->assertLessThan(Arr::first($measurement->getSteps(), $callable), Arr::last($measurement->getSteps(), $callable));
     }
 }
 

@@ -2,7 +2,7 @@
 
 namespace ArjanSchouten\HtmlMinifier\Measurements;
 
-class Measurement
+class Measurement implements MeasurementInterface
 {
     /**
      * @var array

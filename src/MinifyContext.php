@@ -2,6 +2,9 @@
 
 namespace ArjanSchouten\HtmlMinifier;
 
+use ArjanSchouten\HtmlMinifier\Measurements\Measurement;
+use ArjanSchouten\HtmlMinifier\Measurements\MeasurementInterface;
+
 class MinifyContext
 {
     /**
@@ -15,11 +18,17 @@ class MinifyContext
     private $contents;
 
     /**
+     * @var \ArjanSchouten\HtmlMinifier\Measurements\Measurement
+     */
+    private $measurement;
+
+    /**
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      */
-    public function __construct(PlaceholderContainer $placeholderContainer)
+    public function __construct(PlaceholderContainer $placeholderContainer, MeasurementInterface $measurement = null)
     {
         $this->placeholderContainer = $placeholderContainer;
+        $this->measurement = $measurement;
     }
 
     /**
@@ -50,5 +59,31 @@ class MinifyContext
         $this->contents = $contents;
 
         return $this;
+    }
+
+    /**
+     * Add a measurement step.
+     *
+     * @param string $input
+     * @param string $keyName
+     */
+    public function addMeasurementStep($input, $keyName = null)
+    {
+        if ($this->measurement == null) {
+            $this->measurement = new Measurement($input, $keyName);
+            return;
+        }
+
+        $this->measurement->addStep($input, $keyName);
+    }
+
+    /**
+     * Get the measurement.
+     *
+     * @return \ArjanSchouten\HtmlMinifier\Measurements\MeasurementInterface
+     */
+    public function getMeasurement()
+    {
+        return $this->measurement;
     }
 }

@@ -67,7 +67,6 @@ class CommentPlaceholder implements PlaceholderInterface
                 )
             /xis',
             function ($match) use ($placeholderContainer) {
-                var_dump($match);
                 if (!empty(preg_replace('/\s*/', '', $match[3]))) {
                     return $placeholderContainer->addPlaceholder($match[1]).$match[3].$placeholderContainer->addPlaceholder($match[4]);
                 } else {

@@ -52,6 +52,7 @@ class Minify
      */
     public function run(MinifyContext $context, $options = [])
     {
+        $context->addMeasurementStep($context->getContents(), 'Initial step');
         $context = $this->placeholders($context);
         $context = $this->minifiers($context, $options);
 
@@ -87,6 +88,7 @@ class Minify
             $provides = $minifier->provides();
             if ($this->runAll($options) || $this->isOptionSet($provides, $options)) {
                 $context = $minifier->process($context);
+                $context->addMeasurementStep($context->getContents(), $this->getClassName($minifier).'|'.$minifier->provides());
             }
         }
 
@@ -186,5 +188,16 @@ class Minify
         self::$minifiers[] = $minifier;
 
         return self::$minifiers;
+    }
+
+    private function getClassName($object)
+    {
+        $class = get_class($object);
+        if (($index = strrpos($class, '\\'))) {
+            $fixForTrailingBackslash = 1;
+            return substr($class, $index + $fixForTrailingBackslash);
+        }
+
+        return $class;
     }
 }

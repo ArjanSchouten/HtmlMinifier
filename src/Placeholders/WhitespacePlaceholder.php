@@ -87,14 +87,16 @@ class WhitespacePlaceholder implements PlaceholderInterface
 
         return preg_replace_callback(
             '/
-                \s*
-                <('.$elementsRegex.')   # Match an inline element
-                (?:(?!<\/\1>).)*        # Match everything except its end tag
-                <\/\1>                  # Match the end tag
-                \s*
+                (
+                    <('.$elementsRegex.')   # Match an inline element
+                    (?:(?!<\/\2>).)*        # Match everything except its end tag
+                    <\/\2>                  # Match the end tag
+                    \s+
+                )
+                <('.$elementsRegex.')       # Match starting tag
             /xis',
             function ($match) use ($placeholderContainer) {
-                return $this->replaceWhitespacesInInlineElements($match[0], $placeholderContainer);
+                return $this->replaceWhitespacesInInlineElements($match[1], $placeholderContainer).'<'.$match[3];
             }, $contents);
     }
 
@@ -108,12 +110,8 @@ class WhitespacePlaceholder implements PlaceholderInterface
      */
     private function replaceWhitespacesInInlineElements($element, PlaceholderContainer $placeholderContainer)
     {
-        return preg_replace_callback(['/(>)\s/', '/\s(<)/'], function ($match) use ($placeholderContainer) {
-            if ($match[1] === '>') {
-                return '>'.$placeholderContainer->addPlaceholder(' ');
-            } else {
-                return $placeholderContainer->addPlaceholder(' ').'<';
-            }
+        return preg_replace_callback('/>\s/', function ($match) use ($placeholderContainer) {
+            return '>'.$placeholderContainer->addPlaceholder(' ');
         }, $element);
     }
 

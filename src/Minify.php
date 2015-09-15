@@ -195,6 +195,7 @@ class Minify
         $class = get_class($object);
         if (($index = strrpos($class, '\\'))) {
             $fixForTrailingBackslash = 1;
+
             return substr($class, $index + $fixForTrailingBackslash);
         }
 

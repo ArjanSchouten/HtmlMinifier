@@ -71,10 +71,11 @@ class MinifyContext
     {
         if ($this->measurement == null) {
             $this->measurement = new Measurement($input, $keyName);
+
             return;
         }
 
-        $this->measurement->addStep($input, $keyName);
+        $this->measurement->createReferencePoint($input, $keyName);
     }
 
     /**

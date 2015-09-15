@@ -5,9 +5,9 @@ namespace ArjanSchouten\HtmlMinifier\Measurements;
 class Measurement implements MeasurementInterface
 {
     /**
-     * @var array
+     * @var \ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint[]
      */
-    private $steps;
+    private $referencePoints;
 
     /**
      * Create a measurement with the input before modification.
@@ -17,7 +17,7 @@ class Measurement implements MeasurementInterface
      */
     public function __construct($input, $keyName = 'Initial')
     {
-        $this->steps[$keyName] = mb_strlen($input, '8bit');
+        $this->referencePoints[$keyName] = new ReferencePoint($keyName, mb_strlen($input, '8bit'));
     }
 
     /**
@@ -25,26 +25,27 @@ class Measurement implements MeasurementInterface
      *
      * @param string $input
      * @param string $keyname
-     * @return array
+     *
+     * @return \ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint[]
      */
-    public function addStep($input, $keyname = null)
+    public function createReferencePoint($input, $keyname = null)
     {
         if ($keyname == null) {
-            $keyname = 'Step: '.count($this->steps) + 1;
+            $keyname = 'Step: '.count($this->referencePoints) + 1;
         }
 
-        $this->steps[$keyname] = mb_strlen($input, '8bit');
+        $this->referencePoints[$keyname] = new ReferencePoint($keyname, mb_strlen($input, '8bit'));
 
-        return $this->steps;
+        return $this->referencePoints;
     }
 
     /**
      * Get all the steps which are measured.
      *
-     * @return array
+     * @return \ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint[]
      */
-    public function getSteps()
+    public function getReferencePoints()
     {
-        return $this->steps;
+        return $this->referencePoints;
     }
 }

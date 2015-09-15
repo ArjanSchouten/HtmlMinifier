@@ -9,14 +9,15 @@ interface MeasurementInterface
      *
      * @param string $input
      * @param string $keyname
+     *
      * @return array
      */
-    function addStep($input, $keyname = null);
+    public function createReferencePoint($input, $keyname = null);
 
     /**
      * Get all the steps which are measured.
      *
      * @return array
      */
-    function getSteps();
+    public function getReferencePoints();
 }

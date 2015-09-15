@@ -2,6 +2,7 @@
 
 namespace ArjanSchouten\HtmlMinifier\Laravel\Command;
 
+use ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint;
 use ArjanSchouten\HtmlMinifier\MinifyContext;
 use ArjanSchouten\HtmlMinifier\Option;
 use ArjanSchouten\HtmlMinifier\Options;
@@ -22,6 +23,11 @@ class ViewCompilerCommand extends Command
     protected $description = 'Minify all the blade templates and save the templates';
 
     /**
+     * @var \ArjanSchouten\HtmlMinifier\MinifyContext
+     */
+    protected $minifyContext;
+
+    /**
      * Fire event and compile and minify the views.
      *
      * @return void
@@ -35,6 +41,8 @@ class ViewCompilerCommand extends Command
         $this->compileViews();
 
         $this->info('Yeah! You\'re views are minified!');
+
+        $this->createMinifyOutput();
     }
 
     /**
@@ -49,8 +57,9 @@ class ViewCompilerCommand extends Command
 
             $context = new MinifyContext(new PlaceholderContainer());
             $minifier = $this->laravel->make('blade.compiler.min');
+            $this->minifyContext = $minifier->run($context->setContents($value), $this->option());
 
-            return $minifier->run($context->setContents($value), $this->option())->getContents();
+            return $this->minifyContext->getContents();
         });
     }
 
@@ -105,6 +114,15 @@ class ViewCompilerCommand extends Command
         if ($engine instanceof CompilerEngine) {
             $engine->getCompiler()->compile($file);
         }
+    }
+
+    protected function createMinifyOutput()
+    {
+        $measurements = $this->minifyContext->getMeasurement();
+        $rows = Collection::make($measurements->getReferencePoints())->map(function (ReferencePoint $referencePoint) {
+            return [$referencePoint->getName(), $referencePoint->getBytes()];
+        });
+        $this->table(['Minification strategy', 'Total Bytes'], $rows);
     }
 
     /**

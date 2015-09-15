@@ -81,10 +81,10 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         ]);
 
         $measurement = $context->getMeasurement();
-        $this->assertEquals(5, count($measurement->getSteps()));
+        $this->assertEquals(5, count($measurement->getReferencePoints()));
 
         $callable = function() { return true; };
-        $this->assertLessThan(Arr::first($measurement->getSteps(), $callable), Arr::last($measurement->getSteps(), $callable));
+        $this->assertLessThan(Arr::first($measurement->getReferencePoints(), $callable), Arr::last($measurement->getReferencePoints(), $callable));
     }
 }
 

@@ -127,23 +127,23 @@ class ViewCompilerCommand extends Command
             $bytesSaved = '';
             $bytesSavedPercentage = '';
             if ($lastReferencePoint != null) {
-                $bytesSaved = $lastReferencePoint->getBytes() - $referencePoint->getBytes();
-                $totalBytesSavedPercentage += $bytesSavedPercentage = $this->calculateImprovementPercentage($referencePoint->getBytes(), $lastReferencePoint->getBytes());
+                $bytesSaved = $lastReferencePoint->getKiloBytes() - $referencePoint->getKiloBytes();
+                $totalBytesSavedPercentage += $bytesSavedPercentage = $this->calculateImprovementPercentage($referencePoint->getKiloBytes(), $lastReferencePoint->getKiloBytes());
                 $bytesSavedPercentage = round(abs($bytesSavedPercentage),1).'%';
             }
             $lastReferencePoint = $referencePoint;
 
-            return [$referencePoint->getName(), $referencePoint->getBytes(), $bytesSaved, $bytesSavedPercentage];
+            return [$referencePoint->getName(), $referencePoint->getKiloBytes(), $bytesSaved, $bytesSavedPercentage];
         });
 
         $rows[] = [
             'Total',
-            $referencePoints->last()->getBytes(),
-            abs($referencePoints->last()->getBytes() - $referencePoints->first()->getBytes()),
+            $referencePoints->last()->getKiloBytes(),
+            abs($referencePoints->last()->getKiloBytes() - $referencePoints->first()->getKiloBytes()),
             abs(round($totalBytesSavedPercentage,1)).'%'
         ];
 
-        $this->table(['Minification strategy', 'Total Bytes', 'Bytes saved', 'Bytes saved %'], $rows);
+        $this->table(['Minification strategy', 'Size (KB)', 'Kilo Bytes saved (KB)', 'Size saved %'], $rows);
     }
 
     private function calculateImprovementPercentage($new, $old)

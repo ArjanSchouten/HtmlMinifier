@@ -37,6 +37,14 @@ class ReferencePoint
     }
 
     /**
+     * @return float
+     */
+    public function getKiloBytes()
+    {
+        return $this->bytes / 1000;
+    }
+
+    /**
      * @param int $bytes
      */
     public function addBytes($bytes)

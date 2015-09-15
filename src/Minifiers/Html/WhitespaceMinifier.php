@@ -89,7 +89,7 @@ class WhitespaceMinifier implements MinifierInterface
      */
     public function removeSpacesAroundPlaceholders($contents)
     {
-        return preg_replace('/>\s*('.Constants::PLACEHOLDER_PATTERN.')\s*</', '>$1<', $contents);
+        return preg_replace('/\s*('.Constants::PLACEHOLDER_PATTERN.')\s*/', '$1', $contents);
     }
 
     /**

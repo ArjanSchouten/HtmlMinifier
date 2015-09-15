@@ -23,21 +23,21 @@ class Measurement implements MeasurementInterface
     /**
      * Add a step and measure the input size.
      *
-     * @param string $input
+     * @param int $inputSize
      * @param string $keyname
      *
      * @return \ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint[]
      */
-    public function createReferencePoint($input, $keyname = null)
+    public function createReferencePoint($inputSize, $keyname = null)
     {
         if ($keyname === null) {
             $keyname = 'Step: '.count($this->referencePoints) + 1;
         }
 
         if (!array_key_exists($keyname, $this->referencePoints)) {
-            $this->referencePoints[$keyname] = new ReferencePoint($keyname, mb_strlen($input, '8bit'));
+            $this->referencePoints[$keyname] = new ReferencePoint($keyname, $inputSize);
         } else {
-            $this->referencePoints[$keyname]->addBytes(mb_strlen($input, '8bit'));
+            $this->referencePoints[$keyname]->addBytes($inputSize);
         }
 
         return $this->referencePoints;

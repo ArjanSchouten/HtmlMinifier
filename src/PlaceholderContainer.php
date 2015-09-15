@@ -83,4 +83,18 @@ class PlaceholderContainer extends Collection
             return $this->get($match[0]);
         }, $originalContent);
     }
+
+    public function getPlaceholderSize()
+    {
+        return $this->keys()->sum(function ($key) {
+            return mb_strlen($key, '8bit');
+        });
+    }
+
+    public function getOriginalSize()
+    {
+        return $this->values()->sum(function ($value) {
+            return mb_strlen($value, '8bit');
+        });
+    }
 }

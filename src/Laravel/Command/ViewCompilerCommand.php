@@ -120,14 +120,15 @@ class ViewCompilerCommand extends Command
     {
         $measurements = $this->minifyContext->getMeasurement();
         $referencePoints = Collection::make($measurements->getReferencePoints());
+        $totalBytesSavedPercentage = 0;
 
         $lastReferencePoint = null;
-        $rows = $referencePoints->map(function (ReferencePoint $referencePoint) use (&$lastReferencePoint) {
+        $rows = $referencePoints->map(function (ReferencePoint $referencePoint) use (&$lastReferencePoint, &$totalBytesSavedPercentage) {
             $bytesSaved = '';
             $bytesSavedPercentage = '';
             if ($lastReferencePoint != null) {
                 $bytesSaved = $lastReferencePoint->getBytes() - $referencePoint->getBytes();
-                $bytesSavedPercentage = $this->calculateImprovementPercentage($referencePoint->getBytes(), $lastReferencePoint->getBytes());
+                $totalBytesSavedPercentage += $bytesSavedPercentage = $this->calculateImprovementPercentage($referencePoint->getBytes(), $lastReferencePoint->getBytes());
                 $bytesSavedPercentage = round(abs($bytesSavedPercentage),1).'%';
             }
             $lastReferencePoint = $referencePoint;
@@ -139,7 +140,7 @@ class ViewCompilerCommand extends Command
             'Total',
             $referencePoints->last()->getBytes(),
             $referencePoints->last()->getBytes() - $referencePoints->first()->getBytes(),
-            round(abs($this->calculateImprovementPercentage($referencePoints->last()->getBytes(), $referencePoints->first()->getBytes())),1).'%'
+            $totalBytesSavedPercentage.'%'
         ];
 
         $this->table(['Minification strategy', 'Total Bytes', 'Bytes saved', 'Bytes saved %'], $rows);

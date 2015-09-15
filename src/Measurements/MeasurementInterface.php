@@ -7,12 +7,12 @@ interface MeasurementInterface
     /**
      * Add a step and measure the input size.
      *
-     * @param string $input
+     * @param string $inputSize
      * @param string $keyname
      *
      * @return array
      */
-    public function createReferencePoint($input, $keyname = null);
+    public function createReferencePoint($inputSize, $keyname = null);
 
     /**
      * Get all the steps which are measured.

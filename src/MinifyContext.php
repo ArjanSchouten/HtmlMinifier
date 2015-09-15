@@ -75,7 +75,12 @@ class MinifyContext
             return;
         }
 
-        $this->measurement->createReferencePoint($input, $keyName);
+        $this->measurement->createReferencePoint($this->calculateInputLength($input), $keyName);
+    }
+
+    private function calculateInputLength($input)
+    {
+        return mb_strlen($input, '8bit') + $this->placeholderContainer->getOriginalSize() - $this->placeholderContainer->getPlaceholderSize();
     }
 
     /**

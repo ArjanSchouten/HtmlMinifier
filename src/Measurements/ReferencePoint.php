@@ -2,6 +2,8 @@
 
 namespace ArjanSchouten\HtmlMinifier\Measurements;
 
+use InvalidArgumentException;
+
 class ReferencePoint
 {
     private $name;
@@ -32,5 +34,17 @@ class ReferencePoint
     public function getBytes()
     {
         return $this->bytes;
+    }
+
+    /**
+     * @param int $bytes
+     */
+    public function addBytes($bytes)
+    {
+        if ($bytes < 0) {
+            throw new InvalidArgumentException('The passed bytes amount is below zero: '.$bytes);
+        }
+
+        $this->bytes += $bytes;
     }
 }

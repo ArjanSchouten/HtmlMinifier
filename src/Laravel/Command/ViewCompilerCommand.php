@@ -119,10 +119,35 @@ class ViewCompilerCommand extends Command
     protected function createMinifyOutput()
     {
         $measurements = $this->minifyContext->getMeasurement();
-        $rows = Collection::make($measurements->getReferencePoints())->map(function (ReferencePoint $referencePoint) {
-            return [$referencePoint->getName(), $referencePoint->getBytes()];
+        $referencePoints = Collection::make($measurements->getReferencePoints());
+
+        $lastReferencePoint = null;
+        $rows = $referencePoints->map(function (ReferencePoint $referencePoint) use (&$lastReferencePoint) {
+            $bytesSaved = '';
+            $bytesSavedPercentage = '';
+            if ($lastReferencePoint != null) {
+                $bytesSaved = $lastReferencePoint->getBytes() - $referencePoint->getBytes();
+                $bytesSavedPercentage = $this->calculateImprovementPercentage($referencePoint->getBytes(), $lastReferencePoint->getBytes());
+                $bytesSavedPercentage = round(abs($bytesSavedPercentage),1).'%';
+            }
+            $lastReferencePoint = $referencePoint;
+
+            return [$referencePoint->getName(), $referencePoint->getBytes(), $bytesSaved, $bytesSavedPercentage];
         });
-        $this->table(['Minification strategy', 'Total Bytes'], $rows);
+
+        $rows[] = [
+            'Total',
+            $referencePoints->last()->getBytes(),
+            $referencePoints->last()->getBytes() - $referencePoints->first()->getBytes(),
+            round(abs($this->calculateImprovementPercentage($referencePoints->last()->getBytes(), $referencePoints->first()->getBytes())),1).'%'
+        ];
+
+        $this->table(['Minification strategy', 'Total Bytes', 'Bytes saved', 'Bytes saved %'], $rows);
+    }
+
+    private function calculateImprovementPercentage($new, $old)
+    {
+        return ($new - $old) / $old * 100;
     }
 
     /**

@@ -18,7 +18,7 @@ class MinifyContext
     private $contents;
 
     /**
-     * @var \ArjanSchouten\HtmlMinifier\Measurements\Measurement
+     * @var \ArjanSchouten\HtmlMinifier\Measurements\MeasurementInterface
      */
     private $measurement;
 

@@ -190,6 +190,13 @@ class Minify
         return self::$minifiers;
     }
 
+    /**
+     * Get the classname without the namespace.
+     *
+     * @param $object
+     *
+     * @return string
+     */
     private function getClassName($object)
     {
         $class = get_class($object);

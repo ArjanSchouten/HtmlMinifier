@@ -34,7 +34,11 @@ class Measurement implements MeasurementInterface
             $keyname = 'Step: '.count($this->referencePoints) + 1;
         }
 
-        $this->referencePoints[$keyname] = new ReferencePoint($keyname, mb_strlen($input, '8bit'));
+        if (!array_key_exists($keyname, $this->referencePoints)) {
+            $this->referencePoints[$keyname] = new ReferencePoint($keyname, mb_strlen($input, '8bit'));
+        } else {
+            $this->referencePoints[$keyname]->addBytes(mb_strlen($input, '8bit'));
+        }
 
         return $this->referencePoints;
     }

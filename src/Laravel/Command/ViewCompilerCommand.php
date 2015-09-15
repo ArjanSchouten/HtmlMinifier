@@ -139,8 +139,8 @@ class ViewCompilerCommand extends Command
         $rows[] = [
             'Total',
             $referencePoints->last()->getBytes(),
-            $referencePoints->last()->getBytes() - $referencePoints->first()->getBytes(),
-            $totalBytesSavedPercentage.'%'
+            abs($referencePoints->last()->getBytes() - $referencePoints->first()->getBytes()),
+            abs(round($totalBytesSavedPercentage,1)).'%'
         ];
 
         $this->table(['Minification strategy', 'Total Bytes', 'Bytes saved', 'Bytes saved %'], $rows);

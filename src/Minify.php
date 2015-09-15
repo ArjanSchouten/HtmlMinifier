@@ -52,8 +52,8 @@ class Minify
      */
     public function run(MinifyContext $context, $options = [])
     {
-        $context->addMeasurementStep($context->getContents(), 'Initial step');
         $context = $this->placeholders($context);
+        $context->addMeasurementStep($context->getContents(), 'Initial step');
         $context = $this->minifiers($context, $options);
 
         return $this->restore($context);

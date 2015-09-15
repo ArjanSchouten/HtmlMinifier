@@ -133,17 +133,17 @@ class ViewCompilerCommand extends Command
             }
             $lastReferencePoint = $referencePoint;
 
-            return [$referencePoint->getName(), $referencePoint->getKiloBytes(), $bytesSaved, $bytesSavedPercentage];
+            return [$referencePoint->getName(), round($referencePoint->getKiloBytes(),1), round($bytesSaved,1), $bytesSavedPercentage];
         });
 
         $rows[] = [
             'Total',
-            $referencePoints->last()->getKiloBytes(),
-            abs($referencePoints->last()->getKiloBytes() - $referencePoints->first()->getKiloBytes()),
+            round($referencePoints->last()->getKiloBytes(),1),
+            abs(round($referencePoints->last()->getKiloBytes() - $referencePoints->first()->getKiloBytes(),1)),
             abs(round($totalBytesSavedPercentage,1)).'%'
         ];
 
-        $this->table(['Minification strategy', 'Size (KB)', 'Kilo Bytes saved (KB)', 'Size saved %'], $rows);
+        $this->table(['Minification strategy', 'Size (KB)', 'Saved (KB)', 'Size (%)'], $rows);
     }
 
     private function calculateImprovementPercentage($new, $old)

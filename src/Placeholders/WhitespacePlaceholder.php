@@ -87,10 +87,12 @@ class WhitespacePlaceholder implements PlaceholderInterface
 
         return preg_replace_callback(
             '/
+                \s*
                 <('.$elementsRegex.')   # Match an inline element
                 (?:(?!<\/\1>).)*        # Match everything except its end tag
                 <\/\1>                  # Match the end tag
-            /xi',
+                \s*
+            /xis',
             function ($match) use ($placeholderContainer) {
                 return $this->replaceWhitespacesInInlineElements($match[0], $placeholderContainer);
             }, $contents);

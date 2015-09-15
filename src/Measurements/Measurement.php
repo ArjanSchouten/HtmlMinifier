@@ -30,7 +30,7 @@ class Measurement implements MeasurementInterface
      */
     public function createReferencePoint($input, $keyname = null)
     {
-        if ($keyname == null) {
+        if ($keyname === null) {
             $keyname = 'Step: '.count($this->referencePoints) + 1;
         }
 

@@ -69,7 +69,7 @@ class MinifyContext
      */
     public function addMeasurementStep($input, $keyName = null)
     {
-        if ($this->measurement == null) {
+        if ($this->measurement === null) {
             $this->measurement = new Measurement($input, $keyName);
 
             return;

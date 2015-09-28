@@ -57,19 +57,17 @@ class WhitespacePlaceholder implements PlaceholderInterface
             '/
                 (
                     <('.$elementsRegex.')       # Match the start tag and capture it
-                    (?:(?!<\/\2>).)*            # Match everything without the end tag
+                    (?:(?!<\/\2>).*)            # Match everything without the end tag
                     <\/\2>                      # Match the captured elements end tag
                 )
                 \s+                             # Match minimal 1 whitespace between the elements
-                (
-                    <(?:'.$elementsRegex.')     # Match the start of the next inline element
-                )
+                <('.$elementsRegex.')           # Match the start of the next inline element
             /xi',
             function ($match) use ($placeholderContainer) {
                 // Where going to respect one space between the inline elements.
                 $placeholder = $placeholderContainer->addPlaceholder(' ');
 
-                return $match[1].$placeholder.$match[3];
+                return $match[1].$placeholder.'<'.$match[3];
         }, $contents);
     }
 
@@ -89,7 +87,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
             '/
                 (
                     <('.$elementsRegex.')   # Match an inline element
-                    (?:(?!<\/\2>).)*        # Match everything except its end tag
+                    (?:(?!<\/\2>).*)        # Match everything except its end tag
                     <\/\2>                  # Match the end tag
                     \s+
                 )
@@ -156,9 +154,6 @@ class WhitespacePlaceholder implements PlaceholderInterface
      */
     private function getInlineElementsRegex()
     {
-        $inlineElementsRepository = new HtmlInlineElementsRepository();
-        $elements = $inlineElementsRepository->getElements();
-
-        return implode('|', $elements->all());
+        return 'a(?:bbr|cronym)?|b(?:do|ig|r|utton)?|c(?:ite|ode)|dfn|em|i(?:mg|nput)|kbd|label|map|object|q|s(?:amp|elect|mall|pan|trong|u[bp])|t(?:extarea|t)|var';
     }
 }

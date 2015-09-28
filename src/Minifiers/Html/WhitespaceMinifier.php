@@ -22,15 +22,15 @@ class WhitespaceMinifier implements MinifierInterface
      * @var array
      */
     protected $minifyRules = [
-        '\s?=\s?' => '=',
-        '\s?\/>'  => '>',
-        '>\s<'    => '><',
-        '\s\s'    => ' ',
-        '<\s'     => '<',
-        '\s>'     => '>',
-        '\t'      => ' ',
-        '\r'      => '',
-        '\n'      => '',
+        '/\s?=\s?/' => '=',
+        '/\s?\/>/'  => '>',
+        '/>\s</'    => '><',
+        '/\s\s/'    => ' ',
+        '/<\s/'     => '<',
+        '/\s>/'     => '>',
+        '/\t/'      => ' ',
+        '/\r/'      => '',
+        '/\n/'      => '',
     ];
 
     /**
@@ -72,9 +72,7 @@ class WhitespaceMinifier implements MinifierInterface
     {
         do {
             $originalContents = $contents;
-            array_walk($this->minifyRules, function ($replace, $minifyRule) use (&$contents) {
-                $contents = preg_replace('/'.$minifyRule.'/', $replace, $contents);
-            });
+            $contents = preg_replace(array_keys($this->minifyRules), array_values($this->minifyRules), $contents);
         } while ($originalContents != $contents);
 
         return $contents;

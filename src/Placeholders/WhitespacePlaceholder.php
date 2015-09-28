@@ -121,29 +121,21 @@ class WhitespacePlaceholder implements PlaceholderInterface
      */
     protected function replaceElements($contents, PlaceholderContainer $placeholderContainer)
     {
-        foreach ($this->htmlPlaceholderTags as $htmlTag) {
-            $contents = $this->setHtmlTagPlaceholder($contents, $placeholderContainer, $htmlTag);
-        }
+        $htmlTags = implode('|', $this->htmlPlaceholderTags);
 
-        return $contents;
-    }
-
-    /**
-     * Add placeholder for html tags with a placeholder to prevent data violation.
-     *
-     * @param string                                           $contents
-     * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
-     * @param string                                           $htmlTag
-     *
-     * @return string
-     */
-    protected function setHtmlTagPlaceholder($contents, PlaceholderContainer $placeholderContainer, $htmlTag)
-    {
-        // Attributes may contain a ">" which should be skipped due to this unrolling the loop.
-        $pattern = '/(<'.$htmlTag.'(?:[^"\'>]*|"[^"]*"|\'[^\']*\')*>)(((?!<\/'.$htmlTag.'>).)*)(<\/'.$htmlTag.'>)/is';
+        $pattern = '/
+            (
+                <('.$htmlTags.')
+                    (?:
+                        [^"\'>]*|"[^"]*"|\'[^\']*\'
+                    )*
+                >
+            )
+            ((?:(?!<\/\2>).)+)
+            (<\/\2>)/xis';
 
         return preg_replace_callback($pattern, function ($match) use ($placeholderContainer) {
-            return $match[1].$placeholderContainer->addPlaceholder($match[2]).$match[4];
+            return $match[1].$placeholderContainer->addPlaceholder($match[3]).$match[4];
         }, $contents);
     }
 
@@ -154,6 +146,6 @@ class WhitespacePlaceholder implements PlaceholderInterface
      */
     private function getInlineElementsRegex()
     {
-        return 'a(?:bbr|cronym)?|b(?:do|ig|r|utton)?|c(?:ite|ode)|dfn|em|i(?:mg|nput)|kbd|label|map|object|q|s(?:amp|elect|mall|pan|trong|u[bp])|t(?:extarea|t)|var';
+        return 'a(?:bbr|cronym)?|b(?:utton|r|ig|do)?|c(?:ite|ode)|dfn|em|i(?:mg|nput)|kbd|label|map|object|q|s(?:amp|elect|mall|pan|trong|u[bp])|t(?:extarea|t)|var';
     }
 }

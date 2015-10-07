@@ -33,6 +33,9 @@ $app->register(ArjanSchouten\HtmlMinifier\Laravel\HtmlMinifierServiceProvider::c
 #### Plain php projects with composer
 If you're not using a php framework you can use the minifier by using the code below:
 ```php
+//include the composer autoloader
+require __DIR__ . '/vendor/autoload.php';
+
 // create a minify context which will be used through the minification process
 $context = new MinifyContext(new PlaceholderContainer());
 // save the html contents in the context

@@ -117,7 +117,13 @@ class Minify
      */
     protected function isOptionSet($provides, $options = [])
     {
-        return (isset($options[$provides]) && $options[$provides] === true) || Options::options()[$provides]->isDefault();
+        if (isset($options[$provides]) && $options[$provides] === true) {
+            return true;
+        } elseif (!isset($options[$provides]) && Options::options()[$provides]->isDefault()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

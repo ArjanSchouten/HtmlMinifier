@@ -16,15 +16,15 @@ Html Minification can be extremely powerfull and can reduce the size of you're w
 ## Installation (Couldn't be easier!)
 Let composer do the hard work for us!
 ```php
-composer require arjanschouten/htmlminifier dev-master
+composer require arjanschouten/htmlminifier
 ```
-#### Laravel 5.1
-With Laravel 5.1 you've to register the service provider in the ```config/app.php``` file and add it to the providers array:
+#### Laravel 5.1 and Laravel 5.2
+With Laravel 5 you've to register the service provider in the ```config/app.php``` file and add it to the providers array:
 ```php
 ArjanSchouten\HtmlMinifier\Laravel\HtmlMinifierServiceProvider::class
 ```
 
-#### Lumen
+#### Lumen 5
 With Lumen you've to register the service provider in the ```bootstrap/app.php``` file and add the following line:
 ```php
 $app->register(ArjanSchouten\HtmlMinifier\Laravel\HtmlMinifierServiceProvider::class);

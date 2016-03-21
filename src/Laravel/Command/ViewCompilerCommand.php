@@ -34,13 +34,13 @@ class ViewCompilerCommand extends Command
      */
     public function fire()
     {
-        $this->info('Going to minify you\'re views. Just a few seconds...');
+        $this->info('Going to minify your views. Just a few seconds...');
 
         $this->setupCompiler();
 
         $this->compileViews();
 
-        $this->info('Yeah! You\'re views are minified!');
+        $this->info('Yeah! Your views are minified!');
 
         $this->createMinifyOutput();
     }

@@ -5,7 +5,7 @@ use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 use ArjanSchouten\HtmlMinifier\Placeholders\Php\PhpPlaceholder;
 use Mockery as m;
 
-class PHPPlaceholderTest extends PHPUnit_Framework_TestCase
+class PhpPlaceholderTest extends PHPUnit_Framework_TestCase
 {
     private $phpPlaceholder;
 

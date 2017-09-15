@@ -11,7 +11,6 @@ use ArjanSchouten\HtmlMinifier\Minifiers\Html\OptionalElementMinifier;
 use ArjanSchouten\HtmlMinifier\Minifiers\Html\RedundantAttributeMinifier;
 use ArjanSchouten\HtmlMinifier\Minifiers\Html\WhitespaceMinifier;
 use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
-use ArjanSchouten\HtmlMinifier\Placeholders\Blade\BladePlaceholder;
 use ArjanSchouten\HtmlMinifier\Placeholders\CommentPlaceholder;
 use ArjanSchouten\HtmlMinifier\Placeholders\Php\PhpPlaceholder;
 use ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface;
@@ -25,7 +24,6 @@ class Minify
      */
     protected static $placeholders = [
         PhpPlaceholder::class,
-        BladePlaceholder::class,
         CommentPlaceholder::class,
         WhitespacePlaceholder::class,
     ];

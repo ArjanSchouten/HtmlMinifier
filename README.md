@@ -6,9 +6,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/?branch=master)
 
-## Why should you use a/this html minifier?!
-Html Minification can reduce the size of you're website!
-
 ## Installation
 Let composer do the hard work for us!
 ```php

@@ -6,28 +6,18 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArjanSchouten/HtmlMinifier/?branch=master)
 
-**Never lose customers because of a slow response time!**
-
-[Research](http://www.nngroup.com/articles/response-times-3-important-limits/) has shown that the response time of a website is incredibly important. You should return a response within a second!
-
 ## Why should you use a/this html minifier?!
-Html Minification can be extremely powerfull and can reduce the size of you're website drastically! This Html Minifier should be runned only once! It will minify you're templates so it's a one time process. During every request the Html Minifier isn't using  unneeded resources (also because of a defered service provider). **Finally there is no overhead, only advantages for you and your users!**
+Html Minification can reduce the size of you're website!
 
-## Installation (Couldn't be easier!)
+## Installation
 Let composer do the hard work for us!
 ```php
 composer require arjanschouten/htmlminifier
 ```
-#### Laravel 5.1 and Laravel 5.2
-With Laravel 5 you've to register the service provider in the ```config/app.php``` file and add it to the providers array:
+#### Laravel 5.*
+A Laravel package based on this minifier can be installed by running:
 ```php
-ArjanSchouten\HtmlMinifier\Laravel\HtmlMinifierServiceProvider::class
-```
-
-#### Lumen 5
-With Lumen you've to register the service provider in the ```bootstrap/app.php``` file and add the following line:
-```php
-$app->register(ArjanSchouten\HtmlMinifier\Laravel\HtmlMinifierServiceProvider::class);
+composer require arjanschouten/laravelhtmlminifier
 ```
 
 #### Plain php projects with composer
@@ -49,13 +39,6 @@ $minifiedContents = $context->getContents();
 
 ```
 
-## Running
-### Laravel 5 and Lumen
-With Laravel 5 you can start the minification process by using ```artisan```:
-```php
-php artisan minify:views
-```
-
 ## Options
 This minifier have some minification options which are:
 
@@ -69,19 +52,7 @@ This minifier have some minification options which are:
 | Remove defaults such as from ```<script type=text/javascript>```    | remove-defaults         | no                  |
 | Remove empty attributes. HTML boolean attributes are skipped  | remove-empty-attributes | no                  |
 
-For example running the defaults and remove-defaults with optional elements can be done with:
-```php
-php artisan minify:views --remove-defaults --optional-elements
-```
-
-If you want to run all minification strategies you can run:
-```php 
-php artisan minify:views --all
-# or
-php artisan minify:views -a
-```
-
-You can also do this from code by passing a second array to the run method:
+You can enable the various minification options for example with:
 ```php
 ...
 $options = [
@@ -94,7 +65,7 @@ $minify->run($context, $options);
 This will disable ```whitespace``` and enables ```remove-defaults```.
 
 ### Contributing
-**Contributions are always welcome**. Please read the [CONTRIBUTING.md readme](https://github.com/ArjanSchouten/HtmlMinifier/blob/master/CONTRIBUTING.md).
+**Contributions are welcome**. Please read the [CONTRIBUTING.md readme](https://github.com/ArjanSchouten/HtmlMinifier/blob/master/CONTRIBUTING.md).
 
 ### Testing
 HtmlMinifier uses ```phpunit``` for testing. You can run the tests with ```vendor/bin/phpunit ```.
@@ -103,4 +74,4 @@ HtmlMinifier uses ```phpunit``` for testing. You can run the tests with ```vendo
 This package is licensed under the [MIT License](https://github.com/ArjanSchouten/HtmlMinifier/blob/master/LICENSE).
 
 ### Creator and Maintainer
-This package is created and maintained by [Arjan Schouten](http://www.arjan-schouten.nl).
+This package is created and maintained by [Arjan Schouten](http://arjan-schouten.nl).

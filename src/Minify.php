@@ -22,7 +22,7 @@ class Minify
     /**
      * @var \ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface[]
      */
-    protected static $placeholders = [
+    protected $placeholders = [
         PhpPlaceholder::class,
         CommentPlaceholder::class,
         WhitespacePlaceholder::class,
@@ -31,7 +31,7 @@ class Minify
     /**
      * @var \ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface[]
      */
-    protected static $minifiers = [
+    protected $minifiers = [
         CommentMinifier::class,
         WhitespaceMinifier::class,
         AttributeQuoteMinifier::class,
@@ -64,7 +64,7 @@ class Minify
      */
     protected function placeholders(MinifyContext $context)
     {
-        foreach (self::$placeholders as $placeholder) {
+        foreach ($this->placeholders as $placeholder) {
             $placeholder = new $placeholder();
             $context = $placeholder->process($context);
         }
@@ -80,7 +80,7 @@ class Minify
      */
     protected function minifiers(MinifyContext $context, $options = [])
     {
-        foreach (self::$minifiers as $minifier) {
+        foreach ($this->minifiers as $minifier) {
             $minifier = new $minifier();
 
             $provides = $minifier->provides();
@@ -141,9 +141,9 @@ class Minify
     /**
      * @return \ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface[]
      */
-    public static function getPlaceholders()
+    public function getPlaceholders()
     {
-        return self::$placeholders;
+        return $this->placeholders;
     }
 
     /**
@@ -153,25 +153,25 @@ class Minify
      *
      * @return \ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface[]
      */
-    public static function addPlaceholder($placeholder)
+    public function addPlaceholder($placeholder)
     {
         if (!isset(class_implements($placeholder)[PlaceholderInterface::class])) {
             throw new InvalidArgumentException('The class ['.$placeholder.'] should be a member of the ['.PlaceholderInterface::class.']');
-        } elseif (in_array($placeholder, self::$placeholders)) {
+        } elseif (in_array($placeholder, $this->placeholders)) {
             throw new InvalidArgumentException('The placeholder ['.$placeholder.'] is already added to the minifier!');
         }
 
-        self::$placeholders[] = $placeholder;
+        $this->placeholders[] = $placeholder;
 
-        return self::$placeholders;
+        return $this->placeholders;
     }
 
     /**
      * @return \ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface[]
      */
-    public static function getMinifiers()
+    public function getMinifiers()
     {
-        return self::$minifiers;
+        return $this->minifiers;
     }
 
     /**
@@ -181,17 +181,17 @@ class Minify
      *
      * @return \ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface[]
      */
-    public static function addMinifier($minifier)
+    public function addMinifier($minifier)
     {
         if (!isset(class_implements($minifier)[MinifierInterface::class])) {
             throw new InvalidArgumentException('The class ['.$minifier.'] should be a member of the ['.MinifierInterface::class.']');
-        } elseif (in_array($minifier, self::$minifiers)) {
+        } elseif (in_array($minifier, $this->minifiers)) {
             throw new InvalidArgumentException('The minifier ['.$minifier.'] is already added to the minifier!');
         }
 
-        self::$minifiers[] = $minifier;
+        $this->minifiers[] = $minifier;
 
-        return self::$minifiers;
+        return $this->minifiers;
     }
 
     /**

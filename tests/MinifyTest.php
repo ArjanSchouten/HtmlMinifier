@@ -40,7 +40,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
 
     public function testAddPlaceholder()
     {
-        $minify = new MinifyDriver();
+        $minify = new Minify();
 
         $oldPlaceholders = $minify->getPlaceholders();
         $oldMinifiers = $minify->getMinifiers();
@@ -64,10 +64,6 @@ class MinifyTest extends PHPUnit_Framework_TestCase
 
         $minify->addMinifier(StubMinifierWithInterface::class);
         $this->assertTrue(in_array(StubMinifierWithInterface::class, $minify->getMinifiers()));
-
-        //restore the original strategies
-        $minify->setMinifiers($oldMinifiers);
-        $minify->setPlaceholders($oldPlaceholders);
     }
 
     public function testMinifyMeasurement()
@@ -87,20 +83,6 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         $this->assertLessThan(Arr::first($measurement->getReferencePoints(), $callable), Arr::last($measurement->getReferencePoints(), $callable));
     }
 }
-
-class MinifyDriver extends Minify
-{
-    public function setMinifiers($minifiers)
-    {
-        self::$minifiers = $minifiers;
-    }
-
-    public function setPlaceholders($placeholders)
-    {
-        self::$placeholders = $placeholders;
-    }
-}
-
 
 class Stub{}
 class StubPlaceholderWithInterface implements PlaceholderInterface {

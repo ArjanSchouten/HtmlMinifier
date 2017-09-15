@@ -36,8 +36,4 @@ class Options
 
         return self::$options;
     }
-
-    public static function addOption()
-    {
-    }
 }

@@ -1,21 +1,21 @@
 <?php
 
-namespace ArjanSchouten\HtmlMinifier\Measurements;
+namespace ArjanSchouten\HtmlMinifier\Statistics;
 
-class Measurement implements MeasurementInterface
+class Statistics implements StatisticsInterface
 {
     /**
-     * @var \ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint[]
+     * @var \ArjanSchouten\HtmlMinifier\Statistics\ReferencePoint[]
      */
     private $referencePoints;
 
     /**
-     * Create a measurement with the input before modification.
+     * Create statistics with the input before modification.
      *
      * @param string $input
      * @param string $keyName
      */
-    public function __construct($input, $keyName = 'Initial')
+    public function __construct($input, $keyName = 'Original input')
     {
         $this->referencePoints[$keyName] = new ReferencePoint($keyName, mb_strlen($input, '8bit'));
     }
@@ -26,12 +26,12 @@ class Measurement implements MeasurementInterface
      * @param int $inputSize
      * @param string $keyname
      *
-     * @return \ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint[]
+     * @return \ArjanSchouten\HtmlMinifier\Statistics\ReferencePoint[]
      */
     public function createReferencePoint($inputSize, $keyname = null)
     {
         if ($keyname === null) {
-            $keyname = 'Step: '.count($this->referencePoints) + 1;
+            $keyname = 'Step: '.(count($this->referencePoints) + 1);
         }
 
         if (!array_key_exists($keyname, $this->referencePoints)) {
@@ -46,10 +46,23 @@ class Measurement implements MeasurementInterface
     /**
      * Get all the steps which are measured.
      *
-     * @return \ArjanSchouten\HtmlMinifier\Measurements\ReferencePoint[]
+     * @return \ArjanSchouten\HtmlMinifier\Statistics\ReferencePoint[]
      */
     public function getReferencePoints()
     {
         return $this->referencePoints;
+    }
+
+    /**
+     * Get the total saved bytes in bytes.
+     *
+     * @return int
+     */
+    public function getTotalSavedBytes()
+    {
+        $initialStep = array_first($this->referencePoints);
+        $lastStep = array_last($this->referencePoints);
+
+        return $initialStep->getBytes() - $lastStep->getBytes();
     }
 }

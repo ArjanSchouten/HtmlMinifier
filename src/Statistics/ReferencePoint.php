@@ -1,6 +1,6 @@
 <?php
 
-namespace ArjanSchouten\HtmlMinifier\Measurements;
+namespace ArjanSchouten\HtmlMinifier\Statistics;
 
 use InvalidArgumentException;
 

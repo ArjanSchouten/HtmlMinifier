@@ -1,8 +1,8 @@
 <?php
 
-namespace ArjanSchouten\HtmlMinifier\Measurements;
+namespace ArjanSchouten\HtmlMinifier\Statistics;
 
-interface MeasurementInterface
+interface StatisticsInterface
 {
     /**
      * Add a step and measure the input size.
@@ -20,4 +20,11 @@ interface MeasurementInterface
      * @return array
      */
     public function getReferencePoints();
+
+    /**
+     * Get the total saved bytes in bytes.
+     *
+     * @return int
+     */
+    public function getTotalSavedBytes();
 }

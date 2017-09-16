@@ -2,8 +2,8 @@
 
 namespace ArjanSchouten\HtmlMinifier;
 
-use ArjanSchouten\HtmlMinifier\Measurements\Measurement;
-use ArjanSchouten\HtmlMinifier\Measurements\MeasurementInterface;
+use ArjanSchouten\HtmlMinifier\Statistics\Statistics;
+use ArjanSchouten\HtmlMinifier\Statistics\StatisticsInterface;
 
 class MinifyContext
 {
@@ -18,17 +18,17 @@ class MinifyContext
     private $contents;
 
     /**
-     * @var \ArjanSchouten\HtmlMinifier\Measurements\MeasurementInterface
+     * @var \ArjanSchouten\HtmlMinifier\Statistics\StatisticsInterface
      */
-    private $measurement;
+    private $statistics;
 
     /**
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      */
-    public function __construct(PlaceholderContainer $placeholderContainer, MeasurementInterface $measurement = null)
+    public function __construct(PlaceholderContainer $placeholderContainer, StatisticsInterface $statistics = null)
     {
         $this->placeholderContainer = $placeholderContainer;
-        $this->measurement = $measurement;
+        $this->statistics = $statistics;
     }
 
     /**
@@ -62,20 +62,20 @@ class MinifyContext
     }
 
     /**
-     * Add a measurement step.
+     * Add a minification step.
      *
      * @param string $input
      * @param string $keyName
      */
-    public function addMeasurementStep($input, $keyName = null)
+    public function addMinificationStep($input, $keyName = null)
     {
-        if ($this->measurement === null) {
-            $this->measurement = new Measurement($input, $keyName);
+        if ($this->statistics === null) {
+            $this->statistics = new Statistics($input, $keyName);
 
             return;
         }
 
-        $this->measurement->createReferencePoint($this->calculateInputLength($input), $keyName);
+        $this->statistics->createReferencePoint($this->calculateInputLength($input), $keyName);
     }
 
     private function calculateInputLength($input)
@@ -84,12 +84,12 @@ class MinifyContext
     }
 
     /**
-     * Get the measurement.
+     * Get the minification statistics.
      *
-     * @return \ArjanSchouten\HtmlMinifier\Measurements\MeasurementInterface
+     * @return \ArjanSchouten\HtmlMinifier\Statistics\StatisticsInterface
      */
-    public function getMeasurement()
+    public function getStatistics()
     {
-        return $this->measurement;
+        return $this->statistics;
     }
 }

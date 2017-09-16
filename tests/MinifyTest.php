@@ -76,7 +76,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
             Options::EMPTY_ATTRIBUTES => true
         ]);
 
-        $measurement = $context->getMeasurement();
+        $measurement = $context->getStatistics();
         $this->assertEquals(5, count($measurement->getReferencePoints()));
 
         $callable = function() { return true; };

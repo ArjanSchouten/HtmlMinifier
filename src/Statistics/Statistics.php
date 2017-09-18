@@ -23,7 +23,7 @@ class Statistics implements StatisticsInterface
     /**
      * Add a step and measure the input size.
      *
-     * @param int $inputSize
+     * @param int    $inputSize
      * @param string $keyname
      *
      * @return \ArjanSchouten\HtmlMinifier\Statistics\ReferencePoint[]

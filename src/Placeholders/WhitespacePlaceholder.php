@@ -3,7 +3,6 @@
 namespace ArjanSchouten\HtmlMinifier\Placeholders;
 
 use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
-use ArjanSchouten\HtmlMinifier\Repositories\HtmlInlineElementsRepository;
 
 class WhitespacePlaceholder implements PlaceholderInterface
 {
@@ -44,7 +43,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
      * Whitespaces between inline html elements must be replaced with a placeholder because
      * a browser is showing that whitespace.
      *
-     * @param string $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      *
      * @return string
@@ -68,13 +67,13 @@ class WhitespacePlaceholder implements PlaceholderInterface
                 $placeholder = $placeholderContainer->addPlaceholder(' ');
 
                 return $match[1].$placeholder.'<'.$match[3];
-        }, $contents);
+            }, $contents);
     }
 
     /**
      * Whitespaces in an inline element have a function so we replace it.
      *
-     * @param string $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      *
      * @return string
@@ -101,7 +100,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
     /**
      * Replace the whitespaces in inline elements with a placeholder.
      *
-     * @param string $element
+     * @param string                                           $element
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      *
      * @return string
@@ -114,7 +113,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
     }
 
     /**
-     * @param string $contents
+     * @param string                                           $contents
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
      *
      * @return string

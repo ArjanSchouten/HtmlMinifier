@@ -24,12 +24,12 @@ class CommentMinifier implements MinifierInterface
                     [^>]*   # search for everything without a ">"
                 >           # match the end of the comment
             /xs', function ($match) {
-            if (Str::contains(strtolower($match[0]), 'doctype')) {
-                return $match[0];
-            }
+                if (Str::contains(strtolower($match[0]), 'doctype')) {
+                    return $match[0];
+                }
 
-            return '';
-        }, $context->getContents()));
+                return '';
+            }, $context->getContents()));
     }
 
     /**

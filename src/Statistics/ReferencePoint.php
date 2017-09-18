@@ -12,7 +12,7 @@ class ReferencePoint
 
     /**
      * @param string $name
-     * @param int $bytes
+     * @param int    $bytes
      */
     public function __construct($name, $bytes)
     {

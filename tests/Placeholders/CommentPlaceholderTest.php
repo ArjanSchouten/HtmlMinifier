@@ -22,7 +22,7 @@ class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
     public function testConditionalCommentPlaceholder()
     {
         $placeholder = 'myPlaceholder';
-        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('createPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyContext($placeholderContainer);
 
         // This conditional comment is useless! Remove it!
@@ -48,7 +48,7 @@ class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
     public function testNestedConditionalComments()
     {
         $placeholder = 'myPlaceholder';
-        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('createPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyContext($placeholderContainer);
 
         $result = $this->commentPlaceholder->process($context->setContents('<!--[if true]><![if IE 7]><p>This nested comment is displayed in IE 7.</p><![endif]><![endif]-->'));
@@ -58,7 +58,7 @@ class CommentPlaceholderTest extends PHPUnit_Framework_TestCase
     public function testCData()
     {
         $placeholder = 'myPlaceholder';
-        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('createPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyContext($placeholderContainer);
 
         $result = $this->commentPlaceholder->process($context->setContents('<![CDATA[<greeting>Hello, world!</greeting>]]>'));

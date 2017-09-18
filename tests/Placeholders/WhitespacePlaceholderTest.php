@@ -22,7 +22,7 @@ class WhitespacePlaceholderTest extends PHPUnit_Framework_TestCase
     public function test()
     {
         $placeholder = 'myPlaceholder';
-        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('createPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyContext($placeholderContainer);
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<script id="myid">test</script>'));
@@ -55,7 +55,7 @@ ga('send', 'pageview');
     public function testWhitespacesBetweenInlineElements()
     {
         $placeholder = 'myPlaceholder';
-        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('createPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyContext($placeholderContainer);
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<span></span> <span></span>'));

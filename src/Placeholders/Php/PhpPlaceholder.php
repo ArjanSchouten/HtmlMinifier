@@ -17,10 +17,10 @@ class PhpPlaceholder implements PlaceholderInterface
     {
         $contents = $context->getContents();
         $contents = preg_replace_callback('/<\?=((?!\?>).)*\?>/s', function ($match) use ($context) {
-            return $context->getPlaceholderContainer()->addPlaceholder($match[0]);
+            return $context->getPlaceholderContainer()->createPlaceholder($match[0]);
         }, $contents);
         $contents = preg_replace_callback('/<\?php((?!\?>).)*(\?>)?/s', function ($match) use ($context) {
-            return $context->getPlaceholderContainer()->addPlaceholder($match[0]);
+            return $context->getPlaceholderContainer()->createPlaceholder($match[0]);
         }, $contents);
 
         return $context->setContents($contents);

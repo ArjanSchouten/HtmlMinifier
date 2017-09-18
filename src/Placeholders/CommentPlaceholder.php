@@ -31,7 +31,7 @@ class CommentPlaceholder implements PlaceholderInterface
     protected function setCDataPlaceholder($contents, PlaceholderContainer $placeholderContainer)
     {
         return preg_replace_callback('/<!\[CDATA\[((?!\]\]>).)*\]\]>/s', function ($match) use ($placeholderContainer) {
-            return $placeholderContainer->addPlaceholder($match[0]);
+            return $placeholderContainer->createPlaceholder($match[0]);
         }, $contents);
     }
 
@@ -68,7 +68,7 @@ class CommentPlaceholder implements PlaceholderInterface
             /xis',
             function ($match) use ($placeholderContainer) {
                 if (!empty(preg_replace('/\s*/', '', $match[3]))) {
-                    return $placeholderContainer->addPlaceholder($match[1]).$match[3].$placeholderContainer->addPlaceholder($match[4]);
+                    return $placeholderContainer->createPlaceholder($match[1]).$match[3].$placeholderContainer->createPlaceholder($match[4]);
                 } else {
                     return '';
                 }

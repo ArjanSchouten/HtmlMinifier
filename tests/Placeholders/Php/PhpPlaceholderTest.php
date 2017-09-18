@@ -22,7 +22,7 @@ class PhpPlaceholderTest extends PHPUnit_Framework_TestCase
     public function testPHPPlaceholder()
     {
         $placeholder = 'myPlaceholder';
-        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('createPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyContext($placeholderContainer);
 
         $result = $this->phpPlaceholder->process($context->setContents('<?php echo \''.PHP_EOL.'\';?>'));
@@ -38,7 +38,7 @@ class PhpPlaceholderTest extends PHPUnit_Framework_TestCase
     public function testShortTags()
     {
         $placeholder = 'myPlaceholder';
-        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('addPlaceholder')->andReturn($placeholder)->getMock();
+        $placeholderContainer = m::mock(PlaceholderContainer::class)->shouldReceive('createPlaceholder')->andReturn($placeholder)->getMock();
         $context = new MinifyContext($placeholderContainer);
 
         $result = $this->phpPlaceholder->process($context->setContents('<?= echo \'\';?>'));

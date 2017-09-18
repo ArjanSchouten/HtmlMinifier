@@ -24,6 +24,7 @@ class MinifyContext
 
     /**
      * @param \ArjanSchouten\HtmlMinifier\PlaceholderContainer $placeholderContainer
+     * @param \ArjanSchouten\HtmlMinifier\Statistics\StatisticsInterface|null $statistics
      */
     public function __construct(PlaceholderContainer $placeholderContainer, StatisticsInterface $statistics = null)
     {
@@ -75,12 +76,7 @@ class MinifyContext
             return;
         }
 
-        $this->statistics->createReferencePoint($this->calculateInputLength($input), $keyName);
-    }
-
-    private function calculateInputLength($input)
-    {
-        return mb_strlen($input, '8bit') + $this->placeholderContainer->getOriginalSize() - $this->placeholderContainer->getPlaceholderSize();
+        $this->statistics->createReferencePoint($this->placeholderContainer->getContentSize($input), $keyName);
     }
 
     /**

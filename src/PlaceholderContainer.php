@@ -40,24 +40,56 @@ class PlaceholderContainer extends Collection
     }
 
     /**
-     * Store a placeholder in the container.
+     * Replace ```$value``` with a placeholder and store it in the container.
      *
-     * @param string $originalContent
+     * @param string $value
+     * @param string $content
+     *
+     * @return string $contents
+     */
+    public function addPlaceholder($value, $content)
+    {
+        $placeholder = $this->createPlaceholder($value);
+
+        return str_replace($value, $placeholder, $content);
+    }
+
+    /**
+     * Create a unique placeholder for the given contents.
+     *
+     * @param string $value
      *
      * @return string $placeholder
      */
-    public function addPlaceholder($originalContent)
+    public function createPlaceholder($value)
     {
-        if (($key = array_search($originalContent, $this->all()))) {
+        if (($key = array_search($value, $this->all()))) {
             $placeholder = $key;
         } else {
             $placeholder = $this->createUniquePlaceholder();
         }
 
-        $originalContent = $this->removeNestedPlaceholders($originalContent);
-        $this->items[$placeholder] = $originalContent;
+        $value = $this->removeNestedPlaceholders($value);
+        $this->items[$placeholder] = $value;
 
         return $placeholder;
+    }
+
+    /**
+     * Calculate the byte size of the placeholders.
+     *
+     * @param string $contentsWithPlaceholders
+     * @return int
+     */
+    public function getContentSize($contentsWithPlaceholders)
+    {
+        $placeholderSize = $this->map(function ($value, $key) use (&$contentsWithPlaceholders){
+            $count = substr_count($contentsWithPlaceholders, $key);
+
+            return strlen($key) * $count - strlen($value) * $count;
+        })->sum();
+
+        return strlen($contentsWithPlaceholders) - $placeholderSize;
     }
 
     /**
@@ -80,21 +112,7 @@ class PlaceholderContainer extends Collection
     protected function removeNestedPlaceholders($originalContent)
     {
         return preg_replace_callback('/'.Constants::PLACEHOLDER_PATTERN.'/', function ($match) {
-            return $this->get($match[0]);
+            return $this->pull($match[0]);
         }, $originalContent);
-    }
-
-    public function getPlaceholderSize()
-    {
-        return $this->keys()->sum(function ($key) {
-            return mb_strlen($key, '8bit');
-        });
-    }
-
-    public function getOriginalSize()
-    {
-        return $this->values()->sum(function ($value) {
-            return mb_strlen($value, '8bit');
-        });
     }
 }

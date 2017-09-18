@@ -60,7 +60,7 @@ class WhitespaceMinifierTest extends PHPUnit_Framework_TestCase
     public function testSpacesAroundPlaceholders()
     {
         $placeholderContainer = new PlaceholderContainer();
-        $placeholder = $placeholderContainer->addPlaceholder(null);
+        $placeholder = $placeholderContainer->createPlaceholder(null);
 
         $result = $this->whitespaceMinifier->removeSpacesAroundPlaceholders('<a></a> '.$placeholder.'<p>test</p>');
         $this->assertEquals('<a></a>'.$placeholder.'<p>test</p>', $result);

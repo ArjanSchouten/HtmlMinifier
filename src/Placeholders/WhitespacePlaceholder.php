@@ -65,7 +65,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
             /xi',
             function ($match) use ($placeholderContainer) {
                 // Where going to respect one space between the inline elements.
-                $placeholder = $placeholderContainer->addPlaceholder(' ');
+                $placeholder = $placeholderContainer->createPlaceholder(' ');
 
                 return $match[1].$placeholder.'<'.$match[3];
         }, $contents);
@@ -109,7 +109,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
     private function replaceWhitespacesInInlineElements($element, PlaceholderContainer $placeholderContainer)
     {
         return preg_replace_callback('/>\s/', function ($match) use ($placeholderContainer) {
-            return '>'.$placeholderContainer->addPlaceholder(' ');
+            return '>'.$placeholderContainer->createPlaceholder(' ');
         }, $element);
     }
 
@@ -135,12 +135,12 @@ class WhitespacePlaceholder implements PlaceholderInterface
             (<\/\2>)/xis';
 
         return preg_replace_callback($pattern, function ($match) use ($placeholderContainer) {
-            return $match[1].$placeholderContainer->addPlaceholder($match[3]).$match[4];
+            return $match[1].$placeholderContainer->createPlaceholder($match[3]).$match[4];
         }, $contents);
     }
 
     /**
-     * Get the regular expression for matching the inline element names.
+     * Get the regular expression for matching inline elements.
      *
      * @return string
      */

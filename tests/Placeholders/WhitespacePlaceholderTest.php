@@ -77,7 +77,7 @@ ga('send', 'pageview');
         $this->assertEquals('<small></small><span></span>', $result->getContents());
 
         $result = $this->whitespacePlaceholderText->process($context->setContents(rtrim(str_repeat('<a><span></span></a>'.PHP_EOL, 4)), PHP_EOL));
-        $this->assertEquals(rtrim(str_repeat('<a><span></span></a>'.$placeholder, 4),$placeholder), $result->getContents());
+        $this->assertEquals(rtrim(str_repeat('<a><span></span></a>'.$placeholder, 4), $placeholder), $result->getContents());
 
         $result = $this->whitespacePlaceholderText->process($context->setContents('<a><span></span>   </a>'));
         $this->assertEquals('<a><span></span>   </a>', $result->getContents());

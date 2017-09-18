@@ -49,8 +49,8 @@ class AttributeQuoteMinifier implements MinifierInterface
                     )       # use a the "unrolling the loop" technique to be able to skip escaped quotes like ="\""
                 \1?         # match the same quote symbol as matched before
             /x', function ($match) {
-            return $this->minifyAttribute($match);
-        }, $context->getContents()));
+                return $this->minifyAttribute($match);
+            }, $context->getContents()));
     }
 
     /**

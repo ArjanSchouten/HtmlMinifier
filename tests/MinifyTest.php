@@ -4,8 +4,8 @@ use ArjanSchouten\HtmlMinifier\Minifiers\Html\OptionalElementMinifier;
 use ArjanSchouten\HtmlMinifier\Minifiers\MinifierInterface;
 use ArjanSchouten\HtmlMinifier\Minify;
 use ArjanSchouten\HtmlMinifier\MinifyContext;
-use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 use ArjanSchouten\HtmlMinifier\Options;
+use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
 use ArjanSchouten\HtmlMinifier\Placeholders\PlaceholderInterface;
 use Illuminate\Support\Arr;
 
@@ -18,7 +18,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         $minify = new Minify();
 
         $context = $minify->run($context, [
-            Options::ALL => true
+            Options::ALL => true,
         ]);
         $this->assertContains('id=test', $context->getContents());
         $this->assertNotContains(PHP_EOL, $context->getContents());
@@ -31,7 +31,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         $minify = new Minify();
 
         $context = $minify->run($context, [
-            Options::EMPTY_ATTRIBUTES => true
+            Options::EMPTY_ATTRIBUTES => true,
         ]);
         $this->assertNotContains('id=test', $context->getContents());
         $this->assertNotContains(PHP_EOL, $context->getContents());
@@ -73,27 +73,34 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         $minify = new Minify();
 
         $context = $minify->run($context, [
-            Options::EMPTY_ATTRIBUTES => true
+            Options::EMPTY_ATTRIBUTES => true,
         ]);
 
         $measurement = $context->getStatistics();
         $this->assertEquals(5, count($measurement->getReferencePoints()));
 
-        $callable = function() { return true; };
+        $callable = function () {
+            return true;
+        };
         $this->assertLessThan(Arr::first($measurement->getReferencePoints(), $callable), Arr::last($measurement->getReferencePoints(), $callable));
     }
 }
 
-class Stub{}
-class StubPlaceholderWithInterface implements PlaceholderInterface {
+class Stub
+{
+}
+class StubPlaceholderWithInterface implements PlaceholderInterface
+{
     public function process($payload)
     {
     }
 }
-class StubMinifierWithInterface implements MinifierInterface {
+class StubMinifierWithInterface implements MinifierInterface
+{
     public function process(MinifyContext $context)
     {
     }
+
     public function provides()
     {
     }

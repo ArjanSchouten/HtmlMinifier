@@ -2,8 +2,6 @@
 
 namespace ArjanSchouten\HtmlMinifier\Repositories;
 
-use Illuminate\Support\Collection;
-
 class HtmlBooleanAttributeRepository extends AbstractRepository
 {
     protected static $attributes;
@@ -11,13 +9,14 @@ class HtmlBooleanAttributeRepository extends AbstractRepository
     /**
      * Get the html boolean attributes.
      *
+     * @throws \ArjanSchouten\HtmlMinifier\Exception\FileNotFoundException
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getAttributes()
     {
         if (self::$attributes === null) {
-            $attributes = $this->loadJson($this->resource('HtmlBooleanAttributes.json'))->attributes;
-            self::$attributes = Collection::make($attributes);
+            self::$attributes = $this->loadJson($this->resource('HtmlBooleanAttributes.json'))->attributes;
         }
 
         return self::$attributes;

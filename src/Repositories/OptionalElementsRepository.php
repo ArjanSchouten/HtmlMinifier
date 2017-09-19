@@ -9,7 +9,7 @@ class OptionalElementsRepository extends AbstractRepository
     /**
      * Get the optional html elments.
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \ArjanSchouten\HtmlMinifier\Exception\FileNotFoundException
      *
      * @return mixed
      */

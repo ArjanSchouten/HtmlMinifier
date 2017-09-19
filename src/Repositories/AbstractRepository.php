@@ -2,8 +2,7 @@
 
 namespace ArjanSchouten\HtmlMinifier\Repositories;
 
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Filesystem\Filesystem;
+use ArjanSchouten\HtmlMinifier\Exception\FileNotFoundException;
 
 abstract class AbstractRepository
 {
@@ -17,23 +16,19 @@ abstract class AbstractRepository
     /**
      * Load a json file and decode it.
      *
-     * @param string $file
+     * @param string $path
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \ArjanSchouten\HtmlMinifier\Exception\FileNotFoundException
      *
      * @return mixed
      */
-    protected function loadJson($file)
+    protected function loadJson($path)
     {
-        $filesystem = new Filesystem();
-
-        if ($filesystem->exists($file)) {
-            $json = $filesystem->get($file);
-
-            return json_decode($json);
+        if (!file_exists($path)) {
+            throw new FileNotFoundException();
         }
 
-        throw new FileNotFoundException();
+        return json_decode(file_get_contents($path));
     }
 
     /**

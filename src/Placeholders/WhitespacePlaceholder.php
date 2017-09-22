@@ -35,7 +35,7 @@ class WhitespacePlaceholder implements PlaceholderInterface
 
         $contents = $this->whitespaceBetweenInlineElements($contents, $context->getPlaceholderContainer());
         $contents = $this->whitespaceInInlineElements($contents, $context->getPlaceholderContainer());
-        $contents = $this->replaceElements($contents, $context->getPlaceholderContainer());
+        $contents = $this->replaceElementContents($contents, $context->getPlaceholderContainer());
 
         return $context->setContents($contents);
     }
@@ -119,20 +119,26 @@ class WhitespacePlaceholder implements PlaceholderInterface
      *
      * @return string
      */
-    protected function replaceElements($contents, PlaceholderContainer $placeholderContainer)
+    protected function replaceElementContents($contents, PlaceholderContainer $placeholderContainer)
     {
         $htmlTags = implode('|', $this->htmlPlaceholderTags);
 
         $pattern = '/
             (
-                <('.$htmlTags.')
+                <(' . $htmlTags . ')                    # Match html start tag and capture
                     (?:
                         [^"\'>]*|"[^"]*"|\'[^\']*\'
-                    )*
-                >
+                    )*                                  # Match all attributes
+                >                                       # Match end of tag
             )
-            ((?:(?!<\/\2>).)+)
-            (<\/\2>)/xis';
+            (
+                (?:                                     # Negotiate this part
+                    (?!<\/\2>)                          # Negative look ahead for the end tag
+                    .                                   # Match everything if not the end tag 
+                )*+                                     # Possessive quantifier which will prevent backtracking
+            )
+            (<\/\2>)                                    # Match end tag by back referencing the start tag
+            /xis';
 
         return preg_replace_callback($pattern, function ($match) use ($placeholderContainer) {
             return $match[1].$placeholderContainer->createPlaceholder($match[3]).$match[4];

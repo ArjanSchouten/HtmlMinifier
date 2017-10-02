@@ -54,7 +54,7 @@ class EmptyAttributeMinifier implements MinifierInterface
      */
     private function isBooleanAttribute($attribute)
     {
-        return $this->repository->getAttributes()->search(trim($attribute)) || Html::isDataAttribute($attribute);
+        return array_search(trim($attribute), $this->repository->getAttributes()) || Html::isDataAttribute($attribute);
     }
 
     /**

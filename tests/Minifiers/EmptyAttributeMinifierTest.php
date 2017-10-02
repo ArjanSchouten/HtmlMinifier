@@ -4,7 +4,6 @@ use ArjanSchouten\HtmlMinifier\Minifiers\Html\EmptyAttributeMinifier;
 use ArjanSchouten\HtmlMinifier\Minifiers\Html\HtmlBooleanAttributeRepository;
 use ArjanSchouten\HtmlMinifier\MinifyContext;
 use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
-use Illuminate\Support\Collection;
 use Mockery as m;
 
 class EmptyAttribute extends PHPUnit_Framework_TestCase
@@ -63,7 +62,7 @@ class EmptyAttribute extends PHPUnit_Framework_TestCase
         $context = new MinifyContext(new PlaceholderContainer());
 
         $repository = m::mock(HtmlBooleanAttributeRepository::class)->shouldReceive('getAttributes')->andReturn(
-            new Collection(['async', 'defer'])
+            ['async', 'defer']
         )->getMock();
 
         $this->emptyAttributeMinifier->setRepository($repository);

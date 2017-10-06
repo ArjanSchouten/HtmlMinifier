@@ -18,8 +18,7 @@ class BooleanAttributeMinifier implements MinifierInterface
      */
     public function process(MinifyContext $context)
     {
-        $booleanAttributes = new HtmlBooleanAttributeRepository();
-        $booleanAttributes = implode('|', $booleanAttributes->getAttributes()->all());
+        $booleanAttributes = implode('|', (new HtmlBooleanAttributeRepository())->getAttributes());
 
         return $context->setContents(preg_replace_callback(
             '/

@@ -3,7 +3,6 @@
 namespace ArjanSchouten\HtmlMinifier\Placeholders;
 
 use ArjanSchouten\HtmlMinifier\PlaceholderContainer;
-use ArjanSchouten\HtmlMinifier\Repositories\HtmlInlineElementsRepository;
 
 class WhitespacePlaceholder implements PlaceholderInterface
 {
